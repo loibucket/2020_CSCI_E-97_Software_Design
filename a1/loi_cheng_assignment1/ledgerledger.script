@@ -109,7 +109,28 @@ process-transaction 21 amount 5000 fee 10 note "food" payer bob receiver mary
 # this transaction should fail since the minimum fee is not provided
 process-transaction 22 amount 20 fee 5 note "food" payer bob receiver mary
 
-get-block 2
-
 # validate the state of the blockchain
 Validate
+
+# additional tests
+# show the details of block #2
+get-block 1
+get-block 2
+
+#show the details of transaction 15
+get-transaction 1
+get-transaction 6
+get-transaction 15
+get-transaction 22
+
+process-transaction 21 amount 20 fee 15 note "food" payer bob receiver mary
+process-transaction 22 amount 20 fee 15 note "food" payer bob receiver mary
+process-transaction 23 amount 20 fee 15 note "food" payer bob receiver mary
+process-transaction 24 amount 20 fee 15 note "food" payer bob receiver mary
+process-transaction 25 amount 20 fee 15 note "food" payer bob receiver mary
+process-transaction 26 amount 20 fee 15 note "food" payer bob receiver mary
+process-transaction 27 amount 20 fee 15 note "food" payer bob receiver mary
+process-transaction 28 amount 20 fee 15 note "food" payer bob receiver mary
+process-transaction 29 amount 20 fee 15 note "food" payer bob receiver mary
+process-transaction 30 amount 20 fee 15 note "food" payer bob receiver mary
+process-transaction 31 amount 20 fee 15 note "food" payer bob receiver mary

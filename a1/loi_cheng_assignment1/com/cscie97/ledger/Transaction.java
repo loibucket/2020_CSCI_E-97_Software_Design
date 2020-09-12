@@ -3,22 +3,20 @@ package com.cscie97.ledger;
 import java.io.Serializable;
 
 /**
- * <h1>Transaction</h1>
- * <p>
  * The Transaction class represents a transaction in the Ledger System. A
  * transaction contains a transaction id, an amount, a fee, a note, and
  * references a payer account and a receiver account. The transaction amount is
  * transferred from the payer’s account balance to the receiver’s account
  * balance. The transaction fee is transferred from the payer’s account to the
- * master account. Transactions are aggregated within blocks.
- * </p>
+ * master account. Transactions are aggregated within blocks. Final to prevent
+ * modifications like additional methods
  *
  * @author Loi Cheng
  * @version 1.0
  * @since 2020-09-05
  */
 
-public class Transaction implements Serializable {
+public final class Transaction implements Serializable {
 
     // serial version uid required to make item serializable
     private static final long serialVersionUID = 1L;

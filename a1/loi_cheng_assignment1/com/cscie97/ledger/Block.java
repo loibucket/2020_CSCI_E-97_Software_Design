@@ -12,13 +12,13 @@ import java.util.Map;
  * block have been applied. The account balance map should be copied from the
  * previous block and updated to reflect the transactions in the current block.
  * The block contains the hash of the previous block. It also contains the hash
- * of itself.
+ * of itself. Final to prevent modifications like additional methods
  *
  * @author Loi Cheng
  * @version 1.0
  * @since 2020-09-05
  */
-public class Block {
+public final class Block {
 
     /**
      * A sequentially incrementing block number assigned to the block. The first

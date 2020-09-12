@@ -6,13 +6,14 @@ import java.io.Serializable;
  * The Account class represents an individual account within the Ledger Service.
  * An account contains an address that provides a unique identity for the
  * Account. The Account also contains a balance that represents the value of the
- * account. The account can only be updated by the Ledger Service.
+ * account. The account can only be updated by the Ledger Service. Final to
+ * prevent modifications like additional methods
  *
  * @author Loi Cheng
  * @version 1.0
  * @since 2020-09-05
  */
-public class Account implements Serializable {
+public final class Account implements Serializable {
 
     // serial version uid required to make item serializable
     private static final long serialVersionUID = 1L;

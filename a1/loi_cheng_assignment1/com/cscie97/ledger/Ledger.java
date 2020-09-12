@@ -18,13 +18,14 @@ import java.nio.charset.StandardCharsets;
  * The Ledger manages the Blocks of the blockchain. It also provides the API
  * used by clients of the Ledger. The Ledger processes transaction processing
  * requests, and also queries about the state of the Ledger, including Account
- * balances, Transaction details, and Block details.
+ * balances, Transaction details, and Block details. Final to prevent
+ * modifications like additional methods
  *
  * @author Loi Cheng
  * @version 1.0
  * @since 2020-09-05
  */
-public class Ledger {
+public final class Ledger {
 
     // Name of the ledger.
     private String name;
