@@ -1,0 +1,112 @@
+create-ledger test description "test ledger 2020" seed "harvard"
+create-account mary
+create-account bob
+create-account bill
+create-account frank
+create-account jane
+get-account-balance mary
+ERROR: line 15, COMMAND: get-account-balance, REASON: no completed blocks found in ledger
+process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver mary
+process-transaction 2 amount 1000 fee 10 note "fund account" payer master receiver bob
+process-transaction 3 amount 1000 fee 10 note "fund account" payer master receiver bill
+process-transaction 4 amount 1000 fee 10 note "fund account" payer master receiver frank
+process-transaction 5 amount 1000 fee 10 note "fund account" payer master receiver mary
+get-account-balance mary
+ERROR: line 29, COMMAND: get-account-balance, REASON: no completed blocks found in ledger
+get-account-balances
+ERROR: line 33, COMMAND: get-account-balances, REASON: no completed blocks found in ledger
+process-transaction 6 amount 1000 fee 10 note "fund account" payer master receiver bob
+process-transaction 7 amount 1000 fee 10 note "fund account" payer master receiver bill
+process-transaction 8 amount 1000 fee 10 note "fund account" payer master receiver frank
+process-transaction 9 amount 1000 fee 10 note "fund account" payer master receiver mary
+process-transaction 10 amount 1000 fee 10 note "fund account" payer master receiver bob
+get-account-balance mary
+3000
+get-account-balance bob
+3000
+get-account-balance bill
+2000
+get-account-balance frank
+2000
+get-account-balance jane
+0
+get-block 1
+------------
+BLOCK NUMBER: 1
+BLOCK HASH: 23410628033EAE166E8344302ACED1C04DF233CF3F119E37E1EFFA6B039ACC96
+PREVIOUS HASH: null
+TRANSACTIONS: 
+transaction id: 1 amount: 1000 fee: 10 note: "fund account" payer: master receiver: mary 
+transaction id: 2 amount: 1000 fee: 10 note: "fund account" payer: master receiver: bob 
+transaction id: 3 amount: 1000 fee: 10 note: "fund account" payer: master receiver: bill 
+transaction id: 4 amount: 1000 fee: 10 note: "fund account" payer: master receiver: frank 
+transaction id: 5 amount: 1000 fee: 10 note: "fund account" payer: master receiver: mary 
+transaction id: 6 amount: 1000 fee: 10 note: "fund account" payer: master receiver: bob 
+transaction id: 7 amount: 1000 fee: 10 note: "fund account" payer: master receiver: bill 
+transaction id: 8 amount: 1000 fee: 10 note: "fund account" payer: master receiver: frank 
+transaction id: 9 amount: 1000 fee: 10 note: "fund account" payer: master receiver: mary 
+transaction id: 10 amount: 1000 fee: 10 note: "fund account" payer: master receiver: bob
+ACCOUNT BALANCES: 
+frank: 2000 
+bob: 3000 
+mary: 3000 
+bill: 2000 
+master: 2147473647 
+jane: 0
+------------
+get-transaction 10
+transaction id: 10 amount: 1000 fee: 10 note: "fund account" payer: master receiver: bob
+process-transaction 11 amount 200 fee 10 note "september rent" payer frank receiver jane
+get-account-balance frank
+2000
+get-account-balance jane
+0
+process-transaction 12 amount 20 fee 10 note "uber" payer bob receiver mary
+process-transaction 13 amount 20 fee 10 note "uber" payer bob receiver mary
+process-transaction 14 amount 20 fee 10 note "uber" payer bob receiver mary
+process-transaction 15 amount 20 fee 10 note "uber" payer bob receiver mary
+process-transaction 16 amount 20 fee 10 note "uber" payer bob receiver mary
+process-transaction 17 amount 20 fee 10 note "uber" payer bob receiver mary
+process-transaction 18 amount 20 fee 10 note "uber" payer bob receiver mary
+process-transaction 19 amount 20 fee 10 note "uber" payer bob receiver mary
+process-transaction 20 amount 20 fee 10 note "uber" payer bob receiver mary
+get-account-balance jane
+200
+get-account-balance frank
+1790
+get-account-balance mary
+3180
+get-account-balance bob
+2730
+get-account-balances
+{frank=1790, bob=2730, mary=3180, bill=2000, master=2147473747, jane=200}
+process-transaction 21 amount 5000 fee 10 note "food" payer bob receiver mary
+ERROR: line 106, COMMAND: process-transaction, REASON: insufficient funds to cover the amount plus fee
+process-transaction 22 amount 20 fee 5 note "food" payer bob receiver mary
+ERROR: line 110, COMMAND: process-transaction, REASON: fee must be at least 10
+get-block 2
+------------
+BLOCK NUMBER: 2
+BLOCK HASH: 92A2D01C77175728603F33C0964A9DDBC80E78BB366E64691642D63C5CB01E5B
+PREVIOUS HASH: 23410628033EAE166E8344302ACED1C04DF233CF3F119E37E1EFFA6B039ACC96
+TRANSACTIONS: 
+transaction id: 11 amount: 200 fee: 10 note: "september rent" payer: frank receiver: jane 
+transaction id: 12 amount: 20 fee: 10 note: "uber" payer: bob receiver: mary 
+transaction id: 13 amount: 20 fee: 10 note: "uber" payer: bob receiver: mary 
+transaction id: 14 amount: 20 fee: 10 note: "uber" payer: bob receiver: mary 
+transaction id: 15 amount: 20 fee: 10 note: "uber" payer: bob receiver: mary 
+transaction id: 16 amount: 20 fee: 10 note: "uber" payer: bob receiver: mary 
+transaction id: 17 amount: 20 fee: 10 note: "uber" payer: bob receiver: mary 
+transaction id: 18 amount: 20 fee: 10 note: "uber" payer: bob receiver: mary 
+transaction id: 19 amount: 20 fee: 10 note: "uber" payer: bob receiver: mary 
+transaction id: 20 amount: 20 fee: 10 note: "uber" payer: bob receiver: mary
+ACCOUNT BALANCES: 
+frank: 1790 
+bob: 2730 
+mary: 3180 
+bill: 2000 
+master: 2147473747 
+jane: 200
+------------
+Validate
+ledger is valid

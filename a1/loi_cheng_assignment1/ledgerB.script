@@ -134,3 +134,7 @@ process-transaction 28 amount 20 fee 15 note "food" payer bob receiver mary
 process-transaction 29 amount 20 fee 15 note "food" payer bob receiver mary
 process-transaction 30 amount 20 fee 15 note "food" payer bob receiver mary
 process-transaction 31 amount 20 fee 15 note "food" payer bob receiver mary
+
+get-block 3
+get-transaction 30
+get-transaction 31

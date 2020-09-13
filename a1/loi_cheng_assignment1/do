@@ -1,4 +1,0 @@
-javac com/cscie97/ledger/*.java com/cscie97/ledger/test/*.java
-java -cp . com.cscie97.ledger.test.TestDriver ledger.script
-#java -cp . com.cscie97.ledger.test.TestDriver ledgerledger.script
-#java -cp . com.cscie97.ledger.test.TestInteractive
