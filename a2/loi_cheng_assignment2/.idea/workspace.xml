@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a6b84424-61d9-4258-bea0-ab1404c6cb48" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/loi_cheng_assignment2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/CommandAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/test/TestDriver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/smart_city_sample.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/City.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/CityException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/CommandAPIException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/InfoKiosk.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/IoTDevice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/Map.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/ParkingSpace.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/Robot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/Sensor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/StreetLight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/StreetSign.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/String.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/Vehicle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/biometricId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/blockchainAddress.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/cityId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/deviceId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/personId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unstaged/uri.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartCity.asta" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartCity.asta" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1i48C92hQKdRX34hK1JSnIoPQF1" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a6b84424-61d9-4258-bea0-ab1404c6cb48" name="Default Changelist" comment="" />
+      <created>1601155373572</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601155373572</updated>
+      <workItem from="1601155374722" duration="1716000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="41" y="23" key="#Project_Structure" timestamp="1601155388095">
+      <screen x="41" y="23" width="1399" height="877" />
+    </state>
+    <state x="41" y="23" key="#Project_Structure/41.23.1399.877@41.23.1399.877" timestamp="1601155388095" />
+    <state x="263" y="126" width="1079" height="724" key="SettingsEditor" timestamp="1601156050679">
+      <screen x="41" y="23" width="1399" height="877" />
+    </state>
+    <state x="263" y="126" width="1079" height="724" key="SettingsEditor/41.23.1399.877@41.23.1399.877" timestamp="1601156050679" />
+    <state x="171" y="23" key="new project wizard" timestamp="1601155435147">
+      <screen x="41" y="23" width="1399" height="877" />
+    </state>
+    <state x="171" y="23" key="new project wizard/41.23.1399.877@41.23.1399.877" timestamp="1601155435147" />
+  </component>
+</project>
