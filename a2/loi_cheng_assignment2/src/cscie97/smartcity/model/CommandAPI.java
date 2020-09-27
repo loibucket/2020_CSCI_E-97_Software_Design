@@ -22,16 +22,133 @@ public class CommandAPI {
 
 		// do different action with commands
 		String action = a.get(0);
+		String subject = a.get(1);
 		try {
+			// create define update show
 			switch (action) {
-				case "create-ledger":
-					System.out.println("a");
+				case "create":
+					System.out.println("create");
+					switch (subject) {
+						case "sensor-event":
+							// create sensor-event <city_id>[:<device_id>] type (microphone|camera|thermometer|co2meter) value <string> [subject <person_id>]
+							System.out.println("sensor-event");
+							break;
+						case "sensor-output":
+							// create sensor-output <city_id>[:<device_id>] type (speaker) value <string>
+							System.out.println("sensor-output");
+							break;
+						default:
+							System.out.println("command not recognized");
+							break;
+					}
 					break;
-				case "create-account":
-					System.out.println("b");
+				case "define":
+					System.out.println("define");
+					switch (subject) {
+						case "city":
+							// define city <city_id> name <name> account <address> lat <float> long <float> radius <float>
+							System.out.println("city");
+							break;
+						case "street-sign":
+							//define street-sign <city_id>:<device_id> lat <float> long <float> enabled (true|false) text <text>
+							System.out.println("street-sign");
+							break;
+						case "info-kiosk":
+							//define info-kiosk <city_id>:<device_id> lat <float> long <float> enabled (true|false) image <uri>
+							System.out.println("info-kiosk");
+							break;
+						case "street-light":
+							//define street-sign <city_id>:<device_id> lat <float> long <float> enabled (true|false) text <text>
+							System.out.println("street-light");
+							break;
+						case "parking-space":
+							// define parking-space <city_id>:<device_id> lat <float> long <float> enabled(true|false) rate <int>
+							System.out.println("parking-space");
+							break;
+						case "robot":
+							// define robot <city_id>:<device_id> lat <float> long <float> enabled(true|false) activity <string>
+							System.out.println("robot");
+							break;
+						case "vehicle":
+							// define vehicle <city_id>:<device_id> lat <float> long <float> enabled(true|false) type (bus|car) activity <string> capacity <int> fee <int>
+							System.out.println("vehicle");
+							break;
+						case "resident":
+							// define resident <person_id> name <name> bio-metric <string> phone <phone_number> role (adult|child|administrator) lat <lat> long <long> account <account_address>
+							System.out.println("resident");
+							break;
+						case "visitor":
+							// define visitor <person_id> bio-metric <string> lat <lat> long <long>
+							System.out.println("visitor");
+							break;
+						default:
+							System.out.println("subject not recognized");
+							break;
+					}
 					break;
+				case "show":
+					System.out.println("show");
+					switch (subject) {
+						case "city":
+							// show city <city_id>
+							System.out.println("city");
+							break;
+						case "device":
+							// show device <city_id>[:<device_id>]
+							System.out.println("device");
+							break;
+						case "person":
+							// show person <person_id>
+							System.out.println("person");
+							break;
+						default:
+							System.out.println("subject not recognized");
+							break;
+					}
+					break;
+				case "update":
+					System.out.println("update");
+					switch (subject) {
+						case "street-sign":
+							// update street-sign <city_id>:<device_id> [enabled (true|false)] [text <text>]
+							System.out.println("street-sign");
+							break;
+						case "info-kiosk":
+							// update info-kiosk <city_id>:<device_id> [enabled (true|false)] [image <uri>]
+							System.out.println("info-kiosk");
+							break;
+						case "street-light":
+							// update street-light <city_id>:<device_id> [enabled (true|false)] [brightness<int>]
+							System.out.println("street-light");
+							break;
+						case "parking-space":
+							// update parking-space <city_id>:<device_id> [enabled (true|false)] [rate<int>]
+							System.out.println("parking-space");
+							break;
+						case "robot":
+							// update robot <city_id>:<device_id> [lat <float> long <float>] [enabled(true|false)] [activity <string>]
+							System.out.println("robot");
+							break;
+						case "vehicle":
+							// update vehicle <city_id>:<device_id> [lat <float> long <float>] [enabled(true|false)] [activity <string>] [fee <int>]
+							System.out.println("vehicle");
+							break;
+						case "resident":
+							// update resident <person_id> [name <name>] [bio-metric <string>] [phone<phone_number>] [role (adult|child|administrator)] [lat <lat> long <long>] [account <account_address>]
+							System.out.println("resident");
+							break;
+						case "visitor":
+							// update visitor <person_id> [bio-metric <string>] [lat <lat> long <long>]
+							System.out.println("visitor");
+							break;
+						default:
+							System.out.println("subject not recognized");
+							break;
+					}
+					break;
+				// create define update show
 				default:
-					System.out.println("c");
+					System.out.println("command not recognized");
 			}
 		} catch (Exception e) {
 			// print error message, and continue processing next line
@@ -40,6 +157,11 @@ public class CommandAPI {
 	}
 
 	public void processCommandFile(String authToken, String commandFile) {
+
+		if(authToken != "placeholder"){
+			System.out.println("authentication error");
+			return;
+		}
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(commandFile));
 			String line;

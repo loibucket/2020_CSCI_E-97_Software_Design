@@ -1,3 +1,5 @@
+package cscie97.smartcity.model;
+
 public class StreetSign extends IoTDevice {
 
 	private String text;

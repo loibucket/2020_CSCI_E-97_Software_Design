@@ -15,6 +15,3 @@ public class TestDriver {
 
     }
 }
-
-//compile command javac cscie97/smartcity/model/*.java cscie97/smartcity/test/*.java
-//test command java -cp . cscie97.smartcity.test.TestDriver smartcity_model.script

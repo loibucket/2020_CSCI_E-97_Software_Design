@@ -20,34 +20,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6b84424-61d9-4258-bea0-ab1404c6cb48" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/loi_cheng_assignment2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/CommandAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/test/TestDriver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/smart_city_sample.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/City.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/CityException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/CommandAPIException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/InfoKiosk.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/IoTDevice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/Map.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/ParkingSpace.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/Person.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/Robot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/Sensor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/StreetLight.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/StreetSign.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/String.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/Vehicle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/biometricId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/blockchainAddress.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/cityId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/deviceId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/personId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unstaged/uri.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartCity.asta" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartCity.asta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/City.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/CityException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/CommandAPIException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/InfoKiosk.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/IoTDevice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/ParkingSpace.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/Robot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/Sensor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/StreetLight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/StreetSign.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/Vehicle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/do.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/CommandAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/CommandAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/test/TestDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/test/TestDriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/City.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/CityException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/CommandAPIException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/InfoKiosk.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/IoTDevice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/Map.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/ParkingSpace.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/Person.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/Robot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/Sensor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/StreetLight.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/StreetSign.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/String.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/Vehicle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/biometricId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/blockchainAddress.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/cityId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/deviceId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/personId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unstaged/uri.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +89,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
@@ -104,7 +112,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1601155373572</updated>
-      <workItem from="1601155374722" duration="1716000" />
+      <workItem from="1601155374722" duration="6587000" />
     </task>
     <servers />
   </component>
@@ -130,10 +138,14 @@
       <screen x="41" y="23" width="1399" height="877" />
     </state>
     <state x="41" y="23" key="#Project_Structure/41.23.1399.877@41.23.1399.877" timestamp="1601155388095" />
-    <state x="263" y="126" width="1079" height="724" key="SettingsEditor" timestamp="1601156050679">
+    <state x="481" y="261" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601157333598">
       <screen x="41" y="23" width="1399" height="877" />
     </state>
-    <state x="263" y="126" width="1079" height="724" key="SettingsEditor/41.23.1399.877@41.23.1399.877" timestamp="1601156050679" />
+    <state x="481" y="261" key="#com.intellij.fileTypes.FileTypeChooser/41.23.1399.877@41.23.1399.877" timestamp="1601157333598" />
+    <state x="202" y="176" width="1079" height="724" key="SettingsEditor" timestamp="1601159469178">
+      <screen x="41" y="23" width="1399" height="877" />
+    </state>
+    <state x="202" y="176" width="1079" height="724" key="SettingsEditor/41.23.1399.877@41.23.1399.877" timestamp="1601159469178" />
     <state x="171" y="23" key="new project wizard" timestamp="1601155435147">
       <screen x="41" y="23" width="1399" height="877" />
     </state>

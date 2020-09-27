@@ -1,3 +1,7 @@
+package cscie97.smartcity.model;
+
+import java.util.Map;
+
 public class IoTDevice {
 
 	private String deviceId;
@@ -10,6 +14,6 @@ public class IoTDevice {
 
 	private String event;
 
-	private Sensor[] sensor;
+	private Map<String,Sensor> sensorMap;
 
 }
