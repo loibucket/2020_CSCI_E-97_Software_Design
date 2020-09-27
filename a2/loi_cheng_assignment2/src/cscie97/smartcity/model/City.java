@@ -1,6 +1,7 @@
 package cscie97.smartcity.model;
 
 import java.util.Map;
+import java.util.Arrays;
 
 public class City {
 
@@ -17,6 +18,11 @@ public class City {
 	private Map<String, IoTDevice> deviceMap;
 
 	private Map<String, Person> peopleMap;
+
+
+	public City(String cityId, String name, String account, float[] location, float radius){
+		System.out.println(cityId+name+account+Arrays.toString(location)+radius);
+	}
 
 	public void defineStreetSign(String deviceId, boolean enabled, String text, float[] location) {
 
