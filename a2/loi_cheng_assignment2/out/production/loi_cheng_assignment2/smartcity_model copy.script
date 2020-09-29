@@ -1,43 +1,43 @@
-# Sample script for the Smart City Model Service.
-# Please feel free to adjust the syntax.  This script is provided as a sample.
+# Sample script for the Smart City Model Service. 
+# Please feel free to adjust the syntax.  This script is provided as a sample. 
 #
 # City Commands
 # Define a city
-# define city <city_id> name <name> account <address> lat <float> long <float> radius <float>
+# define city <city_id> name <name> account <address> lat <float> long <float> radius <float>  
 
 define city city_1 name Cambridge-MA account cambridge-account lat 42.3766 long -71.1160 radius 100
 
 # Show the details of a city. Print out the details of the city including the id, name, account, location, people, and IoT devices.
-# show city <city_id>
+# show city <city_id> 
 
 show city city_1
 
 # Device Commands
-# Define a street sign
+# Define a street sign  
 # define street-sign <city_id>:<device_id> lat <float> long <float> enabled (true|false) text <text>
 
 define street-sign city_1:ss_1 lat 42.3732 long -71.1202 enabled  true  text "Welcome to Harvard Square"
 define street-sign city_1:ss_2 lat 42.3736 long -71.1214 enabled  true  text "Brattle Theatre"
 
 
-# update a street sign
+# update a street sign  
 # update street-sign <city_id>:<device_id> [enabled (true|false)] [text <text>]
 
 update street-sign city_1:ss_1  text "The time is now 9:00 pm"
 update street-sign city_1:ss_2  text "Now playing, Cassablaca"
 
 
-# Define an information kiosk
+# Define an information kiosk  
 # define info-kiosk <city_id>:<device_id> lat <float> long <float> enabled (true|false) image <uri>
 
 define info-kiosk city_1:kiosk_1 lat 42.3723 long -71.1230 enabled true image https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg
 define info-kiosk city_1:kiosk_2 lat 42.3766 long -71.1160 enabled true image https://www.lwa-architects.com/wp-content/uploads/2014/12/Harvard-SciCtr_Ext-bikes-992x1250.jpg
 
 
-# Update an information kiosk
+# Update an information kiosk  
 # update info-kiosk <city_id>:<device_id> [enabled (true|false)] [image <uri>]
 
-update info-kiosk city_1:kiosk_1 enabled false
+update info-kiosk city_1:kiosk_1 enabled false 
 update info-kiosk city_1:kiosk_2 image https://www.google.com/maps/place/Cambridge,+MA/@42.3737266,-71.1236297,16.23z/data=!4m5!3m4!1s0x89e370a5cb30cc5f:0xc53a8e6489686c87!8m2!3d42.3736158!4d-71.1097335
 
 
@@ -79,7 +79,7 @@ define robot city_1:bot_2 lat 42.3729 long -71.1192 enabled true activity "assis
 # Update a robot
 # update robot <city_id>:<device_id> [lat <float> long <float>] [enabled (true|false)] [activity <string>]
 
-update robot city_1:bot_1 lat 42.3732 long -71.1195
+update robot city_1:bot_1 lat 42.3732 long -71.1195  
 update robot city_1:bot_2 activity "walking dog"
 
 
@@ -93,8 +93,8 @@ define vehicle city_1:bus_1 lat 42.3736 long -71.1214 enabled  true  type  bus  
 # Update a vehicle
 # update vehicle <city_id>:<device_id> [lat <float> long <float>] [enabled (true|false)] [activity <string>] [fee <int>]
 
-update vehicle city_1:car_1 lat 42.3830 long -71.1125   activity "driving"
-update vehicle city_1:bus_1 lat 42.3635 long -71.0985 enabled true activity "on route"
+update vehicle city_1:car_1 lat 42.3830 long -71.1125   activity "driving"  
+update vehicle city_1:bus_1 lat 42.3635 long -71.0985 enabled true activity "on route"  
 
 
 # Show the details of a device; if device id is omitted, show details for all devices within the city
@@ -109,8 +109,8 @@ show device city_1
 
 create sensor-event city_1:bus_1 type microphone value "does this bus go to Central Square?" subject jane
 create sensor-event city_1:bus_1 type camera value "person boarding bus" subject jane
-create sensor-event city_1:sl_1 type thermometer value 80
-create sensor-event city_1:sl_1 type co2meter value 500
+create sensor-event city_1:sl_1 type thermometer value 80  
+create sensor-event city_1:sl_1 type co2meter value 500 
 create sensor-event city_1:bot_1 type thermometer  value 98.6 joe
 
 # Send a device output
@@ -120,25 +120,25 @@ create sensor-output city_1:bot_1 type speaker value "your temperature is normal
 create sensor-output city_1 speaker value "severe weather alert, please take shelter"
 
 # Person Commands
-# Define a new Resident
+# Define a new Resident 
 # define resident <person_id> name <name> bio-metric <string> phone <phone_number> role (adult|child|administrator) lat <lat> long <long> account <account_address>
 
 define resident resident_1 name jane bio-metric "voice-print='voiceprint-jane',face-print='faceprint-jane'" phone 781-222-3344 role adult lat 42.3735 long -71.1205 account janes_account
 
 
-# Update a Resident
+# Update a Resident 
 # update resident <person_id> [name <name>] [bio-metric <string>] [phone <phone_number>] [role (adult|child|administrator)] [lat <lat> long <long>] [account <account_address>]
 
-update resident resident_1 name jane lat 42.3830 long -71.1125
+update resident resident_1 name jane lat 42.3830 long -71.1125  
 
 
-# Define a new Visitor
+# Define a new Visitor 
 # define visitor <person_id> bio-metric <string> lat <lat> long <long>
 
-define visitor visitor_1 bio-metric "iris-print='irisprint-visitor_1'" lat 42.3744 long -71.1203
+define visitor visitor_1 bio-metric "iris-print='irisprint-visitor_1'" lat 42.3744 long -71.1203 
 
 
-# Update a Visitor
+# Update a Visitor 
 # update visitor <person_id> [bio-metric <string>] [lat <lat> long <long>]
 
 update visitor visitor_1  lat 42.3830 long -71.1125

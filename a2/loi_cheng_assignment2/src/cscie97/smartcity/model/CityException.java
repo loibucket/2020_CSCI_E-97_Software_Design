@@ -3,7 +3,6 @@ package cscie97.smartcity.model;
 public class CityException extends Exception{
 
 	public String action;
-
 	public String reason;
 
 	// Create an exception without any parameters provided

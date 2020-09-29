@@ -3,9 +3,7 @@ package cscie97.smartcity.model;
 public class CommandAPIException extends Exception{
 
 	public String command;
-
 	public String reason;
-
 	public int lineNumber;
 
 	// Create an exception without any parameters provided
@@ -22,14 +20,14 @@ public class CommandAPIException extends Exception{
 		this.lineNumber = -1;
 	}
 
-	// Create an exception with commmand and reason
+	// Create an exception with command and reason
 	public CommandAPIException(String command, String reason) {
 		this.command = command;
 		this.reason = reason;
 		this.lineNumber = -1;
 	}
 
-	// Create an execption with comand, reason and line number
+	// Create an exception with command, reason and line number
 	public CommandAPIException(String command, String reason, int lineNumber) {
 		this.command = command;
 		this.reason = reason;
