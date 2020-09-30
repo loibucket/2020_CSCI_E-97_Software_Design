@@ -1,17 +1,36 @@
 package cscie97.smartcity.model;
 
+import java.util.Arrays;
+
 enum VehicleType{
 	car, bus;
 }
 
+/**
+ * Vehicle
+ *
+ * @author Loi Cheng
+ * @version 1.0
+ * @since 2020-09-29
+ */
 public class Vehicle extends IoTDevice {
 
 	private VehicleType type;
-	private int capacity;
-	private int fee;
+	private Integer capacity;
+	private Integer fee;
 
-	// define vehicle <city_id>:<device_id> lat <float> long <float> enabled(true|false) type (bus|car) activity <string> capacity <int> fee <int>
-	public Vehicle(String deviceId, float[] location, Boolean enabled, VehicleType type, String activity, int capacity, int fee){
+	/**
+	 * Constructor
+	 * @param deviceId id
+	 * @param location lat long
+	 * @param enabled bool
+	 * @param type car bus
+	 * @param activity what it's doing
+	 * @param capacity how many seats
+	 * @param fee cost per passenger
+	 */
+	public Vehicle(String deviceId, Float[] location, Boolean enabled, VehicleType type, String activity, Integer capacity, Integer fee){
+		// define vehicle <city_id>:<device_id> lat <Float> Float <Float> enabled(true|false) type (bus|car) activity <string> capacity <int> fee <int>
 		super.deviceId = deviceId;
 		super.location = location;
 		super.enabled = enabled;
@@ -21,11 +40,39 @@ public class Vehicle extends IoTDevice {
 		this.fee = fee;
 	}
 
-	public void updateVehicle(float[] location, Boolean enabled, String activity, int fee) {
+	/**
+	 * Update
+	 * @param location lat long
+	 * @param enabled bool
+	 * @param activity what it's doing
+	 * @param fee cost per passenger
+	 */
+	public void updateVehicle(Float[] location, Boolean enabled, String activity, Integer fee) {
 		super.location = location;
 		super.enabled = enabled;
 		super.event = activity;
 		this.fee = fee;
 	}
 
+	/**
+	 * To String
+	 * @return string
+	 */
+	@Override
+	public String toString() {
+		return "Vehicle{" +
+				"type=" + type +
+				", capacity=" + capacity +
+				", fee=" + fee +
+				", deviceId='" + deviceId + '\'' +
+				", location=" + Arrays.toString(location) +
+				", enabled=" + enabled +
+				", event='" + event + '\'' +
+				", microphone=" + microphone +
+				", camera=" + camera +
+				", thermometer=" + thermometer +
+				", co2meter=" + co2meter +
+				", speaker=" + speaker +
+				'}';
+	}
 }

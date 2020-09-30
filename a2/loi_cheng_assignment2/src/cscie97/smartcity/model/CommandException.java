@@ -1,34 +1,41 @@
 package cscie97.smartcity.model;
 
-public class CommandAPIException extends Exception{
+/**
+ * Exception is used when input command generates an error
+ *
+ * @author Loi Cheng
+ * @version 1.0
+ * @since 2020-09-29
+ */
+public class CommandException extends Exception{
 
 	public String command;
 	public String reason;
-	public int lineNumber;
+	public Integer lineNumber;
 
 	// Create an exception without any parameters provided
-	public CommandAPIException() {
+	public CommandException() {
 		this.command = "unspecified";
 		this.reason = "unspecified";
 		this.lineNumber = -1;
 	}
 
 	// Create an exception with only the command provided
-	public CommandAPIException(String command) {
+	public CommandException(String command) {
 		this.command = command;
 		this.reason = "unspecified";
 		this.lineNumber = -1;
 	}
 
 	// Create an exception with command and reason
-	public CommandAPIException(String command, String reason) {
+	public CommandException(String command, String reason) {
 		this.command = command;
 		this.reason = reason;
 		this.lineNumber = -1;
 	}
 
 	// Create an exception with command, reason and line number
-	public CommandAPIException(String command, String reason, int lineNumber) {
+	public CommandException(String command, String reason, Integer lineNumber) {
 		this.command = command;
 		this.reason = reason;
 		this.lineNumber = lineNumber;

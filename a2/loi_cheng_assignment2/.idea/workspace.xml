@@ -20,14 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6b84424-61d9-4258-bea0-ab1404c6cb48" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/smartcity_model copy.script" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../a1/loi_cheng_assignment1/CSCI E97 Assignment1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../a1/loi_cheng_assignment1/Grade Sheet for Assignment 1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../a1/loi_cheng_assignment1/Ledger Service Design Document.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/loi_cheng_assignment2/do.sh" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/loi_cheng_assignment2/do.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/loi_cheng_assignment2/smartcity_model.script" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/loi_cheng_assignment2/smartcity_model.script" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/City.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/CityException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/CityException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/CityException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/ServiceException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/CommandAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/CommandAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/CommandAPIException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/CommandAPIException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/CommandAPIException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/CommandException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/InfoKiosk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/InfoKiosk.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/IoTDevice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/IoTDevice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/ParkingSpace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/ParkingSpace.java" afterDir="false" />
@@ -37,8 +38,6 @@
       <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/StreetLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/StreetLight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/StreetSign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/StreetSign.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cscie97/smartcity/model/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cscie97/smartcity/model/Vehicle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/do.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/do.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/smartcity_model.script" beforeDir="false" afterPath="$PROJECT_DIR$/src/smartcity_model.script" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +65,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -97,6 +97,8 @@
       <updated>1601155373572</updated>
       <workItem from="1601155374722" duration="10593000" />
       <workItem from="1601334466728" duration="15301000" />
+      <workItem from="1601391004507" duration="1372000" />
+      <workItem from="1601418380777" duration="15842000" />
     </task>
     <servers />
   </component>
@@ -127,10 +129,10 @@
       <screen x="41" y="23" width="1399" height="877" />
     </state>
     <state x="481" y="261" key="#com.intellij.fileTypes.FileTypeChooser/41.23.1399.877@41.23.1399.877" timestamp="1601157333598" />
-    <state x="468" y="165" key="#com.intellij.ide.util.MemberChooser" timestamp="1601341363748">
+    <state x="468" y="165" key="#com.intellij.ide.util.MemberChooser" timestamp="1601434092742">
       <screen x="41" y="23" width="1399" height="877" />
     </state>
-    <state x="468" y="165" key="#com.intellij.ide.util.MemberChooser/41.23.1399.877@41.23.1399.877" timestamp="1601341363748" />
+    <state x="468" y="165" key="#com.intellij.ide.util.MemberChooser/41.23.1399.877@41.23.1399.877" timestamp="1601434092742" />
     <state x="202" y="176" width="1079" height="724" key="SettingsEditor" timestamp="1601159469178">
       <screen x="41" y="23" width="1399" height="877" />
     </state>
