@@ -53,9 +53,14 @@ public class CommandAPI {
                 default -> System.out.println("command not recognized");
             }
         } catch (ServiceException e) {
-            // print error message, and continue processing next line
-            System.out.println(new CommandException(command,e.reason,lineNumber));
+            System.out.println(new CommandException(command, e.action, e.reason, lineNumber).toString());
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+            System.out.println(new CommandException(command, null, "too few arguments!", lineNumber).toString());
+        } catch (Exception e) {
+            System.out.println(new CommandException(command, null, "unspecified", lineNumber).toString());
         }
+        System.out.println("-end-"); //end command
+        System.out.println(" "); //line break
     }
 
     /**
@@ -95,13 +100,39 @@ public class CommandAPI {
      * @throws ServiceException if cannot process command
      */
     private void create(List<String> a) throws ServiceException {
-        // Expected Commands, device_id is optional
-        //   0          1         2                      3                   4                         5       6        7
-        // create sensor-event <city_id>[:<device_id>] type (microphone|camera|thermometer|co2meter) value <string> [subject <person_id>]
-        //   0          1         2                      3      4        5      6
-        // create sensor-output <city_id>[:<device_id>] type (speaker) value <string>
         switch (a.get(1)) {
             case "sensor-event", "sensor-output" -> {
+
+                // Expected Commands
+                //   0          1         2                      3                   4                         5       6        7        8
+                // create sensor-event <city_id>[:<device_id>] [type] (microphone|camera|thermometer|co2meter) value <string> [subject <person_id>]
+                //   0          1         2                      3      4        5      6
+                // create sensor-output <city_id>[:<device_id>] [type] (speaker) value <string>
+                //   0          1         2                         3       4      5         6
+                // create sensor-output <city_id>[:<device_id>] (speaker) value <string> [<person_id>]
+                //   0          1         2                         3       4      5
+                // create sensor-output <city_id>[:<device_id>] (speaker) value <string>
+
+                // check if 'type' is explicit in command
+                // or else find type in the command
+                String type = findAttr(a, "type");
+                if (type == null) {
+                    type = a.get(3);
+                }
+
+                // 'value' is always explicit in command
+                String value = findAttr(a, "value");
+
+                // check if 'subject is explicit in command
+                // or else find subject in command
+                String subject = findAttr(a, "subject");
+                if (subject == null) {
+                    int lastIdx = a.size() - 1;
+                    int valuIdx = a.indexOf("value");
+                    if (lastIdx - valuIdx > 1) { // more than one item after 'value'
+                        subject = a.get(a.size() - 1); // set last item in command as the subject
+                    }
+                }
 
                 // if no id, target all devices
                 String cityId = a.get(2);
@@ -113,15 +144,7 @@ public class CommandAPI {
                     deviceId = a.get(2).split(":")[1];
                 }
 
-                // no person target
-                String personId = null;
-
-                // target person
-                if (a.size() > 7) {
-                    personId = a.get(7);
-                }
-
-                cityMap.get(cityId).createSensorEvent(deviceId, a.get(4), a.get(5), personId);
+                cityMap.get(cityId).createSensorEvent(deviceId, type, value, subject);
             }
             default -> System.out.println("command not recognized");
         }
@@ -201,8 +224,34 @@ public class CommandAPI {
         switch (a.get(1)) {
             // Expected Commands, device_id is optional
             // show city <city_id>
-            case "city" -> System.out.println(cityMap.get(a.get(2)));
-            // show device <city_id>[:<device_id>]
+            case "city" -> {
+
+                // show info
+                System.out.println(cityMap.get(a.get(2)));
+                System.out.println(" "); //line break
+
+                City c = cityMap.get(a.get(2));
+                Float[] center = c.getLocation();
+                Map<String, IoTDevice> allDevices = c.showAllDevices();
+
+                // show devices
+                for (String key : allDevices.keySet()) {
+                    // only display if within city radius
+                    if (distance(allDevices.get(key).getLocation(), center) <= c.getRadius()) {
+                        System.out.println(key + "=" + allDevices.get(key));
+                        System.out.println(" "); // line break
+                    }
+                }
+
+                // show people
+                for (String key : personMap.keySet()) {
+                    // only display if within city radius
+                    if (distance(personMap.get(key).getLocation(), center) <= c.getRadius()) {
+                        System.out.println(key + "=" + personMap.get(key));
+                        System.out.println(" "); // line break
+                    }
+                }
+            }
             case "device" -> {
                 if (a.get(2).contains(":")) {
                     // target single device
@@ -211,7 +260,12 @@ public class CommandAPI {
                     );
                 } else {
                     // target all devices
-                    System.out.println(cityMap.get(a.get(2)).showAllDevices());
+                    Map<String, IoTDevice> allDevices = cityMap.get(a.get(2)).showAllDevices();
+                    // System.out.println(cityMap.get(a.get(2)).showAllDevices());
+                    for (String key : allDevices.keySet()) {
+                        System.out.println(key + "=" + allDevices.get(key));
+                        System.out.println(" "); // line break
+                    }
                 }
             }
             // show person <person_id>
@@ -242,9 +296,9 @@ public class CommandAPI {
         // lookup attributes
         Boolean enabled = Objects.equals(findAttr(a, "enabled"), "true");
         Float lat = (findAttr(a, "lat") != null) ? Float.parseFloat(Objects.requireNonNull(findAttr(a, "lat"))) : null;
-        Float lon = (findAttr(a, "lon") != null) ? Float.parseFloat(Objects.requireNonNull(findAttr(a, "lon"))) : null;
+        Float lon = (findAttr(a, "long") != null) ? Float.parseFloat(Objects.requireNonNull(findAttr(a, "long"))) : null;
         Float[] location = new Float[]{lat, lon};
-        if (lat == null || lon == null){
+        if (lat == null || lon == null) {
             location = null;
         }
         String activity = findAttr(a, "activity");
@@ -362,5 +416,33 @@ public class CommandAPI {
         // create person and add to map
         Person person = new Person(type, personId, name, biometricId, phone, roleType, location, blockchainAddress);
         personMap.put(personId, person);
+    }
+
+    /**
+     * https://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude
+     * Calculate distance between two points in latitude and longitude taking
+     * Uses Haversine method as its base.
+     */
+    private double distance(Float[] locA, Float[] locB) {
+
+        double lat1 = locA[0];
+        double lat2 = locB[0];
+
+        double lon1 = locA[1];
+        double lon2 = locB[1];
+
+        final int R = 6371; // Radius of the earth
+
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = R * c; // km
+
+        distance = Math.pow(distance, 2);
+
+        return Math.sqrt(distance);
     }
 }

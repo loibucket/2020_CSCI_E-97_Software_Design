@@ -20,13 +20,22 @@ public class City {
     private final Float radius;
     private final Map<String, IoTDevice> deviceMap;
 
+    public Float[] getLocation() {
+        return this.location;
+    }
+
+    public Float getRadius() {
+        return this.radius;
+    }
+
     /**
      * City Constructor
-     * @param cityId city Id
-     * @param name name of city
-     * @param account blockchain address of city
+     *
+     * @param cityId   city Id
+     * @param name     name of city
+     * @param account  blockchain address of city
      * @param location location of city
-     * @param radius radius of city, in km
+     * @param radius   radius of city, in km
      */
     public City(String cityId, String name, String account, Float[] location, Float radius) {
         this.cityId = cityId;
@@ -38,8 +47,9 @@ public class City {
     }
 
     /**
-     * Details of City in String Format
-     * @return none
+     * To String
+     *
+     * @return string
      */
     @Override
     public String toString() {
@@ -49,15 +59,16 @@ public class City {
                 ", blockchainAddress='" + blockchainAddress + '\'' +
                 ", location=" + Arrays.toString(location) +
                 ", radius=" + radius +
-                '}';
+                " km}";
     }
 
     /**
      * Define Street Sign
+     *
      * @param deviceId device Id
      * @param location latitude Floatitude
-     * @param enabled (true|false)
-     * @param text text to display
+     * @param enabled  (true|false)
+     * @param text     text to display
      * @throws ServiceException on error defining device
      */
     public void defineStreetSign(String deviceId, Float[] location, Boolean enabled, String text) throws ServiceException {
@@ -68,9 +79,10 @@ public class City {
 
     /**
      * Define Info Kiosk
+     *
      * @param deviceId device Id
      * @param location latitude Floatitude
-     * @param enabled (true|false)
+     * @param enabled  (true|false)
      * @param imageUri link to image
      * @throws ServiceException on error defining device
      */
@@ -82,9 +94,10 @@ public class City {
 
     /**
      * Define Street Light
-     * @param deviceId device Id
-     * @param location latitude Floatitude
-     * @param enabled (true|false)
+     *
+     * @param deviceId   device Id
+     * @param location   latitude Floatitude
+     * @param enabled    (true|false)
      * @param brightness from 0-100
      * @throws ServiceException on error defining device
      */
@@ -96,10 +109,11 @@ public class City {
 
     /**
      * Define Parking Space
+     *
      * @param deviceId device Id
      * @param location latitude Floatitude
-     * @param enabled (true|false)
-     * @param rate fee charged per hour
+     * @param enabled  (true|false)
+     * @param rate     fee charged per hour
      * @throws ServiceException on error defining device
      */
     public void defineParkingSpace(String deviceId, Float[] location, Boolean enabled, int rate) throws ServiceException {
@@ -110,9 +124,10 @@ public class City {
 
     /**
      * Define Robot
+     *
      * @param deviceId device Id
      * @param location latitude Floatitude
-     * @param enabled (true|false)
+     * @param enabled  (true|false)
      * @param activity what it is doing
      * @throws ServiceException on error defining device
      */
@@ -124,13 +139,14 @@ public class City {
 
     /**
      * Define Vehicle
+     *
      * @param deviceId device Id
      * @param location latitude Floatitude
-     * @param enabled (true|false)
-     * @param type (car|bus)
+     * @param enabled  (true|false)
+     * @param type     (car|bus)
      * @param activity what it is doing
      * @param capacity seats in vehicle
-     * @param fee charged to rider per trip
+     * @param fee      charged to rider per trip
      * @throws ServiceException on error defining device
      */
     public void defineVehicle(String deviceId, Float[] location, Boolean enabled, String type, String activity, int capacity, int fee) throws ServiceException {
@@ -147,6 +163,7 @@ public class City {
 
     /**
      * Show IoT Device
+     *
      * @param deviceId device Id
      * @return IoTDevice
      * @throws ServiceException if device not found
@@ -160,17 +177,19 @@ public class City {
 
     /**
      * Show all devices
+     *
      * @return device map
      */
-    public Map<String, IoTDevice> showAllDevices(){
+    public Map<String, IoTDevice> showAllDevices() {
         return deviceMap;
     }
 
     /**
      * Create Sensor Event
+     *
      * @param deviceId deviceId sensor is attached to
-     * @param type (microphone|camera|thermometer|co2meter|speaker)
-     * @param event what's happening with sensor
+     * @param type     (microphone|camera|thermometer|co2meter|speaker)
+     * @param event    what's happening with sensor
      * @param personId (optional) the person the sensor is getting info from, or sending info to
      * @throws ServiceException if device is not found
      */
@@ -186,9 +205,8 @@ public class City {
             default -> throw new ServiceException("create sensor activity", "unrecognized sensor type!");
         }
         // apply to all devices
-        if (deviceId == null){
-            for (String key : deviceMap.keySet())
-            {
+        if (deviceId == null) {
+            for (String key : deviceMap.keySet()) {
                 deviceMap.get(key).sensorEvent(sensor, event, personId);
             }
         } else {
@@ -199,6 +217,7 @@ public class City {
 
     /**
      * Check if Device Already Exists
+     *
      * @param deviceId the device Id
      * @throws ServiceException if already exists
      */
