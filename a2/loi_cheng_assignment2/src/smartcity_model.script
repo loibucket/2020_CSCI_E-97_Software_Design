@@ -179,3 +179,17 @@ define vehicle city_1:car_99 lat 11 long -66 enabled true type car activity "hig
 show city city_1
 show device city_1
 
+define city city_2 name Mars account mars-account lat 9999 long 9999 radius 2
+show city city_2
+
+# Error commands
+define city city_1 name Cambridge-MA account cambridge-account lat 42.3766 long -71.1160 radius 100
+define street-sign city_1:ss_1 lat 42.3732 long -71.1202 enabled  true  text "Welcome to Harvard Square"
+define vehicle city_1:car_99 lat 11 long -66 enabled true type car activity "high speed chase" capacity 4 fee 10
+show person visitor_x
+show device ten
+create sensor-output city_1:bot_xx type speaker value "your temperature is normal"
+create sensor-output city_1:bot_xx type speaker
+
+
+

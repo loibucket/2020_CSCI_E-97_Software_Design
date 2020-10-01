@@ -50,14 +50,14 @@ public class CommandAPI {
                 case "define" -> define(a);
                 case "show" -> show(a);
                 case "update" -> update(a);
-                default -> System.out.println("command not recognized");
+                default -> throw new ServiceException("command", "command not recognized");
             }
         } catch (ServiceException e) {
             System.out.println(new CommandException(command, e.action, e.reason, lineNumber).toString());
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
             System.out.println(new CommandException(command, null, "too few arguments!", lineNumber).toString());
         } catch (Exception e) {
-            System.out.println(new CommandException(command, null, "unspecified", lineNumber).toString());
+            System.out.println(new CommandException(command, null, e.toString(), lineNumber).toString());
         }
         System.out.println("-end-"); //end command
         System.out.println(" "); //line break
@@ -146,7 +146,7 @@ public class CommandAPI {
 
                 cityMap.get(cityId).createSensorEvent(deviceId, type, value, subject);
             }
-            default -> System.out.println("command not recognized");
+            default -> throw new ServiceException("create", "command not recognized");
         }
     }
 
@@ -162,6 +162,9 @@ public class CommandAPI {
             //   0            2             4               6             8           10             12
             // define city <city_id> name <name> account <address> lat <Float> long <Float> radius <Float>
             case "city" -> {
+                if (cityMap.containsKey(a.get(2))) {
+                    throw new ServiceException("create city", "city id already exists!");
+                }
                 City city = new City(a.get(2), a.get(4), a.get(6),
                         new Float[]{Float.parseFloat(a.get(8)), Float.parseFloat(a.get(10))},
                         Float.parseFloat(a.get(12)));
@@ -210,7 +213,7 @@ public class CommandAPI {
             case "visitor" -> definePerson(PersonType.visitor, a.get(2), null, a.get(4), null, null,
                     new Float[]{Float.parseFloat(a.get(6)), Float.parseFloat(a.get(8))},
                     null);
-            default -> System.out.println("subject not recognized");
+            default -> throw new ServiceException("define", "subject not recognized!");
         }
     }
 
@@ -225,7 +228,6 @@ public class CommandAPI {
             // Expected Commands, device_id is optional
             // show city <city_id>
             case "city" -> {
-
                 // show info
                 System.out.println(cityMap.get(a.get(2)));
                 System.out.println(" "); //line break
@@ -255,10 +257,11 @@ public class CommandAPI {
             case "device" -> {
                 if (a.get(2).contains(":")) {
                     // target single device
-                    System.out.println(
-                            cityMap.get(a.get(2).split(":")[0]).showDevice(a.get(2).split(":")[1])
-                    );
+                    System.out.println(cityMap.get(a.get(2).split(":")[0]).showDevice(a.get(2).split(":")[1]));
                 } else {
+                    if (!cityMap.containsKey(a.get(2))) {
+                        throw new ServiceException("show city devices", "city not found!");
+                    }
                     // target all devices
                     Map<String, IoTDevice> allDevices = cityMap.get(a.get(2)).showAllDevices();
                     // System.out.println(cityMap.get(a.get(2)).showAllDevices());
@@ -269,8 +272,14 @@ public class CommandAPI {
                 }
             }
             // show person <person_id>
-            case "person" -> System.out.println(personMap.get(a.get(2)));
-            default -> System.out.println("subject not recognized");
+            case "person" -> {
+                if (personMap.get(a.get(2)) == null) {
+                    throw new ServiceException("show person", "person not found!");
+                } else {
+                    System.out.println(personMap.get(a.get(2)));
+                }
+            }
+            default -> throw new ServiceException("show", "subject not found!");
         }
     }
 
@@ -359,7 +368,7 @@ public class CommandAPI {
             }
             // update visitor <person_id> [bio-metric <string>] [lat <lat> long <Float>]
             case "visitor" -> personMap.get(primaryId).updateVisitor(biometric, location);
-            default -> System.out.println("subject not recognized");
+            default -> throw new ServiceException("update", "subject not recognized!");
         }
     }
 

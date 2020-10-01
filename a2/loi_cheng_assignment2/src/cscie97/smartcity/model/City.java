@@ -20,14 +20,6 @@ public class City {
     private final Float radius;
     private final Map<String, IoTDevice> deviceMap;
 
-    public Float[] getLocation() {
-        return this.location;
-    }
-
-    public Float getRadius() {
-        return this.radius;
-    }
-
     /**
      * City Constructor
      *
@@ -44,6 +36,14 @@ public class City {
         this.location = location;
         this.radius = radius;
         this.deviceMap = new HashMap<>();
+    }
+
+    public Float[] getLocation() {
+        return this.location;
+    }
+
+    public Float getRadius() {
+        return this.radius;
     }
 
     /**
@@ -172,7 +172,7 @@ public class City {
         if (!deviceMap.containsKey(deviceId)) {
             throw new ServiceException("show device", "deviceId not found!");
         }
-        return deviceMap.get(deviceId);
+        return this.deviceMap.get(deviceId);
     }
 
     /**
@@ -206,12 +206,14 @@ public class City {
         }
         // apply to all devices
         if (deviceId == null) {
-            for (String key : deviceMap.keySet()) {
-                deviceMap.get(key).sensorEvent(sensor, event, personId);
+            for (String key : this.deviceMap.keySet()) {
+                this.deviceMap.get(key).sensorEvent(sensor, event, personId);
             }
+        } else if (!this.deviceMap.containsKey(deviceId)) {
+            throw new ServiceException("create sensor event", "device not found!");
         } else {
             // apply to single device
-            deviceMap.get(deviceId).sensorEvent(sensor, event, personId);
+            this.deviceMap.get(deviceId).sensorEvent(sensor, event, personId);
         }
     }
 
@@ -222,7 +224,7 @@ public class City {
      * @throws ServiceException if already exists
      */
     private void deviceExists(String deviceId) throws ServiceException {
-        if (deviceMap.containsKey(deviceId)) {
+        if (this.deviceMap.containsKey(deviceId)) {
             throw new ServiceException("define device", "deviceId already exists!");
         }
     }
