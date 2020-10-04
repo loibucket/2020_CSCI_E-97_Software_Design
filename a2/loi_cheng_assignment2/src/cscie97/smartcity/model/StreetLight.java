@@ -21,8 +21,11 @@ public class StreetLight extends IoTDevice {
      * @param enabled    true false
      * @param brightness 0-100
      */
-    public StreetLight(String deviceId, Float[] location, Boolean enabled, Integer brightness) {
+    public StreetLight(String deviceId, Float[] location, Boolean enabled, Integer brightness) throws ServiceException {
         // define street-light <city_id>:<device_id> lat <float> Float <float> enabled (true|false) brightness <int>
+        if (brightness < 0 || brightness > 100) {
+            throw new ServiceException("set street light brightness", "value outside 0-100 range!");
+        }
         super.deviceId = deviceId;
         super.location = location;
         super.enabled = enabled;
@@ -36,8 +39,8 @@ public class StreetLight extends IoTDevice {
      * @param brightness 0-10
      */
     public void updateStreetLight(Boolean enabled, Integer brightness) throws ServiceException {
-        if (brightness < 0 || brightness > 10) {
-            throw new ServiceException("set street light brightness", "value outside 0-10 range!");
+        if (brightness < 0 || brightness > 100) {
+            throw new ServiceException("set street light brightness", "value outside 0-100 range!");
         }
         super.enabled = enabled == null ? super.enabled : enabled;
         this.brightness = brightness == null ? this.brightness : brightness;

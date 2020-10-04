@@ -6,11 +6,21 @@
 # define city <city_id> name <name> account <address> lat <float> long <float> radius <float>
 
 define city city_1 name Cambridge-MA account cambridge-account lat 42.3766 long -71.1160 radius 100
+define city city_2 name Cambridge-MA_parallel_universe_2 account cambridge-account lat 42.3766 long -71.1160 radius 200
+define city city_3 name Cambridge-MA_parallel_universe_3 account cambridge-account lat 42.3766 long -71.1160 radius 300
+
+# error
+define city city_1 name Cambridge-MA account cambridge-account lat 42.3766 long -71.1160 radius 100
 
 # Show the details of a city. Print out the details of the city including the id, name, account, location, people, and IoT devices.
 # show city <city_id>
 
 show city city_1
+show city city_2
+show city city_3
+
+#error
+show city city_4
 
 # Device Commands
 # Define a street sign
@@ -20,6 +30,12 @@ define street-sign city_1:ss_1 lat 42.3732 long -71.1202 enabled  true  text "We
 define street-sign city_1:ss_2 lat 42.3736 long -71.1214 enabled  true  text "Brattle Theatre"
 show device city_1:ss_1
 show device city_1:ss_2
+update street-sign city_1:ss_2 lat 11 long 12 enabled  true  text "Aliens!"
+show device city_1:ss_2
+
+# error
+define street-sign city_1:ss_1 lat 42.3732 long -71.1202 enabled  true  text "This should error"
+define info-kiosk city_1:ss_1 lat 42.3732 long -71.1202 enabled  true  text "This should error"
 
 # update a street sign
 # update street-sign <city_id>:<device_id> [enabled (true|false)] [text <text>]
@@ -28,6 +44,10 @@ update street-sign city_1:ss_1  text "The time is now 9:00 pm"
 update street-sign city_1:ss_2  text "Now playing, Cassablaca"
 show device city_1:ss_1
 show device city_1:ss_2
+
+# error
+show device city_2:ss_2
+show device city_2:ss_9000
 
 # Define an information kiosk
 # define info-kiosk <city_id>:<device_id> lat <float> long <float> enabled (true|false) image <uri>
@@ -63,10 +83,14 @@ show device city_1:sl_1
 # Define a parking space
 # define parking-space <city_id>:<device_id> lat <float> long <float> enabled (true|false) rate <int>
 
-define parking-space city_1:ps_1 lat 42.3743 long -71.1202 enabled true  rate 25
-define parking-space city_1:ps_2 lat 42.3744 long -71.1203 enabled true  rate 25
+define parking-space city_1:ps_1 lat 42.3743 long -71.1202 enabled true  rate 250
+define parking-space city_1:ps_2 lat 42.3744 long -71.1203 enabled true  rate 2500
 show device city_1:ps_1
 show device city_1:ps_2
+
+#error
+define parking-space city_1:ps_3 lat 42.3744 long -71.1203 enabled true  rate twenty
+
 
 # Update a parking space
 # update parking-space <city_id>:<device_id> [enabled (true|false)] [rate <int>]
@@ -100,6 +124,9 @@ define vehicle city_1:bus_1 lat 42.3736 long -71.1214 enabled  true  type  bus  
 show device city_1:car_1
 show device city_1:bus_1
 
+# error
+show device city_2:car_1
+
 # Update a vehicle
 # update vehicle <city_id>:<device_id> [lat <float> long <float>] [enabled (true|false)] [activity <string>] [fee <int>]
 
@@ -113,6 +140,8 @@ show device city_1:bus_1
 
 show device city_1:bus_1
 show device city_1
+show device city_2
+show device city_3
 
 
 # Simulate a device sensor event
@@ -152,7 +181,6 @@ define visitor resident_1 name jane bio-metric "voice-print='voiceprint-jane',fa
 update resident resident_1 name jane lat 42.3830 long -71.1125
 show person resident_1
 
-
 # Define a new Visitor
 # define visitor <person_id> bio-metric <string> lat <lat> long <long>
 
@@ -167,20 +195,27 @@ define resident visitor_1 bio-metric "iris-print='irisprint-visitor_1'" lat 42.3
 update visitor visitor_1  lat 42.3830 long -71.1125
 show person visitor_1
 
-
 # Show the details of the person
 # show person <person_id>
 
 show person resident_1
 show person visitor_1
 
-define vehicle city_1:car_99 lat 11 long -66 enabled true type car activity "high speed chase" capacity 4 fee 10
-
-show city city_1
-show device city_1
-
-define city city_2 name Mars account mars-account lat 9999 long 9999 radius 2
 show city city_2
+define vehicle city_2:car_88 lat 42.3830 long -71.1125 enabled true type car activity "high speed chase" capacity 4 fee 10
+define vehicle city_2:car_99 lat 11 long -66 enabled true type car activity "high speed chase" capacity 4 fee 10
+show city city_2
+show device city_2
+
+show city city_3
+define vehicle city_3:car_99 lat 11 long -66 enabled true type car activity "high speed chase" capacity 4 fee 10
+show city city_3
+show device city_3
+
+define city city_9 name Mars account mars-account lat 9999 long 9999 radius 2
+define vehicle city_9:car_99 lat 11 long -66 enabled true type car activity "high speed chase" capacity 4 fee 10
+show device city_9
+show city city_9
 
 # Error commands
 define city city_1 name Cambridge-MA account cambridge-account lat 42.3766 long -71.1160 radius 100
@@ -190,6 +225,6 @@ show person visitor_x
 show device ten
 create sensor-output city_1:bot_xx type speaker value "your temperature is normal"
 create sensor-output city_1:bot_xx type speaker
-
+define car city_1:car_99 lat 11 long -66 enabled true type car activity "high speed chase" capacity 4 fee 10
 
 

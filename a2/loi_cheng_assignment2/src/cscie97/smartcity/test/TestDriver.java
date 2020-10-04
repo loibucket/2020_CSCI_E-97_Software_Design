@@ -13,6 +13,10 @@ import java.util.*;
  * @since 2020-09-29
  */
 public class TestDriver {
+    /**
+     * Main class, reads commands and sends to API
+     * @param args command script, or none if interactive input
+     */
     public static void main(String[] args) {
 
         CommandAPI commandAPI = new CommandAPI();

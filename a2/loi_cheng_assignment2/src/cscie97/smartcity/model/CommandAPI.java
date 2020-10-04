@@ -56,6 +56,8 @@ public class CommandAPI {
             System.out.println(new CommandException(command, e.action, e.reason, lineNumber).toString());
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
             System.out.println(new CommandException(command, null, "too few arguments!", lineNumber).toString());
+        } catch (java.lang.NullPointerException e){
+            System.out.println(new CommandException(command, null, "not found!", lineNumber).toString());
         } catch (Exception e) {
             System.out.println(new CommandException(command, null, e.toString(), lineNumber).toString());
         }
@@ -95,6 +97,7 @@ public class CommandAPI {
 
     /**
      * Helper: handle create commands
+     * Slight variations in commands are accepted
      *
      * @param a the command
      * @throws ServiceException if cannot process command
@@ -152,6 +155,8 @@ public class CommandAPI {
 
     /**
      * Helper: handle define commands
+     * Command must follow strict format as indicated
+     * No optional arguments
      *
      * @param a command
      * @throws ServiceException if command cannot be processed
@@ -162,8 +167,14 @@ public class CommandAPI {
             //   0            2             4               6             8           10             12
             // define city <city_id> name <name> account <address> lat <Float> long <Float> radius <Float>
             case "city" -> {
+                if (a.size() != 13) {
+                    throw new ServiceException("define city", "check number of command arguments!");
+                }
                 if (cityMap.containsKey(a.get(2))) {
-                    throw new ServiceException("create city", "city id already exists!");
+                    throw new ServiceException("define city", "city id already exists!");
+                }
+                if(!a.get(3).equals("name") || !a.get(5).equals("account") || !a.get(7).equals("lat") || !a.get(9).equals("long") || !a.get(11).equals("radius")){
+                    throw new ServiceException("define city", "command format error!");
                 }
                 City city = new City(a.get(2), a.get(4), a.get(6),
                         new Float[]{Float.parseFloat(a.get(8)), Float.parseFloat(a.get(10))},
@@ -172,47 +183,115 @@ public class CommandAPI {
             }
             //   0                        2                    4           6                  8             10
             // define street-sign <city_id>:<device_id> lat <Float> long <Float> enabled (true|false) text <text>
-            case "street-sign" -> cityMap.get(a.get(2).split(":")[0]).
-                    defineStreetSign(a.get(2).split(":")[1],
-                            new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
-                            a.get(8).equals("true"), a.get(10));
+            case "street-sign" -> {
+                if (a.size() != 11) {
+                    throw new ServiceException("define street-sign", "check number of command arguments!");
+                }
+                if(!a.get(3).equals("lat") || !a.get(5).equals("long") || !a.get(7).equals("enabled") || !a.get(9).equals("text")){
+                    throw new ServiceException("define street-sign", "command format error!");
+                }
+                cityMap.get(a.get(2).split(":")[0]).
+                        defineStreetSign(a.get(2).split(":")[1],
+                                new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
+                                a.get(8).equals("true"), a.get(10));
+            }
             // define info-kiosk <city_id>:<device_id> lat <Float> long <Float> enabled (true|false) image <uri>
-            case "info-kiosk" -> cityMap.get(a.get(2).split(":")[0]).
-                    defineInfoKiosk(a.get(2).split(":")[1],
-                            new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
-                            a.get(8).equals("true"), a.get(10));
+            case "info-kiosk" -> {
+                if (a.size() != 11) {
+                    throw new ServiceException("define info-kiosk", "check number of command arguments!");
+                }
+                if(!a.get(3).equals("lat") || !a.get(5).equals("long") || !a.get(7).equals("enabled") || !a.get(9).equals("image")){
+                    throw new ServiceException("define info-kiosk", "command format error!");
+                }
+                cityMap.get(a.get(2).split(":")[0]).
+                        defineInfoKiosk(a.get(2).split(":")[1],
+                                new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
+                                a.get(8).equals("true"), a.get(10));
+            }
             // define street-light <city_id>:<device_id> lat <Float> long <Float> enabled (true|false) brightness <int>
-            case "street-light" -> cityMap.get(a.get(2).split(":")[0]).
-                    defineStreetLight(a.get(2).split(":")[1],
-                            new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
-                            a.get(8).equals("true"), Integer.parseInt(a.get(10)));
+            case "street-light" -> {
+                if (a.size() != 11) {
+                    throw new ServiceException("define street-light", "check number of command arguments!");
+                }
+                if(!a.get(3).equals("lat") || !a.get(5).equals("long") || !a.get(7).equals("enabled") || !a.get(9).equals("brightness")){
+                    throw new ServiceException("define street-light", "command format error!");
+                }
+                cityMap.get(a.get(2).split(":")[0]).
+                        defineStreetLight(a.get(2).split(":")[1],
+                                new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
+                                a.get(8).equals("true"), Integer.parseInt(a.get(10)));
+            }
             // define parking-space <city_id>:<device_id> lat <Float> long <Float> enabled(true|false) rate <int>
-            case "parking-space" -> cityMap.get(a.get(2).split(":")[0]).
-                    defineParkingSpace(a.get(2).split(":")[1],
-                            new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
-                            a.get(8).equals("true"), Integer.parseInt(a.get(10)));
+            case "parking-space" -> {
+                if (a.size() != 11) {
+                    throw new ServiceException("define parking-space", "check number of command arguments!");
+                }
+                if(!a.get(3).equals("lat") || !a.get(5).equals("long") || !a.get(7).equals("enabled") || !a.get(9).equals("rate")){
+                    throw new ServiceException("define parking-space", "command format error!");
+                }
+                cityMap.get(a.get(2).split(":")[0]).
+                        defineParkingSpace(a.get(2).split(":")[1],
+                                new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
+                                a.get(8).equals("true"), Integer.parseInt(a.get(10)));
+            }
             // define robot <city_id>:<device_id> lat <Float> long <Float> enabled(true|false) activity <string>
-            case "robot" -> cityMap.get(a.get(2).split(":")[0]).
-                    defineRobot(a.get(2).split(":")[1],
-                            new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
-                            a.get(8).equals("true"), a.get(10));
+            case "robot" -> {
+                if (a.size() != 11) {
+                    throw new ServiceException("define robot", "check number of command arguments!");
+                }
+                if(!a.get(3).equals("lat") || !a.get(5).equals("long") || !a.get(7).equals("enabled") || !a.get(9).equals("activity")){
+                    throw new ServiceException("define robot", "command format error!");
+                }
+                cityMap.get(a.get(2).split(":")[0]).
+                        defineRobot(a.get(2).split(":")[1],
+                                new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
+                                a.get(8).equals("true"), a.get(10));
+            }
             //   0      1             2                   4            6                8                10                12               14        16
             // define vehicle <city_id>:<device_id> lat <Float> long <Float> enabled(true|false) type (bus|car) activity <string> capacity <int> fee <int>
-            case "vehicle" -> cityMap.get(a.get(2).split(":")[0]).
-                    defineVehicle(a.get(2).split(":")[1],
-                            new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
-                            a.get(8).equals("true"), a.get(10), a.get(12),
-                            Integer.parseInt(a.get(14)), Integer.parseInt(a.get(16)));
+            case "vehicle" -> {
+                if (a.size() != 17) {
+                    throw new ServiceException("define vehicle", "check number of command arguments!");
+                }
+                if(!a.get(3).equals("lat") || !a.get(5).equals("long") || !a.get(7).equals("enabled") ||
+                        !a.get(9).equals("type")|| !a.get(11).equals("activity")|| !a.get(13).equals("capacity")||
+                        !a.get(15).equals("fee")){
+                    throw new ServiceException("define vehicle", "command format error!");
+                }
+                cityMap.get(a.get(2).split(":")[0]).
+                        defineVehicle(a.get(2).split(":")[1],
+                                new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
+                                a.get(8).equals("true"), a.get(10), a.get(12),
+                                Integer.parseInt(a.get(14)), Integer.parseInt(a.get(16)));
+            }
             //   0       1         2              4                 6                 8                     10                        12         14                   16
             // define resident <person_id> name <name> bio-metric <string> phone <phone_number> role (adult|child|administrator) lat <lat> long <Float> account <account_address>
-            case "resident" -> definePerson(PersonType.resident, a.get(2), a.get(4), a.get(6), a.get(8), a.get(10),
-                    new Float[]{Float.parseFloat(a.get(12)), Float.parseFloat(a.get(14))},
-                    a.get(16));
+            case "resident" -> {
+                if (a.size() != 17) {
+                    throw new ServiceException("define resident", "check number of command arguments!");
+                }
+                if(!a.get(3).equals("name") || !a.get(5).equals("bio-metric") || !a.get(7).equals("phone") ||
+                        !a.get(9).equals("role")|| !a.get(11).equals("lat")|| !a.get(13).equals("long")||
+                        !a.get(15).equals("account")){
+                    throw new ServiceException("define resident", "command format error!");
+                }
+                definePerson(PersonType.resident, a.get(2), a.get(4), a.get(6), a.get(8), a.get(10),
+                        new Float[]{Float.parseFloat(a.get(12)), Float.parseFloat(a.get(14))},
+                        a.get(16));
+            }
             //   0       1        2                     4           6          8
             // define visitor <person_id> bio-metric <string> lat <lat> long <Float>
-            case "visitor" -> definePerson(PersonType.visitor, a.get(2), null, a.get(4), null, null,
-                    new Float[]{Float.parseFloat(a.get(6)), Float.parseFloat(a.get(8))},
-                    null);
+            case "visitor" -> {
+                if (a.size() != 9) {
+                    throw new ServiceException("define visitor", "check number of command arguments!");
+                }
+                if(!a.get(3).equals("bio-metric") || !a.get(5).equals("lat") || !a.get(7).equals("long")){
+                    throw new ServiceException("define street-light", "command format error!");
+                }
+                definePerson(PersonType.visitor, a.get(2), null, a.get(4), null, null,
+                        new Float[]{Float.parseFloat(a.get(6)), Float.parseFloat(a.get(8))},
+                        null);
+            }
             default -> throw new ServiceException("define", "subject not recognized!");
         }
     }
@@ -256,13 +335,13 @@ public class CommandAPI {
             }
             case "device" -> {
                 if (a.get(2).contains(":")) {
-                    // target single device
+                    // show single device
                     System.out.println(cityMap.get(a.get(2).split(":")[0]).showDevice(a.get(2).split(":")[1]));
                 } else {
                     if (!cityMap.containsKey(a.get(2))) {
                         throw new ServiceException("show city devices", "city not found!");
                     }
-                    // target all devices
+                    // show all devices
                     Map<String, IoTDevice> allDevices = cityMap.get(a.get(2)).showAllDevices();
                     // System.out.println(cityMap.get(a.get(2)).showAllDevices());
                     for (String key : allDevices.keySet()) {

@@ -66,7 +66,7 @@ public class City {
      * Define Street Sign
      *
      * @param deviceId device Id
-     * @param location latitude Floatitude
+     * @param location latitude longitude
      * @param enabled  (true|false)
      * @param text     text to display
      * @throws ServiceException on error defining device
@@ -81,7 +81,7 @@ public class City {
      * Define Info Kiosk
      *
      * @param deviceId device Id
-     * @param location latitude Floatitude
+     * @param location latitude longitude
      * @param enabled  (true|false)
      * @param imageUri link to image
      * @throws ServiceException on error defining device
@@ -96,7 +96,7 @@ public class City {
      * Define Street Light
      *
      * @param deviceId   device Id
-     * @param location   latitude Floatitude
+     * @param location   latitude longitude
      * @param enabled    (true|false)
      * @param brightness from 0-100
      * @throws ServiceException on error defining device
@@ -111,7 +111,7 @@ public class City {
      * Define Parking Space
      *
      * @param deviceId device Id
-     * @param location latitude Floatitude
+     * @param location latitude longitude
      * @param enabled  (true|false)
      * @param rate     fee charged per hour
      * @throws ServiceException on error defining device
@@ -126,7 +126,7 @@ public class City {
      * Define Robot
      *
      * @param deviceId device Id
-     * @param location latitude Floatitude
+     * @param location latitude longitude
      * @param enabled  (true|false)
      * @param activity what it is doing
      * @throws ServiceException on error defining device
@@ -141,7 +141,7 @@ public class City {
      * Define Vehicle
      *
      * @param deviceId device Id
-     * @param location latitude Floatitude
+     * @param location latitude longitude
      * @param enabled  (true|false)
      * @param type     (car|bus)
      * @param activity what it is doing

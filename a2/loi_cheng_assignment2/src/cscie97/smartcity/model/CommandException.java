@@ -35,7 +35,7 @@ public class CommandException extends Exception {
         String command = this.command == null ? "" : ", COMMAND: " + this.command;
         String action = this.action == null ? "" : ", ACTION: " + this.action;
         String reason = this.reason == null ? "" : ", REASON: " + this.reason;
-        return (line + command + action + reason);
+        return (line + action + reason);
     }
 
 }
