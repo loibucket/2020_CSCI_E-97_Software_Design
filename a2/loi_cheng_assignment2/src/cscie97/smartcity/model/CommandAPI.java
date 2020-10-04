@@ -14,8 +14,16 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class CommandAPI {
 
-    private final Map<String, City> cityMap = new HashMap<>();
-    private final Map<String, Person> personMap = new HashMap<>();
+    private final Map<String, City> cityMap;
+    private final Registry registry;
+
+    /**
+     * Constructor
+     */
+    public CommandAPI() {
+        this.cityMap = new HashMap<>();
+        this.registry = new Registry("peoples_01001");
+    }
 
     /**
      * process a line of command
@@ -275,7 +283,7 @@ public class CommandAPI {
                         !a.get(15).equals("account")){
                     throw new ServiceException("define resident", "command format error!");
                 }
-                definePerson(PersonType.resident, a.get(2), a.get(4), a.get(6), a.get(8), a.get(10),
+                registry.definePerson(PersonType.resident, a.get(2), a.get(4), a.get(6), a.get(8), a.get(10),
                         new Float[]{Float.parseFloat(a.get(12)), Float.parseFloat(a.get(14))},
                         a.get(16));
             }
@@ -288,7 +296,7 @@ public class CommandAPI {
                 if(!a.get(3).equals("bio-metric") || !a.get(5).equals("lat") || !a.get(7).equals("long")){
                     throw new ServiceException("define street-light", "command format error!");
                 }
-                definePerson(PersonType.visitor, a.get(2), null, a.get(4), null, null,
+                registry.definePerson(PersonType.visitor, a.get(2), null, a.get(4), null, null,
                         new Float[]{Float.parseFloat(a.get(6)), Float.parseFloat(a.get(8))},
                         null);
             }
@@ -308,8 +316,12 @@ public class CommandAPI {
             // show city <city_id>
             case "city" -> {
                 // show info
-                System.out.println(cityMap.get(a.get(2)));
-                System.out.println(" "); //line break
+                if (cityMap.get(a.get(2)) == null){
+                    throw new ServiceException("show city","city not found!");
+                } else {
+                    System.out.println(cityMap.get(a.get(2)));
+                    System.out.println(" "); //line break
+                }
 
                 City c = cityMap.get(a.get(2));
                 Float[] center = c.getLocation();
@@ -325,10 +337,11 @@ public class CommandAPI {
                 }
 
                 // show people
-                for (String key : personMap.keySet()) {
+                Map<String, Person> allPersons = registry.showAllPersons();
+                for (String personId : allPersons.keySet()) {
                     // only display if within city radius
-                    if (distance(personMap.get(key).getLocation(), center) <= c.getRadius()) {
-                        System.out.println(key + "=" + personMap.get(key));
+                    if (distance(allPersons.get(personId).getLocation(), center) <= c.getRadius()) {
+                        System.out.println(personId + "=" + allPersons.get(personId));
                         System.out.println(" "); // line break
                     }
                 }
@@ -351,13 +364,7 @@ public class CommandAPI {
                 }
             }
             // show person <person_id>
-            case "person" -> {
-                if (personMap.get(a.get(2)) == null) {
-                    throw new ServiceException("show person", "person not found!");
-                } else {
-                    System.out.println(personMap.get(a.get(2)));
-                }
-            }
+            case "person" -> System.out.println(registry.showPerson(a.get(2)));
             default -> throw new ServiceException("show", "subject not found!");
         }
     }
@@ -443,10 +450,10 @@ public class CommandAPI {
                         default -> throw new ServiceException("define Person", "unrecognized role!");
                     }
                 }
-                personMap.get(primaryId).updateResident(name, biometric, phoneNumber, roleType, location, account);
+                registry.showPerson(primaryId).updateResident(name, biometric, phoneNumber, roleType, location, account);
             }
             // update visitor <person_id> [bio-metric <string>] [lat <lat> long <Float>]
-            case "visitor" -> personMap.get(primaryId).updateVisitor(biometric, location);
+            case "visitor" -> registry.showPerson(primaryId).updateVisitor(biometric, location);
             default -> throw new ServiceException("update", "subject not recognized!");
         }
     }
@@ -467,43 +474,6 @@ public class CommandAPI {
         } else {
             return null;
         }
-    }
-
-    /**
-     * Helper: Define a person
-     *
-     * @param type              resident or visitor
-     * @param personId          id
-     * @param name              name
-     * @param biometricId       biometric id
-     * @param phone             phone number
-     * @param role              adult child administrator
-     * @param location          latitude longitude
-     * @param blockchainAddress account address
-     * @throws ServiceException if unable to process
-     */
-    private void definePerson(PersonType type, String personId, String name, String biometricId, String phone,
-                              String role, Float[] location, String blockchainAddress) throws ServiceException {
-
-        // error
-        if (personMap.containsKey(personId)) {
-            throw new ServiceException("define Person", "personId already exists!");
-        }
-
-        // convert role to enum
-        Role roleType = null;
-        if (type == PersonType.resident) {
-            switch (role) {
-                case "adult" -> roleType = Role.adult;
-                case "child" -> roleType = Role.child;
-                case "administrator" -> roleType = Role.administrator;
-                default -> throw new ServiceException("define Person", "unrecognized role!");
-            }
-        }
-
-        // create person and add to map
-        Person person = new Person(type, personId, name, biometricId, phone, roleType, location, blockchainAddress);
-        personMap.put(personId, person);
     }
 
     /**

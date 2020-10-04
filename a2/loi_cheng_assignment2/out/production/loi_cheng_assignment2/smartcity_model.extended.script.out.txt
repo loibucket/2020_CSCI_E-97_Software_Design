@@ -343,7 +343,6 @@ ERROR: line 132, ACTION: define visitor, REASON: check number of command argumen
 -end-
  
 update resident resident_1 name jane lat 42.3830 long -71.1125
-Person{personId='resident_1', biometricId='"voice-print='voiceprint-jane',face-print='faceprint-jane'"', location=[42.3735, -71.1205], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
 -end-
  
 show person resident_1
@@ -364,7 +363,6 @@ ERROR: line 141, ACTION: define resident, REASON: check number of command argume
 -end-
  
 update visitor visitor_1  lat 42.3830 long -71.1125
-Person{personId='visitor_1', biometricId='"iris-print='irisprint-visitor_1'"', location=[42.3744, -71.1203], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
 -end-
  
 show person visitor_1

@@ -76,7 +76,7 @@ public class Person {
     public void updateResident(String name, String biometricId, String phoneNumber, Role role, Float[] location, String account) throws ServiceException {
         // update resident <person_id> [name <name>] [bio-metric <string>] [phone<phone_number>] [role (adult|child|administrator)] [lat <lat> Float <Float>] [account <account_address>]
         if (this.type != PersonType.resident) {
-            throw new ServiceException("upate resident", "not a resident!");
+            throw new ServiceException("update resident", "not a resident!");
         }
         // if null do not update, else update
         this.name = name == null ? this.name : name;
@@ -97,7 +97,7 @@ public class Person {
     public void updateVisitor(String biometricId, Float[] location) throws ServiceException {
         // update visitor <person_id> [bio-metric <string>] [lat <lat> Float <Float>]
         if (this.type != PersonType.visitor) {
-            throw new ServiceException("upate visitor", "not a visitor!");
+            throw new ServiceException("update visitor", "not a visitor!");
         }
         this.biometricId = biometricId == null ? this.biometricId : biometricId;
         this.location = location == null ? this.location : location;
