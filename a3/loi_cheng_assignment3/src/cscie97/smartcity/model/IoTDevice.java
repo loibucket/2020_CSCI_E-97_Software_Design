@@ -28,12 +28,39 @@ public class IoTDevice {
      */
     public void sensorEvent(SensorType type, String action, String personId) {
         switch (type) {
-            case microphone -> this.microphone.updateSensor(action, personId);
-            case camera -> this.camera.updateSensor(action, personId);
-            case thermometer -> this.thermometer.updateSensor(action, personId);
-            case co2meter -> this.co2meter.updateSensor(action, personId);
-            case speaker -> this.speaker.updateSensor(action, personId);
+            case microphone -> this.microphone.updateEvent(action, personId);
+            case camera -> this.camera.updateEvent(action, personId);
+            case thermometer -> this.thermometer.updateEvent(action, personId);
+            case co2meter -> this.co2meter.updateEvent(action, personId);
+            case speaker -> this.speaker.updateEvent(action, personId);
         }
+    }
+
+    /**
+     * Retrieve event recorded in sensor
+     *
+     * @param type sensor type
+     * @return the recorded event as a string and the (optional) person id
+     */
+    public String[] readSensor(SensorType type) throws ServiceException {
+        switch (type) {
+            case microphone -> {
+                return this.microphone.readEvent();
+            }
+            case camera -> {
+                return this.camera.readEvent();
+            }
+            case thermometer -> {
+                return this.thermometer.readEvent();
+            }
+            case co2meter -> {
+                return this.co2meter.readEvent();
+            }
+            case speaker -> {
+                return this.speaker.readEvent();
+            }
+        }
+        throw new ServiceException("read sensor event","sensor error");
     }
 
     /**

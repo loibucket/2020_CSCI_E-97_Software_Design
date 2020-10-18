@@ -1,0 +1,490 @@
+define city city_1 name Cambridge-MA account cambridge-account lat 42.3766 long -71.1160 radius 100
+-end-
+ 
+define city city_2 name Cambridge-MA_parallel_universe_2 account cambridge-account lat 42.3766 long -71.1160 radius 200
+-end-
+ 
+define city city_3 name Cambridge-MA_parallel_universe_3 account cambridge-account lat 42.3766 long -71.1160 radius 300
+-end-
+ 
+define city city_1 name Cambridge-Error-MA account cambridge-account lat 42.3766 long -71.1160 radius 100
+ERROR: line 11, ACTION: define city, REASON: city id already exists!
+-end-
+ 
+show city city_1
+City{cityId='city_1', name='Cambridge-MA', blockchainAddress='cambridge-account', location=[42.3766, -71.116], radius=100.0 km}
+ 
+-end-
+ 
+show city city_2
+City{cityId='city_2', name='Cambridge-MA_parallel_universe_2', blockchainAddress='cambridge-account', location=[42.3766, -71.116], radius=200.0 km}
+ 
+-end-
+ 
+show city city_3
+City{cityId='city_3', name='Cambridge-MA_parallel_universe_3', blockchainAddress='cambridge-account', location=[42.3766, -71.116], radius=300.0 km}
+ 
+-end-
+ 
+show city error_city_4
+ERROR: line 18, ACTION: show city, REASON: city not found!
+-end-
+ 
+define street-sign city_1:ss_1 lat 42.3732 long -71.1202 enabled  true  text "Welcome to Harvard Square"
+-end-
+ 
+define street-sign city_1:ss_2 lat 42.3736 long -71.1214 enabled  true  text "Brattle Theatre"
+-end-
+ 
+show device city_1:ss_1
+StreetSign{text='"Welcome to Harvard Square"', deviceId='ss_1', location=[42.3732, -71.1202], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:ss_2
+StreetSign{text='"Brattle Theatre"', deviceId='ss_2', location=[42.3736, -71.1214], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+update street-sign city_1:ss_2 lat 11 long 12 enabled  true  text "Aliens!"
+-end-
+ 
+show device city_1:ss_2
+StreetSign{text='"Aliens!"', deviceId='ss_2', location=[42.3736, -71.1214], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+define street-sign city_1:ss_1 lat 42.3732 long -71.1202 enabled  true  text "This should error"
+ERROR: line 29, ACTION: define device, REASON: deviceId already exists!
+-end-
+ 
+define info-kiosk city_1:ss_1 lat 42.3732 long -71.1202 enabled  true  text "This should error"
+ERROR: line 30, ACTION: define info-kiosk, REASON: command format error!
+-end-
+ 
+update street-sign city_1:ss_1  text "The time is now 9:00 pm"
+-end-
+ 
+update street-sign city_1:ss_2  text "Now playing, Cassablaca"
+-end-
+ 
+show device city_1:ss_1
+StreetSign{text='"The time is now 9:00 pm"', deviceId='ss_1', location=[42.3732, -71.1202], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:ss_2
+StreetSign{text='"Now playing, Cassablaca"', deviceId='ss_2', location=[42.3736, -71.1214], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_2:ss_error
+ERROR: line 38, ACTION: show device, REASON: deviceId not found!
+-end-
+ 
+show device city_3:ss_another_error
+ERROR: line 39, ACTION: show device, REASON: deviceId not found!
+-end-
+ 
+define info-kiosk city_1:kiosk_1 lat 42.3723 long -71.1230 enabled true image https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg
+-end-
+ 
+define info-kiosk city_1:kiosk_2 lat 42.3766 long -71.1160 enabled true image https://www.lwa-architects.com/wp-content/uploads/2014/12/Harvard-SciCtr_Ext-bikes-992x1250.jpg
+-end-
+ 
+show device city_1:kiosk_1
+InfoKiosk{imageUri='https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg', deviceId='kiosk_1', location=[42.3723, -71.123], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:kiosk_2
+InfoKiosk{imageUri='https://www.lwa-architects.com/wp-content/uploads/2014/12/Harvard-SciCtr_Ext-bikes-992x1250.jpg', deviceId='kiosk_2', location=[42.3766, -71.116], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+update info-kiosk city_1:kiosk_1 enabled false
+-end-
+ 
+update info-kiosk city_1:kiosk_2 image https://www.google.com/maps/place/Cambridge,+MA/@42.3737266,-71.1236297,16.23z/data=!4m5!3m4!1s0x89e370a5cb30cc5f:0xc53a8e6489686c87!8m2!3d42.3736158!4d-71.1097335
+-end-
+ 
+show device city_1:kiosk_1
+InfoKiosk{imageUri='https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg', deviceId='kiosk_1', location=[42.3723, -71.123], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:kiosk_2
+InfoKiosk{imageUri='https://www.google.com/maps/place/Cambridge,+MA/@42.3737266,-71.1236297,16.23z/data=!4m5!3m4!1s0x89e370a5cb30cc5f:0xc53a8e6489686c87!8m2!3d42.3736158!4d-71.1097335', deviceId='kiosk_2', location=[42.3766, -71.116], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+define street-light city_1:sl_1 lat 42.3770 long  -71.1167 enabled  true  brightness 8
+-end-
+ 
+define street-light city_1:sl_2 lat 42.3749 long  -71.1218 enabled  true  brightness 5
+-end-
+ 
+show device city_1:sl_1
+StreetLight{brightness=8, deviceId='sl_1', location=[42.377, -71.1167], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:sl_2
+StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+update street-light city_1:sl_1  brightness 4
+-end-
+ 
+update street-light city_1:sl_1  enabled false brightness 5
+-end-
+ 
+show device city_1:sl_1
+StreetLight{brightness=5, deviceId='sl_1', location=[42.377, -71.1167], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+define parking-space city_1:ps_1 lat 42.3743 long -71.1202 enabled true  rate 250
+-end-
+ 
+define parking-space city_1:ps_2 lat 42.3744 long -71.1203 enabled true  rate 2500
+-end-
+ 
+show device city_1:ps_1
+ParkingSpace{rate=250, deviceId='ps_1', location=[42.3743, -71.1202], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:ps_2
+ParkingSpace{rate=2500, deviceId='ps_2', location=[42.3744, -71.1203], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+define parking-space city_1:ps_3 lat 42.3744 long -71.1203 enabled true  rate twenty_error
+ERROR: line 70, REASON: java.lang.NumberFormatException: For input string: "twenty_error"
+-end-
+ 
+update parking-space city_1:ps_1  rate 50
+-end-
+ 
+update parking-space city_1:ps_2  rate 50
+-end-
+ 
+show device city_1:ps_1
+ParkingSpace{rate=50, deviceId='ps_1', location=[42.3743, -71.1202], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:ps_2
+ParkingSpace{rate=50, deviceId='ps_2', location=[42.3744, -71.1203], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+define robot city_1:bot_1 lat 42.3735 long -71.1205 enabled  true activity "cleaning"
+-end-
+ 
+define robot city_1:bot_2 lat 42.3729 long -71.1192 enabled true activity "assisting student"
+-end-
+ 
+show device city_1:bot_1
+Robot{deviceId='bot_1', location=[42.3735, -71.1205], enabled=true, event='"cleaning"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:bot_2
+Robot{deviceId='bot_2', location=[42.3729, -71.1192], enabled=true, event='"assisting student"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+update robot city_1:bot_1 lat 42.3732 long -71.1195
+-end-
+ 
+update robot city_1:bot_2 activity "walking dog"
+-end-
+ 
+show device city_1:bot_1
+Robot{deviceId='bot_1', location=[42.3732, -71.1195], enabled=false, event='"cleaning"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:bot_2
+Robot{deviceId='bot_2', location=[42.3729, -71.1192], enabled=false, event='"walking dog"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+define vehicle city_1:car_1 lat 42.3725 long -71.1161 enabled true type car activity "parked" capacity 4 fee 10
+-end-
+ 
+define vehicle city_1:bus_1 lat 42.3736 long -71.1214 enabled  true  type  bus  activity "on route" capacity 30 fee 1
+-end-
+ 
+show device city_1:car_1
+Vehicle{type=car, capacity=4, fee=10, deviceId='car_1', location=[42.3725, -71.1161], enabled=true, event='"parked"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:bus_1
+Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3736, -71.1214], enabled=true, event='"on route"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_2:car_error
+ERROR: line 96, ACTION: show device, REASON: deviceId not found!
+-end-
+ 
+update vehicle city_1:car_1 lat 42.3830 long -71.1125   activity "driving"
+-end-
+ 
+update vehicle city_1:bus_1 lat 42.3635 long -71.0985 enabled true activity "on route"
+-end-
+ 
+show device city_1:car_1
+Vehicle{type=car, capacity=4, fee=10, deviceId='car_1', location=[42.383, -71.1125], enabled=false, event='"driving"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:bus_1
+Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='"on route"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:bus_1
+Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='"on route"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1
+bot_1=Robot{deviceId='bot_1', location=[42.3732, -71.1195], enabled=false, event='"cleaning"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+ps_1=ParkingSpace{rate=50, deviceId='ps_1', location=[42.3743, -71.1202], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+kiosk_1=InfoKiosk{imageUri='https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg', deviceId='kiosk_1', location=[42.3723, -71.123], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+ps_2=ParkingSpace{rate=50, deviceId='ps_2', location=[42.3744, -71.1203], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+bot_2=Robot{deviceId='bot_2', location=[42.3729, -71.1192], enabled=false, event='"walking dog"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+ss_1=StreetSign{text='"The time is now 9:00 pm"', deviceId='ss_1', location=[42.3732, -71.1202], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+ss_2=StreetSign{text='"Now playing, Cassablaca"', deviceId='ss_2', location=[42.3736, -71.1214], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+kiosk_2=InfoKiosk{imageUri='https://www.google.com/maps/place/Cambridge,+MA/@42.3737266,-71.1236297,16.23z/data=!4m5!3m4!1s0x89e370a5cb30cc5f:0xc53a8e6489686c87!8m2!3d42.3736158!4d-71.1097335', deviceId='kiosk_2', location=[42.3766, -71.116], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+car_1=Vehicle{type=car, capacity=4, fee=10, deviceId='car_1', location=[42.383, -71.1125], enabled=false, event='"driving"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+sl_2=StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+bus_1=Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='"on route"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+sl_1=StreetLight{brightness=5, deviceId='sl_1', location=[42.377, -71.1167], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+-end-
+ 
+show device city_2
+-end-
+ 
+show device city_3
+-end-
+ 
+create sensor-event city_1:bus_1 type microphone value "does this bus go to Central Square?" subject jane
+-end-
+ 
+create sensor-event city_1:bus_1 type camera value "person boarding bus" subject jane
+-end-
+ 
+create sensor-event city_1:sl_1 type thermometer value 80
+-end-
+ 
+create sensor-event city_1:sl_1 type co2meter value 500
+-end-
+ 
+create sensor-event city_1:bot_1 type thermometer  value 98.6 joe
+-end-
+ 
+show device city_1:bus_1
+Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='"on route"', microphone=Sensor{type=microphone, value='"does this bus go to Central Square?"', personId='jane'}, camera=Sensor{type=camera, value='"person boarding bus"', personId='jane'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:sl_1
+StreetLight{brightness=5, deviceId='sl_1', location=[42.377, -71.1167], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='80', personId='null'}, co2meter=Sensor{type=co2meter, value='500', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+show device city_1:bot_1
+Robot{deviceId='bot_1', location=[42.3732, -71.1195], enabled=false, event='"cleaning"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='joe'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+-end-
+ 
+create sensor-output city_1:bot_1 type speaker value "your temperature is normal"
+-end-
+ 
+show device city_1:bot_1
+Robot{deviceId='bot_1', location=[42.3732, -71.1195], enabled=false, event='"cleaning"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='joe'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"your temperature is normal"', personId='null'}}
+-end-
+ 
+create sensor-output city_1 speaker value "severe weather alert, please take shelter"
+-end-
+ 
+show device city_1:bot_1
+Robot{deviceId='bot_1', location=[42.3732, -71.1195], enabled=false, event='"cleaning"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='joe'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+-end-
+ 
+show device city_1
+bot_1=Robot{deviceId='bot_1', location=[42.3732, -71.1195], enabled=false, event='"cleaning"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='joe'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+ 
+ps_1=ParkingSpace{rate=50, deviceId='ps_1', location=[42.3743, -71.1202], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+ 
+kiosk_1=InfoKiosk{imageUri='https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg', deviceId='kiosk_1', location=[42.3723, -71.123], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+ 
+ps_2=ParkingSpace{rate=50, deviceId='ps_2', location=[42.3744, -71.1203], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+ 
+bot_2=Robot{deviceId='bot_2', location=[42.3729, -71.1192], enabled=false, event='"walking dog"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+ 
+ss_1=StreetSign{text='"The time is now 9:00 pm"', deviceId='ss_1', location=[42.3732, -71.1202], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+ 
+ss_2=StreetSign{text='"Now playing, Cassablaca"', deviceId='ss_2', location=[42.3736, -71.1214], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+ 
+kiosk_2=InfoKiosk{imageUri='https://www.google.com/maps/place/Cambridge,+MA/@42.3737266,-71.1236297,16.23z/data=!4m5!3m4!1s0x89e370a5cb30cc5f:0xc53a8e6489686c87!8m2!3d42.3736158!4d-71.1097335', deviceId='kiosk_2', location=[42.3766, -71.116], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+ 
+car_1=Vehicle{type=car, capacity=4, fee=10, deviceId='car_1', location=[42.383, -71.1125], enabled=false, event='"driving"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+ 
+sl_2=StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+ 
+bus_1=Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='"on route"', microphone=Sensor{type=microphone, value='"does this bus go to Central Square?"', personId='jane'}, camera=Sensor{type=camera, value='"person boarding bus"', personId='jane'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+ 
+sl_1=StreetLight{brightness=5, deviceId='sl_1', location=[42.377, -71.1167], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='80', personId='null'}, co2meter=Sensor{type=co2meter, value='500', personId='null'}, speaker=Sensor{type=speaker, value='"severe weather alert, please take shelter"', personId='null'}}
+ 
+-end-
+ 
+define resident resident_1 name jane bio-metric "voice-print='voiceprint-jane',face-print='faceprint-jane'" phone 781-222-3344 role adult lat 42.3735 long -71.1205 account janes_account
+-end-
+ 
+show person resident_1
+Person{personId='resident_1', biometricId='"voice-print='voiceprint-jane',face-print='faceprint-jane'"', location=[42.3735, -71.1205], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+Person{personId='resident_1', biometricId='"voice-print='voiceprint-jane',face-print='faceprint-jane'"', location=[42.3735, -71.1205], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+-end-
+ 
+define visitor resident_1 name jane-too-many bio-metric "voice-print='voiceprint-jane',face-print='faceprint-jane'" phone 781-222-3344 role adult lat 42.3735 long -71.1205 account janes_account
+ERROR: line 132, ACTION: define visitor, REASON: check number of command arguments!
+-end-
+ 
+update resident resident_1 name jane lat 42.3830 long -71.1125
+Person{personId='resident_1', biometricId='"voice-print='voiceprint-jane',face-print='faceprint-jane'"', location=[42.3735, -71.1205], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+-end-
+ 
+show person resident_1
+Person{personId='resident_1', biometricId='"voice-print='voiceprint-jane',face-print='faceprint-jane'"', location=[42.383, -71.1125], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+Person{personId='resident_1', biometricId='"voice-print='voiceprint-jane',face-print='faceprint-jane'"', location=[42.383, -71.1125], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+-end-
+ 
+define visitor visitor_1 bio-metric "iris-print='irisprint-visitor_1'" lat 42.3744 long -71.1203
+-end-
+ 
+show person visitor_1
+Person{personId='visitor_1', biometricId='"iris-print='irisprint-visitor_1'"', location=[42.3744, -71.1203], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
+Person{personId='visitor_1', biometricId='"iris-print='irisprint-visitor_1'"', location=[42.3744, -71.1203], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
+-end-
+ 
+define resident visitor_1 bio-metric "iris-print='irisprint-visitor_1'" lat 42.3744 long -71.1203
+ERROR: line 141, ACTION: define resident, REASON: check number of command arguments!
+-end-
+ 
+update visitor visitor_1  lat 42.3830 long -71.1125
+Person{personId='visitor_1', biometricId='"iris-print='irisprint-visitor_1'"', location=[42.3744, -71.1203], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
+-end-
+ 
+show person visitor_1
+Person{personId='visitor_1', biometricId='"iris-print='irisprint-visitor_1'"', location=[42.383, -71.1125], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
+Person{personId='visitor_1', biometricId='"iris-print='irisprint-visitor_1'"', location=[42.383, -71.1125], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
+-end-
+ 
+show person resident_1
+Person{personId='resident_1', biometricId='"voice-print='voiceprint-jane',face-print='faceprint-jane'"', location=[42.383, -71.1125], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+Person{personId='resident_1', biometricId='"voice-print='voiceprint-jane',face-print='faceprint-jane'"', location=[42.383, -71.1125], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+-end-
+ 
+show person visitor_1
+Person{personId='visitor_1', biometricId='"iris-print='irisprint-visitor_1'"', location=[42.383, -71.1125], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
+Person{personId='visitor_1', biometricId='"iris-print='irisprint-visitor_1'"', location=[42.383, -71.1125], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
+-end-
+ 
+show city city_2
+City{cityId='city_2', name='Cambridge-MA_parallel_universe_2', blockchainAddress='cambridge-account', location=[42.3766, -71.116], radius=200.0 km}
+ 
+resident_1=Person{personId='resident_1', biometricId='"voice-print='voiceprint-jane',face-print='faceprint-jane'"', location=[42.383, -71.1125], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
+visitor_1=Person{personId='visitor_1', biometricId='"iris-print='irisprint-visitor_1'"', location=[42.383, -71.1125], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
+ 
+-end-
+ 
+define vehicle city_1:car_99 lat 11 long -66 enabled true type car activity "high speed chase" capacity 4 fee 10
+-end-
+ 
+define vehicle city_2:car_88 lat 42.3830 long -71.1125 enabled true type car activity "high speed chase" capacity 4 fee 10
+-end-
+ 
+define vehicle city_2:car_99 lat 11 long -66 enabled true type car activity "high speed chase" capacity 4 fee 10
+-end-
+ 
+show city city_2
+City{cityId='city_2', name='Cambridge-MA_parallel_universe_2', blockchainAddress='cambridge-account', location=[42.3766, -71.116], radius=200.0 km}
+ 
+car_88=Vehicle{type=car, capacity=4, fee=10, deviceId='car_88', location=[42.383, -71.1125], enabled=true, event='"high speed chase"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+resident_1=Person{personId='resident_1', biometricId='"voice-print='voiceprint-jane',face-print='faceprint-jane'"', location=[42.383, -71.1125], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
+visitor_1=Person{personId='visitor_1', biometricId='"iris-print='irisprint-visitor_1'"', location=[42.383, -71.1125], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
+ 
+-end-
+ 
+show device city_2
+car_88=Vehicle{type=car, capacity=4, fee=10, deviceId='car_88', location=[42.383, -71.1125], enabled=true, event='"high speed chase"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+car_99=Vehicle{type=car, capacity=4, fee=10, deviceId='car_99', location=[11.0, -66.0], enabled=true, event='"high speed chase"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+-end-
+ 
+show city city_3
+City{cityId='city_3', name='Cambridge-MA_parallel_universe_3', blockchainAddress='cambridge-account', location=[42.3766, -71.116], radius=300.0 km}
+ 
+resident_1=Person{personId='resident_1', biometricId='"voice-print='voiceprint-jane',face-print='faceprint-jane'"', location=[42.383, -71.1125], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
+visitor_1=Person{personId='visitor_1', biometricId='"iris-print='irisprint-visitor_1'"', location=[42.383, -71.1125], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
+ 
+-end-
+ 
+define vehicle city_3:car_99 lat 11 long -66 enabled true type car activity "high speed chase" capacity 4 fee 10
+-end-
+ 
+show city city_3
+City{cityId='city_3', name='Cambridge-MA_parallel_universe_3', blockchainAddress='cambridge-account', location=[42.3766, -71.116], radius=300.0 km}
+ 
+resident_1=Person{personId='resident_1', biometricId='"voice-print='voiceprint-jane',face-print='faceprint-jane'"', location=[42.383, -71.1125], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
+visitor_1=Person{personId='visitor_1', biometricId='"iris-print='irisprint-visitor_1'"', location=[42.383, -71.1125], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
+ 
+-end-
+ 
+show device city_3
+car_99=Vehicle{type=car, capacity=4, fee=10, deviceId='car_99', location=[11.0, -66.0], enabled=true, event='"high speed chase"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+-end-
+ 
+define city city_9 name Mars account mars-account lat 9999 long 9999 radius 2
+-end-
+ 
+define vehicle city_9:car_99 lat 11 long -66 enabled true type car activity "high speed chase" capacity 4 fee 10
+-end-
+ 
+show device city_9
+car_99=Vehicle{type=car, capacity=4, fee=10, deviceId='car_99', location=[11.0, -66.0], enabled=true, event='"high speed chase"', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+-end-
+ 
+show city city_9
+City{cityId='city_9', name='Mars', blockchainAddress='mars-account', location=[9999.0, 9999.0], radius=2.0 km}
+ 
+-end-
+ 
+define city city_1 name Cambridge-MA account cambridge-account lat 42.3766 long -71.1160 radius 100
+ERROR: line 165, ACTION: define city, REASON: city id already exists!
+-end-
+ 
+define street-sign city_1:ss_1 lat 42.3732 long -71.1202 enabled  true  text "Welcome to Harvard Square"
+ERROR: line 166, ACTION: define device, REASON: deviceId already exists!
+-end-
+ 
+show person visitor_x
+ERROR: line 167, ACTION: show person, REASON: person not found!
+-end-
+ 
+show device ten
+ERROR: line 168, ACTION: show city devices, REASON: city not found!
+-end-
+ 
+create sensor-output city_1:bot_xx type speaker value "your temperature is normal"
+ERROR: line 169, ACTION: create sensor event, REASON: device not found!
+-end-
+ 
+create sensor-output city_1:bot_xx type speaker
+ERROR: line 170, ACTION: create sensor event, REASON: device not found!
+-end-
+ 
+define car city_1:car_99 lat 11 long -66 enabled true type car activity "high speed chase" capacity 4 fee 10
+ERROR: line 171, ACTION: define, REASON: subject not recognized!
+-end-
+ 

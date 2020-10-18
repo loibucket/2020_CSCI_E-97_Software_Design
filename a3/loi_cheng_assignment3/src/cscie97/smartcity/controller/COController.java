@@ -4,6 +4,7 @@ import cscie97.smartcity.model.IoTDevice;
 import cscie97.smartcity.model.IoTObserver;
 
 import java.util.List;
+import java.util.Map;
 
 public class COController implements IoTObserver, CommandFactory {
 
@@ -17,7 +18,7 @@ public class COController implements IoTObserver, CommandFactory {
 	}
 
 	@Override
-	public void observe(List<IoTDevice> deviceList) {
-
+	public void observe(List<IoTDevice> deviceList, Map<String, IoTDevice> deviceMap) {
+		//System.out.println("cocontoller:"+deviceList.toString());
 	}
 }

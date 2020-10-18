@@ -5,11 +5,7 @@ import cscie97.smartcity.controller.KioskController;
 import cscie97.smartcity.controller.MicController;
 import cscie97.smartcity.controller.ParkingMeterController;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * The city manages the devices of the city, its commands are accessed through a service API
@@ -40,9 +36,9 @@ public class City implements CitySubject{
     }
 
     @Override
-    public void notifyObs(List<IoTDevice> deviceList) {
+    public void notifyObs(List<IoTDevice> deviceList) throws ServiceException {
         for (IoTObserver observer : observerList) {
-            observer.observe(deviceList);
+            observer.observe(deviceList, deviceMap);
         }
     }
 
@@ -107,6 +103,8 @@ public class City implements CitySubject{
         deviceExists(deviceId);
         StreetSign sign = new StreetSign(deviceId, location, enabled, text);
         this.deviceMap.put(deviceId, sign);
+        //notify observers
+        notifyObs(new ArrayList<>(Collections.singletonList(sign)));
     }
 
     /**
@@ -122,6 +120,8 @@ public class City implements CitySubject{
         deviceExists(deviceId);
         InfoKiosk kiosk = new InfoKiosk(deviceId, location, enabled, imageUri);
         this.deviceMap.put(deviceId, kiosk);
+        //notify observers
+        notifyObs(new ArrayList<>(Collections.singletonList(kiosk)));
     }
 
     /**
@@ -137,6 +137,8 @@ public class City implements CitySubject{
         deviceExists(deviceId);
         StreetLight light = new StreetLight(deviceId, location, enabled, brightness);
         this.deviceMap.put(deviceId, light);
+        //notify observers
+        notifyObs(new ArrayList<>(Collections.singletonList(light)));
     }
 
     /**
@@ -152,6 +154,8 @@ public class City implements CitySubject{
         deviceExists(deviceId);
         ParkingSpace space = new ParkingSpace(deviceId, location, enabled, rate);
         this.deviceMap.put(deviceId, space);
+        //notify observers
+        notifyObs(new ArrayList<>(Collections.singletonList(space)));
     }
 
     /**
@@ -167,6 +171,8 @@ public class City implements CitySubject{
         deviceExists(deviceId);
         Robot bot = new Robot(deviceId, location, enabled, activity);
         this.deviceMap.put(deviceId, bot);
+        //notify observers
+        notifyObs(new ArrayList<>(Collections.singletonList(bot)));
     }
 
     /**
@@ -191,6 +197,8 @@ public class City implements CitySubject{
         }
         Vehicle vehicle = new Vehicle(deviceId, location, enabled, vehType, activity, capacity, fee);
         this.deviceMap.put(deviceId, vehicle);
+        //notify observers
+        notifyObs(new ArrayList<>(Collections.singletonList(vehicle)));
     }
 
     /**
@@ -240,12 +248,16 @@ public class City implements CitySubject{
         if (deviceId == null) {
             for (String key : this.deviceMap.keySet()) {
                 this.deviceMap.get(key).sensorEvent(sensor, event, personId);
+                //notify observers
+                notifyObs(new ArrayList<>(this.deviceMap.values()));
             }
         } else if (!this.deviceMap.containsKey(deviceId)) {
             throw new ServiceException("create sensor event", "device not found!");
         } else {
             // apply to single device
             this.deviceMap.get(deviceId).sensorEvent(sensor, event, personId);
+            //notify observers
+            notifyObs(new ArrayList<>(Collections.singletonList(this.deviceMap.get(deviceId))));
         }
     }
 

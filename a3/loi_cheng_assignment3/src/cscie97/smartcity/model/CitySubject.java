@@ -8,6 +8,6 @@ public interface CitySubject {
 
 	void detachObs(IoTObserver observer);
 
-	void notifyObs(List<IoTDevice> deviceList);
+	void notifyObs(List<IoTDevice> deviceList) throws ServiceException;
 
 }

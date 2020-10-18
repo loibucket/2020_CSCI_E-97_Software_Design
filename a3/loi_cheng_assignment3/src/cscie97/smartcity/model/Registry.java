@@ -92,7 +92,7 @@ public class Registry {
         if (personMap.get(personId) == null) {
             throw new ServiceException("show person", "person not found!");
         } else {
-            System.out.println(personMap.get(personId));
+            //System.out.println(personMap.get(personId));
         }
         return personMap.get(personId);
     }
