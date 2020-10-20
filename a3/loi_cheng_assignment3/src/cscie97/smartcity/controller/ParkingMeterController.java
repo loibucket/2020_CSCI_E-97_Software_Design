@@ -11,7 +11,7 @@ public class ParkingMeterController implements IoTObserver, CommandFactory {
 	private ParkingEventCommand parkingEvent;
 
 	@Override
-	public Command createCommand(List<IoTDevice> deviceList) {
+	public Command createCommand() {
 		return null;
 	}
 

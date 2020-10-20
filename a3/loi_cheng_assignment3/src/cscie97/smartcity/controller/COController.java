@@ -13,7 +13,7 @@ public class COController implements IoTObserver, CommandFactory {
 	private COTwoOverCommand cOTwoOver;
 
 	@Override
-	public Command createCommand(List<IoTDevice> deviceList) {
+	public Command createCommand() {
 		return null;
 	}
 

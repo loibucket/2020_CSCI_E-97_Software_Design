@@ -6,8 +6,11 @@ import java.util.Arrays;
  * Person
  *
  * @author Loi Cheng
- * @version 1.0
- * @since 2020-09-29
+ * <p>
+ * v1.0 2020-09-29 initial
+ * v1.1 2020-10-19 added more getters
+ * @version 1.1
+ * @since 2020-10-19
  */
 public class Person {
 
@@ -45,14 +48,40 @@ public class Person {
         this.blockchainAddress = blockchainAddress;
     }
 
-    /**
-     * Getter
-     *
-     * @return location
-     */
+
+    //getters
+    public PersonType getType() {
+        return this.type;
+    }
+
+    public String getBlockchainAddress() {
+        return blockchainAddress;
+    }
+
+    public String getBiometricId() {
+        return biometricId;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public String getPersonId() {
+        return personId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     public Float[] getLocation() {
         return this.location;
     }
+    //getters
 
     /**
      * Update resident

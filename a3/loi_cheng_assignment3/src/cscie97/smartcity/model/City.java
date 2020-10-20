@@ -1,5 +1,6 @@
 package cscie97.smartcity.model;
 
+import cscie97.ledger.CommandProcessorException;
 import cscie97.smartcity.controller.CameraController;
 import cscie97.smartcity.controller.KioskController;
 import cscie97.smartcity.controller.MicController;
@@ -9,12 +10,16 @@ import java.util.*;
 
 /**
  * The city manages the devices of the city, its commands are accessed through a service API
+ * The city notifies all observers of any relevant updates
+ * <p>
+ * v1.0: 2020-09-29 original
+ * v1.1: 2020-10-18 added observer pattern ; moved helper function to the Tool class
  *
  * @author Loi Cheng
- * @version 1.0
+ * @version 1.1
  * @since 2020-09-29
  */
-public class City implements CitySubject{
+public class City implements CitySubject {
 
     private final String cityId;
     private final String name;
@@ -22,19 +27,35 @@ public class City implements CitySubject{
     private final Float[] location;
     private final Float radius;
     private final Map<String, IoTDevice> deviceMap;
-
     private final List<IoTObserver> observerList;
 
+    /**
+     * Add observers to the list
+     *
+     * @param observer an observing controller
+     */
     @Override
+
     public void attachObs(IoTObserver observer) {
         observerList.add(observer);
     }
 
+    /**
+     * Remove an observers from the list
+     *
+     * @param observer an obersving controller
+     */
     @Override
     public void detachObs(IoTObserver observer) {
         observerList.remove(observer);
     }
 
+    /**
+     * notify all observers of a update to the devices
+     *
+     * @param deviceList the list of devices that were updated
+     * @throws ServiceException if error occurs during the observation
+     */
     @Override
     public void notifyObs(List<IoTDevice> deviceList) throws ServiceException {
         for (IoTObserver observer : observerList) {
@@ -44,7 +65,8 @@ public class City implements CitySubject{
 
     /**
      * City Constructor
-     *  @param cityId   city Id
+     *
+     * @param cityId   city Id
      * @param name     name of city
      * @param account  blockchain address of city
      * @param location location of city

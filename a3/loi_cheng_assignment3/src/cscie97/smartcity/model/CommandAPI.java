@@ -6,26 +6,44 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import cscie97.smartcity.Tool;
-import cscie97.smartcity.Tool.*;
 
 /**
  * The CommandAPI processes input commands from user and processes them through various methods
+ * v1.0 initial
+ * v1.1 converted all methods to static
  *
  * @author Loi Cheng
- * @version 1.0
- * @since 2020-09-29
+ * @version 1.1
+ * @since 2020-10-19
  */
 public class CommandAPI {
 
-    private final Map<String, City> cityMap;
-    private final Registry registry;
+    private static final Map<String, City> cityMap = new HashMap<>();
+    private static final Registry registry = new Registry("peoples_01001");
+
+    /**
+     * Access the one and only city Map
+     *
+     * @return the city map
+     */
+    public static Map<String, City> getCityMap() {
+        return cityMap;
+    }
+
+    /**
+     * Access the ony and only registry
+     *
+     * @return the registry
+     */
+    public static Registry getRegistry() {
+        return registry;
+    }
 
     /**
      * Constructor
      */
     public CommandAPI() {
-        this.cityMap = new HashMap<>();
-        this.registry = new Registry("peoples_01001");
+
     }
 
     /**
@@ -35,7 +53,7 @@ public class CommandAPI {
      * @param command    command
      * @param lineNumber line number if given
      */
-    public void processCommand(String authToken, String command, int lineNumber) {
+    public static void processCommand(String authToken, String command, int lineNumber) {
 
         if (authToken == null) {
             System.out.println("authorization token not provided!");
@@ -69,11 +87,11 @@ public class CommandAPI {
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
             System.out.println(new CommandException(command, null, "too few arguments!", lineNumber).toString());
         } catch (java.lang.NullPointerException e) {
-            System.out.println(new CommandException(command, null, "not found!", lineNumber).toString());
+            System.out.println(new CommandException(command, null, "not found (null pointer)!", lineNumber).toString());
         } catch (Exception e) {
             System.out.println(new CommandException(command, null, e.toString(), lineNumber).toString());
         }
-        System.out.println("-END-"); //end command
+        System.out.println(":END"); //end command
         System.out.println(" "); //line break
     }
 
@@ -83,7 +101,7 @@ public class CommandAPI {
      * @param authToken   authorization token
      * @param commandFile command file name
      */
-    public void processCommandFile(String authToken, String commandFile) {
+    public static void processCommandFile(String authToken, String commandFile) {
 
         if (!authToken.equals("placeholder")) {
             System.out.println("authentication error");
@@ -98,10 +116,10 @@ public class CommandAPI {
                     if (line.charAt(0) != "#".charAt(0)) {
                         processCommand(authToken, line, lineNumber.get());
                     } else {
-                        System.out.println("LINE " + lineNumber.get() + " " + line);
+                        System.out.println("# LINE " + lineNumber.get() + " " + line);
                     }
-                    lineNumber.getAndIncrement();
                 }
+                lineNumber.getAndIncrement();
             }
             reader.close();
         } catch (Exception e) {
@@ -116,7 +134,7 @@ public class CommandAPI {
      * @param a the command
      * @throws ServiceException if cannot process command
      */
-    private void create(List<String> a) throws ServiceException {
+    private static void create(List<String> a) throws ServiceException {
         switch (a.get(1)) {
             case "sensor-event", "sensor-output" -> {
 
@@ -175,7 +193,7 @@ public class CommandAPI {
      * @param a command
      * @throws ServiceException if command cannot be processed
      */
-    private void define(List<String> a) throws ServiceException {
+    private static void define(List<String> a) throws ServiceException {
         switch (a.get(1)) {
             // Expected Commands, all fields are required
             //   0            2             4               6             8           10             12
@@ -316,7 +334,7 @@ public class CommandAPI {
      * @param a command
      * @throws ServiceException if show error
      */
-    private void show(List<String> a) throws ServiceException {
+    private static void show(List<String> a) throws ServiceException {
         switch (a.get(1)) {
             // Expected Commands, device_id is optional
             // show city <city_id>
@@ -380,7 +398,7 @@ public class CommandAPI {
      *
      * @param a command
      */
-    private void update(List<String> a) throws ServiceException {
+    private static void update(List<String> a) throws ServiceException {
 
         String primaryId;
         String secondaryId;
@@ -463,34 +481,4 @@ public class CommandAPI {
             default -> throw new ServiceException("update", "subject not recognized!");
         }
     }
-
-
-
-//    /**
-//     * https://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude
-//     * Calculate distance between two points in latitude and longitude taking
-//     * Uses Haversine method as its base.
-//     */
-//    private double distance(Float[] locA, Float[] locB) {
-//
-//        double lat1 = locA[0];
-//        double lat2 = locB[0];
-//
-//        double lon1 = locA[1];
-//        double lon2 = locB[1];
-//
-//        final int R = 6371; // Radius of the earth
-//
-//        double latDistance = Math.toRadians(lat2 - lat1);
-//        double lonDistance = Math.toRadians(lon2 - lon1);
-//        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-//                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-//                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-//        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-//        double distance = R * c; // km
-//
-//        distance = Math.pow(distance, 2);
-//
-//        return Math.sqrt(distance);
-//    }
 }

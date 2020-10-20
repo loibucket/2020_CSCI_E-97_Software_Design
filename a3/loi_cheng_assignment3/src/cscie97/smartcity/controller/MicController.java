@@ -15,7 +15,7 @@ public class MicController implements IoTObserver, CommandFactory {
 	private BrokenGlassCommand brokenGlass;
 
 	@Override
-	public Command createCommand(List<IoTDevice> deviceList) {
+	public Command createCommand() {
 		return null;
 	}
 

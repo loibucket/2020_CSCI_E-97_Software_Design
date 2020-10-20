@@ -1,6 +1,11 @@
 package cscie97.smartcity;
 
+import cscie97.smartcity.model.IoTDevice;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Tool
@@ -13,10 +18,11 @@ import java.util.List;
 public class Tool {
 
     /**
-     * https://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude
      * Calculate distance between two points in latitude and longitude taking
      * Uses Haversine method as its base.
-     * @return
+     * https://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude
+     *
+     * @return distance between 2 locations
      */
     public static Float distance(Float[] locA, Float[] locB) {
 
@@ -60,10 +66,10 @@ public class Tool {
     }
 
     /**
-     * helper, removes extra quotes from inputs
+     * Helper, removes extra quotes from inputs
      *
-     * @param s
-     * @return
+     * @param s passed in string
+     * @return cleaned up string without the extra quotes
      */
     public static String clean(String s) {
         //cleanup remove quotes if exists
@@ -76,4 +82,22 @@ public class Tool {
         return s;
     }
 
+    /**
+     * Helper, get list of bots, sorted by nearest to device of interest
+     *
+     * @param device    the device of interest
+     * @param deviceMap all the city devices
+     * @return list of bots sorted by distance
+     */
+    public static List<BotDist> getBotsByDist(IoTDevice device, Map<String, IoTDevice> deviceMap) {
+        List<BotDist> botList = new ArrayList<>();
+        for (String botId : deviceMap.keySet()) {
+            IoTDevice b = deviceMap.get(botId);
+            if (b.getClass().getName().equals("cscie97.smartcity.model.Robot")) {
+                botList.add(new BotDist(botId, Tool.distance(device.getLocation(), b.getLocation())));
+            }
+        }
+        Collections.sort(botList);
+        return botList;
+    }
 }

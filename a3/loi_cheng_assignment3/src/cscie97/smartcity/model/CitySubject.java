@@ -1,13 +1,38 @@
 package cscie97.smartcity.model;
 
+import cscie97.ledger.CommandProcessorException;
+
 import java.util.List;
 
+/**
+ * The city subject interface has methods specific to attach and detach observers, and to notify observers
+ *
+ * @author Loi Cheng
+ * @version 1.0
+ * @since 2020-10-18
+ */
 public interface CitySubject {
 
-	void attachObs(IoTObserver observer);
+    /**
+     * add an observer to be notified
+     *
+     * @param observer an IoT observer, e.g. camera controller
+     */
+    void attachObs(IoTObserver observer);
 
-	void detachObs(IoTObserver observer);
+    /**
+     * remove an observer from notifications
+     *
+     * @param observer an IoT observer, e.g. camera controller
+     */
+    void detachObs(IoTObserver observer);
 
-	void notifyObs(List<IoTDevice> deviceList) throws ServiceException;
+    /**
+     * notify all observers with a list of devices that has been updated
+     *
+     * @param deviceList the list of devices that has been updated
+     * @throws ServiceException if notification errors
+     */
+    void notifyObs(List<IoTDevice> deviceList) throws ServiceException, CommandProcessorException;
 
 }

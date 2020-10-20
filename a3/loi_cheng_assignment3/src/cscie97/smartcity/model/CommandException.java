@@ -31,7 +31,7 @@ public class CommandException extends Exception {
     }
 
     public String toString() {
-        String line = this.lineNumber == null ? "" : "ERROR: line " + this.lineNumber;
+        String line = this.lineNumber == null ? "" : "COMMAND ERROR: line " + this.lineNumber;
         String command = this.command == null ? "" : ", COMMAND: " + this.command;
         String action = this.action == null ? "" : ", ACTION: " + this.action;
         String reason = this.reason == null ? "" : ", REASON: " + this.reason;

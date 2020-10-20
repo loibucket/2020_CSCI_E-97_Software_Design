@@ -1,117 +1,108 @@
 package cscie97.smartcity.controller;
 
-import cscie97.smartcity.BotDist;
-import cscie97.smartcity.Tool;
+import cscie97.ledger.CommandProcessorException;
 import cscie97.smartcity.model.*;
 
 import java.util.*;
 
+/**
+ * The camera controller observes events from the camera and responds accordingly
+ *
+ * @author Loi Cheng
+ * @version 1.0
+ * @since 2020-10-19
+ */
 public class CameraController implements IoTObserver, CommandFactory {
 
-	private EmergencyOneCommand emergencyOne;
+    private EmergencyOneCommand emergencyOne;
 
-	private EmergencyTwoCommand emergencyTwo;
+    private EmergencyTwoCommand emergencyTwo;
 
-	private LitterEventCommand litterEvent;
+    private LitterEventCommand litterEvent;
 
-	private PersonSeenCommand personSeen;
+    private PersonSeenCommand personSeen;
 
-	private BoardBusCommand boardBus;
+    private BoardBusCommand boardBus;
 
-	@Override
-	public Command createCommand(List<IoTDevice> deviceList) {
-		return null;
-	}
+    private IoTDevice targetDevice;
 
-	@Override
-	public void observe(List<IoTDevice> deviceList, Map<String, IoTDevice> deviceMap) throws ServiceException {
+    private List<IoTDevice> deviceList;
 
-		// focus only on camera events
-		for(IoTDevice device:deviceList){
-			String action = device.readSensor(SensorType.camera)[0];
-			String subject = device.readSensor(SensorType.camera)[1];
+    private Map<String, IoTDevice> deviceMap;
 
-			if (action != null){
+    private String command;
 
-				//check for emergency
-				if (action.startsWith("emergency")){
-					String situation = action.substring(10,action.length());
-					List<String> latLong;
-					Float[] location;
+    /**
+     * Create a command to be executed later, based on info stored in the camera controller's command var
+     *
+     * @return the command
+     * @throws ServiceException if error in creating the command
+     */
+    @Override
+    public Command createCommand() throws ServiceException {
+        Command c;
+        switch (this.command) {
+            case "emergency_one" -> c = new EmergencyOneCommand(targetDevice, deviceMap);
+            case "emergency_two" -> c = new EmergencyTwoCommand(targetDevice, deviceMap);
+            case "littering" -> c = new LitterEventCommand(targetDevice, deviceMap);
+            default -> throw new ServiceException("camera controller", "cannot create command!");
+        }
+        return c;
+    }
 
-					//traffic accident
-					if (situation.startsWith("traffic_accident")) {
-						try {
-							latLong = Arrays.asList(situation.substring(17, situation.length()).split(" "));
-							float lat = Float.parseFloat(Objects.requireNonNull(Tool.findAttr(latLong, "lat")));
-							float lon = Float.parseFloat(Objects.requireNonNull(Tool.findAttr(latLong, "long")));
-							location = new Float[]{lat,lon};
-						}catch (Exception e){
-							throw new ServiceException("traffic accident","location not understood!");
-						}
+    /**
+     * Observe for camera events from the passed in devices, responds on specific events, executes a specific command
+     *
+     * @param deviceList list of devices to observe
+     * @param deviceMap  reference of all the devices in the city
+     * @throws ServiceException if observation errors
+     */
+    @Override
+    public void observe(List<IoTDevice> deviceList, Map<String, IoTDevice> deviceMap) throws ServiceException {
 
-						///COMMAND///
-						//stay calm
-						device.sensorEvent(SensorType.speaker,"Stay calm, help is on its way!",null);
-						System.out.println(device);
-						System.out.println(" "); // line break
+        if (deviceList == null) {
+            throw new ServiceException("camera controller", "no devices to observe!");
+        }
 
-						//get robots
-						List<BotDist> bots = new ArrayList<>();
-						for(String botId:deviceMap.keySet()){
-							IoTDevice d = deviceMap.get(botId);
-							if (d.getClass().getName().equals("cscie97.smartcity.model.Robot")){
-								bots.add(new BotDist(botId,Tool.distance(location, d.getLocation())));
-							}
-						}
+        this.deviceList = deviceList;
+        this.deviceMap = deviceMap;
 
-						//get closest robot
-						Collections.sort(bots);
-						List<BotDist> two = new ArrayList<BotDist>(bots.subList(0, 2));
+        // focus only on camera events
+        for (IoTDevice d : deviceList) {
+            String action;
+            action = d.readSensor(SensorType.camera)[0];
 
-						//"address <emergency_type> at lat <lat> long <long>"
-						for (BotDist b: two){
-							Robot bot = (Robot)deviceMap.get(b.getBot());
-							bot.updateRobot(location,true,"address traffic accident");
-							bot.sensorEvent(SensorType.speaker,"I am addressing emergency",subject);
-							System.out.println(bot);
-							System.out.println(" "); // line break
-						}
-						///COMMAND////
-					}
+            // inspect camera footage
+            if (action != null) {
+                switch (action) {
+                    case "fire", "flood", "earthquake", "severe weather" -> {
+                        this.command = "emergency_one";
+                        this.targetDevice = d;
+                    }
+                    case "traffic_accident" -> {
+                        this.command = "emergency_two";
+                        this.targetDevice = d;
+                    }
+                    case "littering" -> {
+                        this.command = "littering";
+                        this.targetDevice = d;
+                    }
+                    case "person_seen" -> {
+                        this.command = "person_seen";
+                        this.targetDevice = d;
+                    }
+                    case "board_bus" -> {
+                        this.command = "board_bus";
+                        this.targetDevice = d;
+                    }
+                    default -> {
+                        // no action taken
+                    }
+                }
+                //create and execute command
+                createCommand().execute();
+            }
+        }
+    }//observe
 
-//					if (situation.startsWith("fire")){
-//						latLong = situation.substring(5,situation.length());
-//					} else if (situation.startsWith("flood")){
-//						latLong = situation.substring(6, situation.length());
-//					} else if (situation.startsWith("earthquake")){
-//						latLong = situation.substring(11,situation.length());
-//					} else if (situation.startsWith("severe weather")){
-//						latLong = situation.substring(15,situation.length());
-//					}
-//
-//					System.out.println("CAMERA CONTROLLER: " + "non critical emergency detected, no action taken");
-//					System.out.println("CAMERA CONTROLLER: " + action);
-				}
-			}
-		}
-	}
-
-	/**
-	 * Helper: get attribute from command
-	 *
-	 * @param a    command
-	 * @param attr attribute name
-	 * @return attribute value
-	 */
-	private String findLatLong(List<String> a, String attr) {
-		int Idx = a.indexOf(attr);
-		if (Idx == -1) {
-			return null;
-		} else if (a.size() > Idx + 1) {
-			return a.get(Idx + 1);
-		} else {
-			return null;
-		}
-	}
-}
+}//class

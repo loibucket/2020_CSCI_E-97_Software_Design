@@ -2,10 +2,13 @@ package cscie97.smartcity.model;
 
 /**
  * IoTDevice is the base of all the other devices like robot, parking space, etc.
+ * <p>
+ * v1.0 2020-09-29 initial
+ * v1.1 2020-10-19 added methods to read sensor events
  *
  * @author Loi Cheng
- * @version 1.0
- * @since 2020-09-29
+ * @version 1.1
+ * @since 2020-10-19
  */
 public class IoTDevice {
 
@@ -60,7 +63,7 @@ public class IoTDevice {
                 return this.speaker.readEvent();
             }
         }
-        throw new ServiceException("read sensor event","sensor error");
+        throw new ServiceException("read sensor event", "sensor error");
     }
 
     /**

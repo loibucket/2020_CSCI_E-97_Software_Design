@@ -57,7 +57,7 @@ public class CommandProcessorException extends IOException {
     }
 
     public String toString() {
-        return ("ERROR: line " + this.lineNumber + ", COMMAND: " + this.command + ", REASON: " + this.reason);
+        return ("LEDGER ERROR: line " + this.lineNumber + ", COMMAND: " + this.command + ", REASON: " + this.reason);
     }
 
 }

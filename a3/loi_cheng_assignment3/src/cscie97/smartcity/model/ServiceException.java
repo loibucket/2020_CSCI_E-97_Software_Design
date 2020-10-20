@@ -31,7 +31,7 @@ public class ServiceException extends Exception {
     }
 
     public String toString() {
-        return ("ERROR: " + ", ACTION: " + this.action + ", REASON: " + this.reason);
+        return ("SERVICE ERROR: " + ", ACTION: " + this.action + ", REASON: " + this.reason);
     }
 
 }

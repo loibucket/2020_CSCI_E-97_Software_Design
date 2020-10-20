@@ -13,7 +13,7 @@ public class KioskController implements IoTObserver, CommandFactory {
 	private MovieReservationCommand movieReservation;
 
 	@Override
-	public Command createCommand(List<IoTDevice> deviceList) {
+	public Command createCommand() {
 		return null;
 	}
 

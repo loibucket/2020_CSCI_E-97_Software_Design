@@ -28,16 +28,14 @@ import java.nio.charset.StandardCharsets;
 public final class Ledger {
 
     // Name of the ledger.
-    private String name;
+    private final String name;
     // Ledger description.
-    private String description;
+    private final String description;
     // The Seed that is used as input to the hashing algorithm.
-    private String seed;
+    private final String seed;
 
-    // The initial Block of the blockchain.
-    private Block genesisBlock;
     // A map of block numbers and the associated
-    private Map<Integer, Block> blockMap;
+    private final Map<Integer, Block> blockMap;
 
     // the transactionPool and balancePool are temporary "blocks" that hold the data
     // until ready to be committed to a complete block
@@ -70,10 +68,10 @@ public final class Ledger {
     /**
      * initialize the ledger
      *
-     * @param name
-     * @param description
-     * @param seed
-     * @throws LedgerException
+     * @param name        name of ledger
+     * @param description description
+     * @param seed        a seed
+     * @throws LedgerException if error
      */
     public Ledger(String name, String description, String seed) throws LedgerException {
         this.name = name;
@@ -92,9 +90,9 @@ public final class Ledger {
      * Create a new account, assign a unique identifier, and set the balance to 0.
      * Return the account identifier.
      *
-     * @param accountId
-     * @return
-     * @throws LedgerException
+     * @param accountId account id
+     * @return string of account id
+     * @throws LedgerException if error
      */
     public String createAccount(String accountId) throws LedgerException {
         if (this.balancePool.keySet().contains(accountId)) {
@@ -110,9 +108,9 @@ public final class Ledger {
      * for the current Block. Return the assigned transaction id. If the transaction
      * is not valid, throw a LedgerException.
      *
-     * @param transaction
-     * @return
-     * @throws LedgerException
+     * @param transaction the transaction
+     * @return transaction id
+     * @throws LedgerException if error
      */
     public String processTransaction(Transaction transaction) throws LedgerException {
         if (transaction.payer.getBalance() < transaction.amount + transaction.fee) {
@@ -121,8 +119,12 @@ public final class Ledger {
         if (transaction.fee < 10) {
             throw new LedgerException("process-transaction", "fee must be at least 10");
         }
-        transaction.payer.updateBalance(transaction.payer.getBalance() - transaction.amount - transaction.fee);
-        transaction.receiver.updateBalance(transaction.receiver.getBalance() + transaction.amount);
+        try {
+            transaction.payer.updateBalance(transaction.payer.getBalance() - transaction.amount - transaction.fee);
+            transaction.receiver.updateBalance(transaction.receiver.getBalance() + transaction.amount);
+        } catch (Exception e) {
+            throw new LedgerException("process transaction", "payer or receiver not found!");
+        }
         balancePool.get("master").updateBalance(balancePool.get("master").getBalance() + transaction.fee);
         this.transactionPool.add(transaction);
         // after 10 transactions, write to a new block
@@ -138,7 +140,8 @@ public final class Ledger {
         String blockHash = treeHash(this.transactionPool, this.balancePool);
         if (this.blockMap.isEmpty()) {
             // genesis block
-            genesisBlock = new Block(1, blockHash, transactionPool, balancePool, null, null);
+            // The initial Block of the blockchain.
+            Block genesisBlock = new Block(1, blockHash, transactionPool, balancePool, null, null);
             this.blockMap.put(1, genesisBlock);
         } else {
             // all other blocks
@@ -157,9 +160,9 @@ public final class Ledger {
      * most recent completed block. If the Account does not exist, throw a
      * LedgerException.
      *
-     * @param accountId
-     * @return
-     * @throws LedgerException
+     * @param accountId the id
+     * @return the account balance
+     * @throws LedgerException if error
      */
     public int getAccountBalance(String accountId) throws LedgerException {
         // check if any complete block exists
@@ -170,7 +173,7 @@ public final class Ledger {
         Block completeBlock = this.blockMap.get(Collections.max(this.blockMap.keySet()));
         // check if key exists
         Map<String, Account> completeAccts = completeBlock.geAccountBalanceMap();
-        if (!completeAccts.keySet().contains(accountId)) {
+        if (!completeAccts.containsKey(accountId)) {
             throw new LedgerException("get-account-balance", "account not found in most recent completed block");
         }
         Account account = completeAccts.get(accountId);
@@ -178,12 +181,25 @@ public final class Ledger {
     }
 
     /**
+     * Return the UNCONFIRMED account balance for the Account with a given address based on the
+     * most recent completed block. If the Account does not exist, throw a
+     * LedgerException. Contains transactions not yet comitted
+     *
+     * @param accountId the id
+     * @return the account balance
+     * @throws LedgerException if error
+     */
+    public int getUnconfirmedBalance(String accountId) throws LedgerException {
+        return getBalancePool().get(accountId).getBalance();
+    }
+
+    /**
      * Return the account balance for the Account with a given address based on the
      * most recent completed block. If the Account does not exist, throw a
      * LedgerException.
      *
-     * @return
-     * @throws LedgerException
+     * @return the map
+     * @throws LedgerException if error
      */
     public Map<String, Integer> getAccountBalances() throws LedgerException {
         // check if any complete block exists
@@ -194,7 +210,7 @@ public final class Ledger {
         // rewrite account balance map into <String, Integer> format
         Map<String, Account> acctBalMap = this.blockMap.get(Collections.max(this.blockMap.keySet()))
                 .geAccountBalanceMap();
-        Map<String, Integer> acctBal = new HashMap<String, Integer>();
+        Map<String, Integer> acctBal = new HashMap<>();
         for (String key : acctBalMap.keySet()) {
             acctBal.put(key, acctBalMap.get(key).getBalance());
         }
@@ -204,9 +220,9 @@ public final class Ledger {
     /**
      * Return the Block for the given block number.
      *
-     * @param blockNumber
-     * @return
-     * @throws LedgerException
+     * @param blockNumber the block
+     * @return the block
+     * @throws LedgerException if error
      */
     public Block getBlock(int blockNumber) throws LedgerException {
         Block block = null;
@@ -220,14 +236,14 @@ public final class Ledger {
 
     /**
      * Return the Transaction for the given transaction id.
-     *
+     * <p>
      * transaction ids 1-10 are in block 1, 11-20 in block 2, etc.. ; each
-     * transaction index 0 holds transacton id 1,11 or 21...etc. index 2 holds 2,
+     * transaction index 0 holds transaction id 1,11 or 21...etc. index 2 holds 2,
      * 12, or 22, ...etc.;
      *
-     * @param transactionId
-     * @return
-     * @throws LedgerException
+     * @param transactionId the id
+     * @return the transaction
+     * @throws LedgerException if error
      */
     public Transaction getTransaction(String transactionId) throws LedgerException {
         int transId = Integer.parseInt(transactionId);
@@ -246,7 +262,7 @@ public final class Ledger {
      * of the previous hash, make sure that the account balances total to the max
      * value. Verify that each completed block has exactly 10 transactions.
      *
-     * @throws LedgerException
+     * @throws LedgerException if error
      */
     public void validate() throws LedgerException {
         if (this.blockMap.isEmpty()) {
@@ -291,10 +307,10 @@ public final class Ledger {
     /**
      * helper to create the block hash
      *
-     * @param transList
-     * @param acctMap
-     * @return
-     * @throws LedgerException
+     * @param transList the list
+     * @param acctMap   the map
+     * @return string of tree
+     * @throws LedgerException if error
      */
     private String treeHash(List<Transaction> transList, Map<String, Account> acctMap) throws LedgerException {
         // check if there are 10 transactions
@@ -358,9 +374,9 @@ public final class Ledger {
      * helper to serialize an object into a byte array, create the hash of the
      * serialized object, return the hash as a hex string
      *
-     * @param obj
-     * @return
-     * @throws LedgerException
+     * @param obj an object
+     * @return a byte hash
+     * @throws LedgerException if error
      */
     private byte[] objectHash(Object obj) throws LedgerException {
         byte[] hash;
@@ -379,7 +395,7 @@ public final class Ledger {
             bos.close();
         } catch (NoSuchAlgorithmException | IOException e) {
             System.out.println(e);
-            throw new LedgerException("hash object", "error encoutered during hashing");
+            throw new LedgerException("hash object", "error encountered during hashing");
         }
         return hash;
     }
@@ -388,8 +404,8 @@ public final class Ledger {
      * helper to convert byte array to hex string
      * https://stackoverflow.com/questions/9655181/how-to-convert-a-byte-array-to-a-hex-string-in-java
      *
-     * @param bytes
-     * @return
+     * @param bytes binary
+     * @return hex
      */
     private static String bytesToHex(byte[] bytes) {
         char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
@@ -406,7 +422,7 @@ public final class Ledger {
      * Makes a deep copy of any Java object that is passed.
      * https://www.journaldev.com/17129/java-deep-copy-object
      *
-     * @throws LedgerException
+     * @throws LedgerException if error
      */
     private static Object deepCopy(Object object) throws LedgerException {
         try {
