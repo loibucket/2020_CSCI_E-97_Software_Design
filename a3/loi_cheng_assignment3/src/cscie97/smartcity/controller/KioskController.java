@@ -8,17 +8,17 @@ import java.util.Map;
 
 public class KioskController implements IoTObserver, CommandFactory {
 
-	private MovieInfoCommand movieInfo;
+    private MovieInfoCommand movieInfo;
 
-	private MovieReservationCommand movieReservation;
+    private MovieReservationCommand movieReservation;
 
-	@Override
-	public Command createCommand() {
-		return null;
-	}
+    @Override
+    public Command createCommand() {
+        return null;
+    }
 
-	@Override
-	public void observe(List<IoTDevice> deviceList, Map<String, IoTDevice> deviceMap) {
-		//System.out.println("kioskcontroller:"+deviceList.toString());
-	}
+    @Override
+    public void observe(IoTDevice d) {
+        //System.out.println("kioskcontroller:"+deviceList.toString());
+    }
 }

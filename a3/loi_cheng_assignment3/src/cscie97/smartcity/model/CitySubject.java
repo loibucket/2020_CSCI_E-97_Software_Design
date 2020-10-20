@@ -30,9 +30,9 @@ public interface CitySubject {
     /**
      * notify all observers with a list of devices that has been updated
      *
-     * @param deviceList the list of devices that has been updated
+     * @param d the list of devices that has been updated
      * @throws ServiceException if notification errors
      */
-    void notifyObs(List<IoTDevice> deviceList) throws ServiceException, CommandProcessorException;
+    void notifyObs(IoTDevice d) throws ServiceException, CommandProcessorException;
 
 }

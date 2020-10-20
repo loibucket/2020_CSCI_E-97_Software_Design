@@ -22,16 +22,19 @@ public class LitterEventCommand implements Command {
 
     private final IoTDevice device;
     private final Map<String, IoTDevice> deviceMap;
+    private final String cityBlockchain;
+
 
     /**
      * Constructor
      *
      * @param targetDevice the reporting device
-     * @param deviceMap    reference to all devices in city
+     * @param c            the city
      */
-    public LitterEventCommand(IoTDevice targetDevice, Map<String, IoTDevice> deviceMap) {
+    public LitterEventCommand(IoTDevice targetDevice, City c) {
         this.device = targetDevice;
-        this.deviceMap = deviceMap;
+        this.deviceMap = c.showAllDevices();
+        this.cityBlockchain = c.getBlockchainAddress();
     }
 
     @Override
@@ -52,6 +55,10 @@ public class LitterEventCommand implements Command {
         System.out.println(bot);
         System.out.println(" "); // line break
 
+        //cleaned litter
+        this.device.sensorEvent(SensorType.camera, "litter cleaned up", null);
+        System.out.println(this.device);
+        System.out.println(" "); // line break
 
         //if resident, find blockchain address of person
         Person person = CommandAPI.getRegistry().showPerson(subject);
@@ -59,25 +66,12 @@ public class LitterEventCommand implements Command {
             String address = person.getBlockchainAddress();
             try {
                 CommandProcessor.processCommand("get-account-balance " + address, -1);
-                CommandProcessor.processCommand("process-transaction 1 amount 50 fee 10 note \"littering\" payer " + address + " receiver master", -1);
+                CommandProcessor.processCommand("process-transaction 1 amount 50 fee 10 note \"littering\" payer " + address + " receiver " + this.cityBlockchain, -1);
                 CommandProcessor.processCommand("get-account-balance " + address, -1);
             } catch (CommandProcessorException e) {
                 //print ledger processing errors
                 System.out.println(e.toString());
             }
         }
-
-//        try {
-//            //do ledger things
-//            CommandProcessor.processCommand("ok", -99);
-//        } catch (CommandProcessorException e) {
-//            //print ledger processing errors
-//            System.out.println(e.toString());
-//        }
-
-        //do registry things
-        //CommandAPI.processCommand("placeholder", "ok", -99);
-
-
     }
 }

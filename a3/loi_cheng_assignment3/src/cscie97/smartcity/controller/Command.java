@@ -5,7 +5,7 @@ import cscie97.smartcity.model.ServiceException;
 
 /**
  * The command interface, each concrete class has very specific actions to perform
- * uses System.out.println to output to user changes to devices
+ * uses System.out.println to show changes made to devices
  *
  * @author Loi Cheng
  * @version 1.0

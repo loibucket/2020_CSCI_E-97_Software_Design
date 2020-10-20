@@ -8,15 +8,15 @@ import java.util.Map;
 
 public class ParkingMeterController implements IoTObserver, CommandFactory {
 
-	private ParkingEventCommand parkingEvent;
+    private ParkingEventCommand parkingEvent;
 
-	@Override
-	public Command createCommand() {
-		return null;
-	}
+    @Override
+    public Command createCommand() {
+        return null;
+    }
 
-	@Override
-	public void observe(List<IoTDevice> deviceList, Map<String, IoTDevice> deviceMap) {
-		//System.out.println("parkingmetercontroller:"+deviceList.toString());
-	}
+    @Override
+    public void observe(IoTDevice d) {
+        //System.out.println("parkingmetercontroller:"+deviceList.toString());
+    }
 }

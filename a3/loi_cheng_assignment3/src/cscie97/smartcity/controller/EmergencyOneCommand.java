@@ -2,10 +2,7 @@ package cscie97.smartcity.controller;
 
 import cscie97.smartcity.BotDist;
 import cscie97.smartcity.Tool;
-import cscie97.smartcity.model.IoTDevice;
-import cscie97.smartcity.model.Robot;
-import cscie97.smartcity.model.SensorType;
-import cscie97.smartcity.model.ServiceException;
+import cscie97.smartcity.model.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,11 +26,11 @@ public class EmergencyOneCommand implements Command {
      * Constructor
      *
      * @param targetDevice the reporting device
-     * @param deviceMap    reference to all devices in city
+     * @param c            the city
      */
-    public EmergencyOneCommand(IoTDevice targetDevice, Map<String, IoTDevice> deviceMap) {
+    public EmergencyOneCommand(IoTDevice targetDevice, City c) {
         this.device = targetDevice;
-        this.deviceMap = deviceMap;
+        this.deviceMap = c.showAllDevices();
     }
 
     /**

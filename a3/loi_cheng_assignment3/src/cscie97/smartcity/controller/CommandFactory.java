@@ -5,8 +5,21 @@ import cscie97.smartcity.model.ServiceException;
 
 import java.util.List;
 
+/**
+ * The command factory interface allows creation of commands
+ *
+ * @author Loi Cheng
+ * @version 1.0
+ * @since 2020-10-19
+ */
 public interface CommandFactory {
 
-	Command createCommand() throws ServiceException;
+    /**
+     * Create a command, to be executed later
+     *
+     * @return a command object
+     * @throws ServiceException if error in creating object
+     */
+    Command createCommand() throws ServiceException;
 
 }

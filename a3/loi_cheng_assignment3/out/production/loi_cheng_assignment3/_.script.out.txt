@@ -3,6 +3,10 @@ LEDGER-OPEN: create-ledger test description "test ledger 2020" seed "harvard"
 LEDGER: 
 :LEDGER-CLOSE
  
+LEDGER-OPEN: create-account cambridge-account
+LEDGER: 
+:LEDGER-CLOSE
+ 
 LEDGER-OPEN: create-account janes_account
 LEDGER: 
 :LEDGER-CLOSE
@@ -43,7 +47,7 @@ LEDGER-OPEN: create-account resident_A_account
 LEDGER: 
 :LEDGER-CLOSE
  
-# LINE 14 #process-transaction <transaction-id> amount <amount> fee <fee> note <note> payer <account-address> receiver <account-address>
+# LINE 16 #process-transaction <transaction-id> amount <amount> fee <fee> note <note> payer <account-address> receiver <account-address>
 LEDGER-OPEN: process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver janes_account
 LEDGER: 
 transaction id: 1
@@ -102,14 +106,14 @@ unconfirmed:1000
  
 LEDGER-OPEN: get-account-balances
 LEDGER: 
-{resident_8_account=1000, joes_account=1000, resident_3_account=1000, resident_9_account=1000, resident_7_account=1000, resident_4_account=1000, resident_6_account=1000, janes_account=1000, resident_5_account=1000, master=2147473647, resident_A_account=1000}
+{resident_8_account=1000, cambridge-account=0, joes_account=1000, resident_3_account=1000, resident_9_account=1000, resident_7_account=1000, resident_4_account=1000, resident_6_account=1000, janes_account=1000, resident_5_account=1000, master=2147473647, resident_A_account=1000}
 :LEDGER-CLOSE
  
 LEDGER-OPEN: get-block 1
 LEDGER: 
 ------------
 BLOCK NUMBER: 1
-BLOCK HASH: 5EA8996BC1D859026A1F92D234BDBB89952D3297B8BEF9C86E1179963E2F47E6
+BLOCK HASH: 42EE772020912EC5402FB4609ED72EC04C537F274B13838F972EC1EA43F59809
 PREVIOUS HASH: null
 TRANSACTIONS: 
 transaction id: 1 amount: 1000 fee: 10 note: "fund account" payer: master receiver: janes_account 
@@ -124,6 +128,7 @@ transaction id: 9 amount: 1000 fee: 10 note: "fund account" payer: master receiv
 transaction id: 10 amount: 1000 fee: 10 note: "fund account" payer: master receiver: resident_A_account
 ACCOUNT BALANCES: 
 resident_8_account: 1000 
+cambridge-account: 0 
 joes_account: 1000 
 resident_3_account: 1000 
 resident_9_account: 1000 
@@ -157,10 +162,12 @@ City{cityId='city_1', name='Cambridge-MA', blockchainAddress='cambridge-account'
 # LINE 14 #define street-sign <city_id>:<device_id> lat <float> long <float> enabled (true|false) text <text>
 COMMAND: define street-sign city_1:ss_1 lat 42.3732 long -71.1202 enabled  true  text "Welcome to Harvard Square"
 RESPONSE: 
+COMMAND ERROR: line 16, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define street-sign city_1:ss_2 lat 42.3736 long -71.1214 enabled  true  text "Brattle Theatre"
 RESPONSE: 
+COMMAND ERROR: line 17, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 19 # update a street sign
@@ -177,10 +184,12 @@ RESPONSE:
 # LINE 26 #define info-kiosk <city_id>:<device_id> lat <float> long <float> enabled (true|false) image <uri>
 COMMAND: define info-kiosk city_1:kiosk_1 lat 42.3723 long -71.1230 enabled  true  image https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg
 RESPONSE: 
+COMMAND ERROR: line 28, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define info-kiosk city_1:kiosk_2 lat 42.3766 long -71.1160 enabled  true  image https://www.lwa-architects.com/wp-content/uploads/2014/12/Harvard-SciCtr_Ext-bikes-992x1250.jpg
 RESPONSE: 
+COMMAND ERROR: line 29, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 31 # Update an information kiosk
@@ -197,10 +206,12 @@ RESPONSE:
 # LINE 38 #define street-light <city_id>:<device_id> lat <float> long <float> enabled (true|false) brightness <int>
 COMMAND: define street-light city_1:sl_1 lat 42.3770 long  -71.1167 enabled  true  brightness 8
 RESPONSE: 
+COMMAND ERROR: line 40, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define street-light city_1:sl_2 lat 42.3749 long  -71.1218 enabled  true  brightness 5
 RESPONSE: 
+COMMAND ERROR: line 41, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 43 # Update a street light
@@ -217,10 +228,12 @@ RESPONSE:
 # LINE 50 #define parking-space <city_id>:<device_id> lat <float> long <float> enabled (true|false) rate <int>
 COMMAND: define parking-space city_1:ps_1 lat 42.3743 long -71.1202 enabled true  rate 25
 RESPONSE: 
+COMMAND ERROR: line 52, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define parking-space city_1:ps_2 lat 42.3744 long -71.1203 enabled true  rate 25
 RESPONSE: 
+COMMAND ERROR: line 53, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 55 # Update a parking space
@@ -237,26 +250,32 @@ RESPONSE:
 # LINE 61 #define robot <city_id>:<device_id> lat <float> long <float> enabled (true|false) activity <string>
 COMMAND: define robot city_1:bot_1 lat 42.37 long -71.12 enabled  true activity "cleaning"
 RESPONSE: 
+COMMAND ERROR: line 63, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define robot city_1:bot_2 lat 42.38 long -71.13 enabled true activity "assisting student2"
 RESPONSE: 
+COMMAND ERROR: line 64, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define robot city_1:bot_3 lat 42.39 long -71.14 enabled true activity "assisting student3"
 RESPONSE: 
+COMMAND ERROR: line 65, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define robot city_1:bot_4 lat 42.40 long -71.15 enabled true activity "assisting student4"
 RESPONSE: 
+COMMAND ERROR: line 66, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define robot city_1:bot_5 lat 42.41 long -71.16 enabled true activity "assisting student5"
 RESPONSE: 
+COMMAND ERROR: line 67, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define robot city_1:bot_6 lat 42.42 long -71.17 enabled true activity "assisting student6"
 RESPONSE: 
+COMMAND ERROR: line 68, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 70 # Update a robot
@@ -273,10 +292,12 @@ RESPONSE:
 # LINE 77 #define vehicle <city_id>:<device_id> lat <float> long <float> enabled (true|false) type (bus|car) activity <string> capacity <int> fee <int>
 COMMAND: define vehicle city_1:car_1 lat 42.3725 long -71.1161 enabled true type car activity "parked" capacity 4 fee 10
 RESPONSE: 
+COMMAND ERROR: line 79, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define vehicle city_1:bus_1 lat 42.3736 long -71.1214 enabled  true  type  bus  activity "on route" capacity 30 fee 1
 RESPONSE: 
+COMMAND ERROR: line 80, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 82 # Update a vehicle
@@ -336,6 +357,7 @@ sl_1=StreetLight{brightness=5, deviceId='sl_1', location=[42.377, -71.1167], ena
 # LINE 95 #create sensor-event <city_id>[:<device_id>] type (microphone|camera|thermometer|co2meter) value <string> [subject <person_id>]
 COMMAND: create sensor-event city_1:bus_1 type microphone value "does this bus go to Central Square?" subject resident_1
 RESPONSE: 
+COMMAND ERROR: line 97, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: create sensor-event city_1:bus_1 type camera value "person boarding bus" subject resident_1
@@ -345,6 +367,7 @@ COMMAND ERROR: line 98, REASON: not found (null pointer)!
  
 COMMAND: create sensor-event city_1:sl_1 type thermometer value 80
 RESPONSE: 
+COMMAND ERROR: line 99, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: create sensor-event city_1:sl_1 type co2meter value 500
@@ -353,17 +376,19 @@ RESPONSE:
  
 COMMAND: create sensor-event city_1:bot_1 type thermometer  value 98.6 subject resident_2
 RESPONSE: 
+COMMAND ERROR: line 101, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 103 # Send a device output
 # LINE 104 #create sensor-output <city_id>[:<device_id>] type (speaker) value <string>
 COMMAND: create sensor-output city_1:bot_1 type speaker value "your temperature is normal"
 RESPONSE: 
+COMMAND ERROR: line 106, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: create sensor-output city_1 speaker value "severe weather alert, please take shelter"
 RESPONSE: 
-COMMAND ERROR: line 107, REASON: not found (null pointer)!
+COMMAND ERROR: line 107, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: Person Commands
@@ -377,7 +402,7 @@ COMMAND: define resident resident_1 name jane bio-metric "voice-print='voiceprin
 RESPONSE: 
 :END
  
-COMMAND: define resident resident_2 name joe bio-metric "voice-print='voiceprint-joe',face-print='faceprint-joe'" phone 781-222-3345 role child lat 42.3735 long -71.1205 account janes_account
+COMMAND: define resident resident_2 name joe bio-metric "voice-print='voiceprint-joe',face-print='faceprint-joe'" phone 781-222-3345 role child lat 42.3735 long -71.1205 account joes_account
 RESPONSE: 
 :END
  
@@ -389,16 +414,14 @@ RESPONSE:
  
 # LINE 120 # Define a new Visitor
 # LINE 121 #define visitor <person_id> bio-metric <string> lat <lat> long <long>
-COMMAND: define visitor visitor_1 bio-metric "iris-print='irisprint-visitor_1' lat 42.3744 long -71.1203
+COMMAND: define visitor visitor_1 bio-metric "iris-print='irisprint-visitor_1'" lat 42.3744 long -71.1203
 RESPONSE: 
-COMMAND ERROR: line 123, ACTION: command, REASON: command not recognized
 :END
  
 # LINE 125 # Update a Visitor
 # LINE 126 #update visitor <person_id> [bio-metric <string>] [lat <lat> long <long>]
 COMMAND: update visitor visitor_1  lat 42.3830 long -71.1125
 RESPONSE: 
-COMMAND ERROR: line 128, ACTION: show person, REASON: person not found!
 :END
  
 # LINE 130 # Show the details of the person
@@ -410,7 +433,7 @@ Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-pr
  
 COMMAND: show person visitor_1
 RESPONSE: 
-COMMAND ERROR: line 134, ACTION: show person, REASON: person not found!
+Person{personId='visitor_1', biometricId='iris-print='irisprint-visitor_1'', location=[42.383, -71.1125], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
 :END
  
 # LINE 136 # Simulate events to trigger Controller Service rules
@@ -448,6 +471,7 @@ Robot{deviceId='bot_3', location=[42.3749, -71.1218], enabled=true, event='addre
  
 StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='traffic accident cleared', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
  
+COMMAND ERROR: line 145, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 147 # Trigger Rule CO2 Event 1
@@ -515,13 +539,15 @@ Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='addre
  
 Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='litter cleaned up', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
  
+Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='litter cleaned up', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
+ 
 LEDGER-OPEN: get-account-balance janes_account
 LEDGER: 
 confirmed:1000
 unconfirmed:1000
 :LEDGER-CLOSE
  
-LEDGER-OPEN: process-transaction 1 amount 50 fee 10 note "littering" payer janes_account receiver master
+LEDGER-OPEN: process-transaction 1 amount 50 fee 10 note "littering" payer janes_account receiver cambridge-account
 LEDGER: 
 transaction id: 11
 :LEDGER-CLOSE
@@ -537,56 +563,133 @@ unconfirmed:940
 # LINE 160 # Trigger Rule Broken Glass
 COMMAND: create sensor-event city_1:kiosk_1 type microphone value "broken_glass_sound"
 RESPONSE: 
+COMMAND ERROR: line 161, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 163 # Trigger Rule Person Seen
 COMMAND: create sensor-event city_1:bot_2 type camera value "person_seen" subject resident_1
 RESPONSE: 
-COMMAND ERROR: line 164, ACTION: camera controller, REASON: cannot create command!
+Robot{deviceId='bot_2', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='person_seen', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.383, -71.1125], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
+Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
+COMMAND ERROR: line 164, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 166 # Trigger Rule Missing Child
 COMMAND: create sensor-event city_1:bot_1 type microphone value "can you help me find my child resident_2" subject resident_1
 RESPONSE: 
-COMMAND ERROR: line 167, ACTION: camera controller, REASON: cannot create command!
+Robot{deviceId='bot_2', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='person_seen', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
+Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
 :END
  
 # LINE 169 # Trigger Rule Parking Event
 COMMAND: create sensor-event city_1:ps_1 type camera value "Vehicle city_1:car_1 parked for 1 hour."
 RESPONSE: 
-COMMAND ERROR: line 170, ACTION: camera controller, REASON: cannot create command!
+Robot{deviceId='bot_2', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='person_seen', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
+Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
 :END
  
 # LINE 172 # Trigger Rule Bus Route
 COMMAND: create sensor-event city_1:bus_1 type microphone value "Does this bus go to central square?" subject resident_1
 RESPONSE: 
-COMMAND ERROR: line 173, ACTION: camera controller, REASON: cannot create command!
+Robot{deviceId='bot_2', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='person_seen', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
+Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
+COMMAND ERROR: line 173, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 175 # Trigger Rule Board Bus
 COMMAND: create sensor-event city_1:bus_1 type camera value "Person boards bus" subject resident_1
 RESPONSE: 
-COMMAND ERROR: line 176, ACTION: camera controller, REASON: cannot create command!
+Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='Person boards bus', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+ 
+LEDGER-OPEN: get-account-balance janes_account
+LEDGER: 
+confirmed:1000
+unconfirmed:940
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: process-transaction 1 amount 1 fee 10 note "board bus" payer janes_account receiver cambridge-account
+LEDGER: 
+transaction id: 12
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: get-account-balance janes_account
+LEDGER: 
+confirmed:1000
+unconfirmed:929
+:LEDGER-CLOSE
+ 
+Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='bus boarded', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you jane', personId='resident_1'}}
+ 
+COMMAND ERROR: line 176, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: create sensor-event city_1:bus_1 type camera value "Person boards bus" subject resident_2
 RESPONSE: 
-COMMAND ERROR: line 177, ACTION: camera controller, REASON: cannot create command!
+Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='Person boards bus', personId='resident_2'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you jane', personId='resident_1'}}
+ 
+Person{personId='resident_2', biometricId='voice-print='voiceprint-joe',face-print='faceprint-joe'', location=[42.3735, -71.1205], type=resident, name='joe', phoneNumber='781-222-3345', role=child, blockchainAddress='joes_account'}
+ 
+LEDGER-OPEN: get-account-balance joes_account
+LEDGER: 
+confirmed:1000
+unconfirmed:1000
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: process-transaction 1 amount 1 fee 10 note "board bus" payer joes_account receiver cambridge-account
+LEDGER: 
+transaction id: 13
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: get-account-balance joes_account
+LEDGER: 
+confirmed:1000
+unconfirmed:989
+:LEDGER-CLOSE
+ 
+Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='bus boarded', personId='resident_2'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you joe', personId='resident_2'}}
+ 
+COMMAND ERROR: line 177, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: create sensor-event city_1:bus_1 type camera value "Person boards bus" subject visitor_1
 RESPONSE: 
-COMMAND ERROR: line 178, ACTION: camera controller, REASON: cannot create command!
+Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='Person boards bus', personId='visitor_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you joe', personId='resident_2'}}
+ 
+Person{personId='visitor_1', biometricId='iris-print='irisprint-visitor_1'', location=[42.383, -71.1125], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
+ 
+Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='bus boarded', personId='visitor_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you null', personId='visitor_1'}}
+ 
+COMMAND ERROR: line 178, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 180 # Trigger Rule Movie Info
 COMMAND: create sensor-event city_1:kiosk_2 type microphone value "what movies are showing tonight?" subject resident_1
 RESPONSE: 
+COMMAND ERROR: line 181, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 183 # Trigger Rule Movie Reservation
 COMMAND: create sensor-event city_1:kiosk_2 type microphone value "reserve 3 seats for the 9 pm showing of Casablanca." subject resident_1
 RESPONSE: 
+COMMAND ERROR: line 184, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 186 ###Duplicate Events
@@ -597,21 +700,23 @@ Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='clean
  
 Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='can you help me find my child resident_2', personId='resident_1'}, camera=Sensor{type=camera, value='litter cleaned up', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
  
-LEDGER-OPEN: get-account-balance janes_account
-LEDGER: 
-confirmed:1000
-unconfirmed:940
-:LEDGER-CLOSE
- 
-LEDGER-OPEN: process-transaction 1 amount 50 fee 10 note "littering" payer janes_account receiver master
-LEDGER: 
-transaction id: 12
-:LEDGER-CLOSE
+Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='can you help me find my child resident_2', personId='resident_1'}, camera=Sensor{type=camera, value='litter cleaned up', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
  
 LEDGER-OPEN: get-account-balance janes_account
 LEDGER: 
 confirmed:1000
-unconfirmed:880
+unconfirmed:929
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: process-transaction 1 amount 50 fee 10 note "littering" payer janes_account receiver cambridge-account
+LEDGER: 
+transaction id: 14
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: get-account-balance janes_account
+LEDGER: 
+confirmed:1000
+unconfirmed:869
 :LEDGER-CLOSE
  
 :END

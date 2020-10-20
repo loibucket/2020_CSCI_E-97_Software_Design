@@ -15,6 +15,20 @@ public class Vehicle extends IoTDevice {
     private final Integer capacity;
     private Integer fee;
 
+    //getters
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public Integer getFee() {
+        return fee;
+    }
+
+    public VehicleType getType() {
+        return type;
+    }
+    //getters
+
     /**
      * Constructor
      *

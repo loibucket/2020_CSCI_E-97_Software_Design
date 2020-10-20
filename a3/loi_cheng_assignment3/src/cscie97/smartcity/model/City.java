@@ -1,10 +1,6 @@
 package cscie97.smartcity.model;
 
-import cscie97.ledger.CommandProcessorException;
-import cscie97.smartcity.controller.CameraController;
-import cscie97.smartcity.controller.KioskController;
-import cscie97.smartcity.controller.MicController;
-import cscie97.smartcity.controller.ParkingMeterController;
+import cscie97.smartcity.controller.*;
 
 import java.util.*;
 
@@ -43,7 +39,7 @@ public class City implements CitySubject {
     /**
      * Remove an observers from the list
      *
-     * @param observer an obersving controller
+     * @param observer an observing controller
      */
     @Override
     public void detachObs(IoTObserver observer) {
@@ -53,13 +49,13 @@ public class City implements CitySubject {
     /**
      * notify all observers of a update to the devices
      *
-     * @param deviceList the list of devices that were updated
+     * @param d the list of devices that were updated
      * @throws ServiceException if error occurs during the observation
      */
     @Override
-    public void notifyObs(List<IoTDevice> deviceList) throws ServiceException {
+    public void notifyObs(IoTDevice d) throws ServiceException {
         for (IoTObserver observer : observerList) {
-            observer.observe(deviceList, deviceMap);
+            observer.observe(d);
         }
     }
 
@@ -82,10 +78,20 @@ public class City implements CitySubject {
         this.observerList = new ArrayList<>();
 
         // attached controller observers
-        attachObs(new CameraController());
+        attachObs(new CameraController(this));
+        attachObs(new COController(this));
         attachObs(new KioskController());
         attachObs(new MicController());
         attachObs(new ParkingMeterController());
+    }
+
+    //getters
+    public String getBlockchainAddress() {
+        return blockchainAddress;
+    }
+
+    public String getCityId() {
+        return cityId;
     }
 
     public Float[] getLocation() {
@@ -95,6 +101,7 @@ public class City implements CitySubject {
     public Float getRadius() {
         return this.radius;
     }
+    //getters
 
     /**
      * To String
@@ -102,6 +109,7 @@ public class City implements CitySubject {
      * @return string
      */
     @Override
+
     public String toString() {
         return "City{" +
                 "cityId='" + cityId + '\'' +
@@ -126,7 +134,7 @@ public class City implements CitySubject {
         StreetSign sign = new StreetSign(deviceId, location, enabled, text);
         this.deviceMap.put(deviceId, sign);
         //notify observers
-        notifyObs(new ArrayList<>(Collections.singletonList(sign)));
+        notifyObs(sign);
     }
 
     /**
@@ -143,7 +151,7 @@ public class City implements CitySubject {
         InfoKiosk kiosk = new InfoKiosk(deviceId, location, enabled, imageUri);
         this.deviceMap.put(deviceId, kiosk);
         //notify observers
-        notifyObs(new ArrayList<>(Collections.singletonList(kiosk)));
+        notifyObs(kiosk);
     }
 
     /**
@@ -160,7 +168,7 @@ public class City implements CitySubject {
         StreetLight light = new StreetLight(deviceId, location, enabled, brightness);
         this.deviceMap.put(deviceId, light);
         //notify observers
-        notifyObs(new ArrayList<>(Collections.singletonList(light)));
+        notifyObs(light);
     }
 
     /**
@@ -177,7 +185,7 @@ public class City implements CitySubject {
         ParkingSpace space = new ParkingSpace(deviceId, location, enabled, rate);
         this.deviceMap.put(deviceId, space);
         //notify observers
-        notifyObs(new ArrayList<>(Collections.singletonList(space)));
+        notifyObs(space);
     }
 
     /**
@@ -194,7 +202,7 @@ public class City implements CitySubject {
         Robot bot = new Robot(deviceId, location, enabled, activity);
         this.deviceMap.put(deviceId, bot);
         //notify observers
-        notifyObs(new ArrayList<>(Collections.singletonList(bot)));
+        notifyObs(bot);
     }
 
     /**
@@ -220,7 +228,7 @@ public class City implements CitySubject {
         Vehicle vehicle = new Vehicle(deviceId, location, enabled, vehType, activity, capacity, fee);
         this.deviceMap.put(deviceId, vehicle);
         //notify observers
-        notifyObs(new ArrayList<>(Collections.singletonList(vehicle)));
+        notifyObs(vehicle);
     }
 
     /**
@@ -271,7 +279,7 @@ public class City implements CitySubject {
             for (String key : this.deviceMap.keySet()) {
                 this.deviceMap.get(key).sensorEvent(sensor, event, personId);
                 //notify observers
-                notifyObs(new ArrayList<>(this.deviceMap.values()));
+                notifyObs(this.deviceMap.get(key));
             }
         } else if (!this.deviceMap.containsKey(deviceId)) {
             throw new ServiceException("create sensor event", "device not found!");
@@ -279,7 +287,7 @@ public class City implements CitySubject {
             // apply to single device
             this.deviceMap.get(deviceId).sensorEvent(sensor, event, personId);
             //notify observers
-            notifyObs(new ArrayList<>(Collections.singletonList(this.deviceMap.get(deviceId))));
+            notifyObs(this.deviceMap.get(deviceId));
         }
     }
 

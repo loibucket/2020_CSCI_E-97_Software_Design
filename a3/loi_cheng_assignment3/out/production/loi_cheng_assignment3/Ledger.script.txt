@@ -1,5 +1,7 @@
 # create-ledger <name> description <description> seed <seed>
 create-ledger test description "test ledger 2020" seed "harvard"
+
+create-account cambridge-account
 create-account janes_account
 create-account joes_account
 create-account resident_3_account

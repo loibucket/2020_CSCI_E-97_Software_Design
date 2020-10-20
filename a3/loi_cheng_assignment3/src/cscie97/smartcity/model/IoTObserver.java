@@ -17,11 +17,10 @@ public interface IoTObserver {
     /**
      * Look through the events stored in the given device list
      *
-     * @param deviceList the device list to check all the events from
-     * @param deviceMap  reference to all devices in the city
+     * @param device the device check events from
      * @throws ServiceException if obeserving errors
      */
-    default void observe(List<IoTDevice> deviceList, Map<String, IoTDevice> deviceMap) throws ServiceException {
+    default void observe(IoTDevice device) throws ServiceException {
 
     }
 
