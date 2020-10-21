@@ -80,9 +80,9 @@ public class City implements CitySubject {
         // attached controller observers
         attachObs(new CameraController(this));
         attachObs(new COController(this));
-        attachObs(new KioskController());
-        attachObs(new MicController());
-        attachObs(new ParkingMeterController());
+        attachObs(new KioskController(this));
+        attachObs(new MicController(this));
+        attachObs(new ParkingMeterController(this));
     }
 
     //getters

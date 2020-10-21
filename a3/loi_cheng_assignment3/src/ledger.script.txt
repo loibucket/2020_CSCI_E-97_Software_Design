@@ -13,6 +13,13 @@ create-account resident_8_account
 create-account resident_9_account
 create-account resident_A_account
 
+#car blockchain address is same as its id
+create-account city_1:car_1
+create-account city_1:car_2
+create-account city_1:car_3
+create-account city_1:car_4
+create-account city_1:car_5
+
 #process-transaction <transaction-id> amount <amount> fee <fee> note <note> payer <account-address> receiver <account-address>
 process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver janes_account
 process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver joes_account
@@ -25,6 +32,18 @@ process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiv
 process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver resident_9_account
 process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver resident_A_account
 
+process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_1
+process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_2
+process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_3
+process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_4
+process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_5
+process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_1
+process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_2
+process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_3
+process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_4
+process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_5
+
 get-account-balance janes_account
 get-account-balances
 get-block 1
+get-block 2

@@ -13,6 +13,11 @@ public class ParkingSpace extends IoTDevice {
 
     private Integer rate;
 
+    //getter
+    public Integer getRate() {
+        return rate;
+    }
+
     /**
      * constructor
      *

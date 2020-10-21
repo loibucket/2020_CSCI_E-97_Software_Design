@@ -125,6 +125,15 @@ public class Person {
     }
 
     /**
+     * update location of person
+     *
+     * @param location the location
+     */
+    public void updateLocation(Float[] location) {
+        this.location = location == null ? this.location : location;
+    }
+
+    /**
      * To String
      *
      * @return person string

@@ -5,12 +5,12 @@ import java.io.FileReader;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import cscie97.smartcity.Tool;
+import cscie97.smartcity.helper.Tool;
 
 /**
  * The CommandAPI processes input commands from user and processes them through various methods
  * v1.0 initial
- * v1.1 converted all methods to static
+ * v1.1 converted all methods to static, all device id's now also contain the city_id, eg. city_1:bus_1
  *
  * @author Loi Cheng
  * @version 1.1
@@ -80,16 +80,19 @@ public class CommandAPI {
                 case "define" -> define(a);
                 case "show" -> show(a);
                 case "update" -> update(a);
-                default -> throw new ServiceException("command", "command not recognized");
+                default -> throw new ServiceException("command api", "command not recognized");
             }
         } catch (ServiceException e) {
             System.out.println(new CommandException(command, e.action, e.reason, lineNumber).toString());
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
-            System.out.println(new CommandException(command, null, "too few arguments!", lineNumber).toString());
+            System.out.println(new CommandException(command, "other", "too few arguments!", lineNumber).toString());
+            e.printStackTrace();
         } catch (java.lang.NullPointerException e) {
-            System.out.println(new CommandException(command, null, "not found (null pointer)!", lineNumber).toString());
+            System.out.println(new CommandException(command, "other", "not found (null pointer)!", lineNumber).toString());
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println(new CommandException(command, null, e.toString(), lineNumber).toString());
+            System.out.println(new CommandException(command, "other", e.toString(), lineNumber).toString());
+            e.printStackTrace();
         }
         System.out.println(":END"); //end command
         System.out.println(" "); //line break
@@ -176,7 +179,7 @@ public class CommandAPI {
                 // if id, target single device
                 if (a.get(2).contains(":")) {
                     cityId = a.get(2).split(":")[0];
-                    deviceId = a.get(2).split(":")[1];
+                    deviceId = a.get(2);
                 }
 
                 cityMap.get(cityId).createSensorEvent(deviceId, type, value, subject);
@@ -223,7 +226,7 @@ public class CommandAPI {
                     throw new ServiceException("define street-sign", "command format error!");
                 }
                 cityMap.get(a.get(2).split(":")[0]).
-                        defineStreetSign(a.get(2).split(":")[1],
+                        defineStreetSign(a.get(2),
                                 new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
                                 a.get(8).equals("true"), Tool.clean(a.get(10)));
             }
@@ -236,7 +239,7 @@ public class CommandAPI {
                     throw new ServiceException("define info-kiosk", "command format error!");
                 }
                 cityMap.get(a.get(2).split(":")[0]).
-                        defineInfoKiosk(a.get(2).split(":")[1],
+                        defineInfoKiosk(a.get(2),
                                 new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
                                 a.get(8).equals("true"), a.get(10));
             }
@@ -249,7 +252,7 @@ public class CommandAPI {
                     throw new ServiceException("define street-light", "command format error!");
                 }
                 cityMap.get(a.get(2).split(":")[0]).
-                        defineStreetLight(a.get(2).split(":")[1],
+                        defineStreetLight(a.get(2),
                                 new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
                                 a.get(8).equals("true"), Integer.parseInt(a.get(10)));
             }
@@ -262,7 +265,7 @@ public class CommandAPI {
                     throw new ServiceException("define parking-space", "command format error!");
                 }
                 cityMap.get(a.get(2).split(":")[0]).
-                        defineParkingSpace(a.get(2).split(":")[1],
+                        defineParkingSpace(a.get(2),
                                 new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
                                 a.get(8).equals("true"), Integer.parseInt(a.get(10)));
             }
@@ -275,7 +278,7 @@ public class CommandAPI {
                     throw new ServiceException("define robot", "command format error!");
                 }
                 cityMap.get(a.get(2).split(":")[0]).
-                        defineRobot(a.get(2).split(":")[1],
+                        defineRobot(a.get(2),
                                 new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
                                 a.get(8).equals("true"), Tool.clean(a.get(10)));
             }
@@ -291,7 +294,7 @@ public class CommandAPI {
                     throw new ServiceException("define vehicle", "command format error!");
                 }
                 cityMap.get(a.get(2).split(":")[0]).
-                        defineVehicle(a.get(2).split(":")[1],
+                        defineVehicle(a.get(2),
                                 new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
                                 a.get(8).equals("true"), a.get(10), Tool.clean(a.get(12)),
                                 Integer.parseInt(a.get(14)), Integer.parseInt(a.get(16)));
@@ -373,7 +376,7 @@ public class CommandAPI {
             case "device" -> {
                 if (a.get(2).contains(":")) {
                     // show single device
-                    System.out.println(cityMap.get(a.get(2).split(":")[0]).showDevice(a.get(2).split(":")[1]));
+                    System.out.println(cityMap.get(a.get(2).split(":")[0]).showDevice(a.get(2)));
                 } else {
                     if (!cityMap.containsKey(a.get(2))) {
                         throw new ServiceException("show city devices", "city not found!");
@@ -406,7 +409,8 @@ public class CommandAPI {
         // look up id
         if (a.get(2).contains(":")) {
             primaryId = a.get(2).split(":")[0];
-            secondaryId = a.get(2).split(":")[1];
+            secondaryId = a.get(2);
+            //secondaryId = a.get(2).split(":")[1];
         } else {
             primaryId = a.get(2);
             secondaryId = null;

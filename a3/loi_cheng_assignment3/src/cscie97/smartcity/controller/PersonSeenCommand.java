@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.helper.Tool;
 import cscie97.smartcity.model.*;
 
 /**
@@ -36,16 +37,11 @@ public class PersonSeenCommand implements Command {
      */
     @Override
     public void execute() throws ServiceException {
-        System.out.println(this.device);
-        System.out.println(" "); // line break
-
-        System.out.println(this.person);
-        System.out.println(" "); // line break
-
+        Tool.report(this.device);
+        Tool.report(this.person);
         try {
             person.updateResident(null, null, null, null, this.device.getLocation(), null);
-            System.out.println(this.person);
-            System.out.println(" "); // line break
+            Tool.report(this.person);
         } catch (Exception e) {
             throw new ServiceException("person seen", "location update error!");
         }

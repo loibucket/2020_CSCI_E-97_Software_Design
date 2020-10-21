@@ -2,7 +2,6 @@ package cscie97.smartcity.controller;
 
 import cscie97.smartcity.model.*;
 
-import java.util.Map;
 import java.lang.Integer;
 
 /**
@@ -18,26 +17,20 @@ public class COController implements IoTObserver, CommandFactory {
     private int coCount;
     Boolean carsEnabled;
 
+    /**
+     * constructor
+     *
+     * @param c the city
+     */
     public COController(City c) {
-        coCount = 0;
-        carsEnabled = true;
+        this.city = c;
+        this.coCount = 0; //default to no meters over 1000
+        this.carsEnabled = true; //default to all cars enabled
     }
 
     @Override
     public Command createCommand() {
-        if (this.coCount > 0 && this.coCount < 3) {
-            return new COCommand(null, this.city);
-        }
-        if (this.coCount >= 3) {
-            if (this.carsEnabled) {
-                this.carsEnabled = false;
-            }
-        } else if (coCount == 0) {
-            if (!this.carsEnabled) {
-                this.carsEnabled = true;
-            }
-        }
-        return new COCommand(this.carsEnabled, this.city);
+        return new COCommand(carsEnabled, this.city);
     }
 
     /**
@@ -48,13 +41,39 @@ public class COController implements IoTObserver, CommandFactory {
      */
     @Override
     public void observe(IoTDevice d) throws ServiceException {
-        int coLevel = Integer.parseInt(d.readSensor(SensorType.co2meter)[0]);
-        if (coLevel >= 1000) {
-            this.coCount = Integer.min(this.coCount++, 3);
-        } else {
-            this.coCount = Integer.max(this.coCount--, 0);
-        }
-        createCommand().execute();
-    }
 
+        //read co2 level
+        String coReading = d.readSensor(SensorType.co2meter)[0];
+        if (coReading == null) {
+            return;
+        }
+
+        //convert to int
+        int coLevel;
+        try {
+            coLevel = Integer.parseInt(coReading);
+        } catch (Exception e) {
+            throw new ServiceException("co controller", "cannot read co level!");
+        }
+
+        //adjust recorded conditions
+        if (coLevel >= 1000) {
+            this.coCount = Integer.min(this.coCount + 1, 3);
+        } else {
+            this.coCount = Integer.max(this.coCount - 1, 0);
+        }
+
+        //take action
+        if (this.coCount >= 3) {
+            if (this.carsEnabled) {
+                this.carsEnabled = false;
+                createCommand().execute();
+            }
+        } else if (coCount == 0) {
+            if (!this.carsEnabled) {
+                this.carsEnabled = true;
+                createCommand().execute();
+            }
+        }
+    }
 }

@@ -82,7 +82,9 @@ public class CameraController implements IoTObserver, CommandFactory {
                     this.targetDevice = d;
                 }
                 default -> {
+                    this.command = "nothing to see here";
                     // no action taken
+                    return;
                 }
             }
             //create and execute command

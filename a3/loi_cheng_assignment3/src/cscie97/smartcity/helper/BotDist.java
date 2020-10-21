@@ -1,4 +1,4 @@
-package cscie97.smartcity;
+package cscie97.smartcity.helper;
 
 /**
  * The BotDist stores bot_id and distance from a given point

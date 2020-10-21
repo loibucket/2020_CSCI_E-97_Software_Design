@@ -1,11 +1,10 @@
 package cscie97.smartcity.controller;
 
-import cscie97.smartcity.BotDist;
-import cscie97.smartcity.Tool;
+import cscie97.smartcity.helper.BotDist;
+import cscie97.smartcity.helper.Tool;
 import cscie97.smartcity.model.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -47,8 +46,7 @@ public class EmergencyOneCommand implements Command {
         for (String key : deviceMap.keySet()) {
             deviceMap.get(key).sensorEvent(SensorType.speaker, "Alert! " + event + "! please find shelter immediately!", null);
         }
-        System.out.println(this.device);
-        System.out.println(" "); // line break
+        Tool.report(this.device);
 
         //split robots
         List<BotDist> botList = Tool.getBotsByDist(this.device, this.deviceMap);
@@ -60,22 +58,19 @@ public class EmergencyOneCommand implements Command {
         for (BotDist b : emergencyBots) {
             Robot bot = (Robot) deviceMap.get(b.getBot());
             bot.updateRobot(this.device.getLocation(), true, "address " + event);
-            System.out.println(bot);
-            System.out.println(" "); // line break
+            Tool.report(bot);
         }
 
         //"help people find shelter"
         for (BotDist b : shelterBots) {
             Robot bot = (Robot) deviceMap.get(b.getBot());
             bot.updateRobot(null, true, "help people find shelter");
-            System.out.println(bot);
-            System.out.println(" "); // line break
+            Tool.report(bot);
         }
 
         //emergency resolved
         this.device.sensorEvent(SensorType.camera, "the " + event + " emergency is over", null);
-        System.out.println(this.device);
-        System.out.println(" "); // line break
+        Tool.report(this.device);
 
     }
 }

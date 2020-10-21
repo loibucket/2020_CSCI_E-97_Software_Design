@@ -77,6 +77,13 @@ update robot city_1:bot_2 activity "walking dog"
 #define vehicle <city_id>:<device_id> lat <float> long <float> enabled (true|false) type (bus|car) activity <string> capacity <int> fee <int>
 
 define vehicle city_1:car_1 lat 42.3725 long -71.1161 enabled true type car activity "parked" capacity 4 fee 10
+define vehicle city_1:car_2 lat 42.38 long -71.12 enabled true type car activity "parked" capacity 4 fee 10
+define vehicle city_1:car_3 lat 42.39 long -71.13 enabled true type car activity "parked" capacity 4 fee 10
+define vehicle city_1:car_4 lat 42.40 long -71.14 enabled true type car activity "parked" capacity 4 fee 10
+define vehicle city_1:car_5 lat 42.41 long -71.15 enabled true type car activity "parked" capacity 4 fee 10
+define vehicle city_1:car_6 lat 42.42 long -71.16 enabled true type car activity "parked" capacity 4 fee 10
+define vehicle city_1:car_7 lat 42.43 long -71.17 enabled true type car activity "parked" capacity 4 fee 10
+
 define vehicle city_1:bus_1 lat 42.3736 long -71.1214 enabled  true  type  bus  activity "on route" capacity 30 fee 1
 
 # Update a vehicle
@@ -105,7 +112,8 @@ create sensor-event city_1:bot_1 type thermometer  value 98.6 subject resident_2
 
 create sensor-output city_1:bot_1 type speaker value "your temperature is normal"
 create sensor-output city_1 speaker value "severe weather alert, please take shelter"
-Person Commands
+
+# Person Commands
 # Define a new Resident
 #define resident <person_id> name <name> bio-metric <string> phone <phone_number> role (adult|child|administrator) lat <lat> long <long> account <account_address>
 
@@ -182,8 +190,3 @@ create sensor-event city_1:kiosk_2 type microphone value "what movies are showin
 
 # Trigger Rule Movie Reservation
 create sensor-event city_1:kiosk_2 type microphone value "reserve 3 seats for the 9 pm showing of Casablanca." subject resident_1
-
-###Duplicate Events
-
-# Trigger Rule Litter Event
-create sensor-event city_1:bot_1 type camera value "littering" subject resident_1

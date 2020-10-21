@@ -47,7 +47,28 @@ LEDGER-OPEN: create-account resident_A_account
 LEDGER: 
 :LEDGER-CLOSE
  
-# LINE 16 #process-transaction <transaction-id> amount <amount> fee <fee> note <note> payer <account-address> receiver <account-address>
+# LINE 16 #car blockchain address is same as its id
+LEDGER-OPEN: create-account city_1:car_1
+LEDGER: 
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: create-account city_1:car_2
+LEDGER: 
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: create-account city_1:car_3
+LEDGER: 
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: create-account city_1:car_4
+LEDGER: 
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: create-account city_1:car_5
+LEDGER: 
+:LEDGER-CLOSE
+ 
+# LINE 23 #process-transaction <transaction-id> amount <amount> fee <fee> note <note> payer <account-address> receiver <account-address>
 LEDGER-OPEN: process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver janes_account
 LEDGER: 
 transaction id: 1
@@ -98,6 +119,56 @@ LEDGER:
 transaction id: 10
 :LEDGER-CLOSE
  
+LEDGER-OPEN: process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_1
+LEDGER: 
+transaction id: 11
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_2
+LEDGER: 
+transaction id: 12
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_3
+LEDGER: 
+transaction id: 13
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_4
+LEDGER: 
+transaction id: 14
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_5
+LEDGER: 
+transaction id: 15
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_1
+LEDGER: 
+transaction id: 16
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_2
+LEDGER: 
+transaction id: 17
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_3
+LEDGER: 
+transaction id: 18
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_4
+LEDGER: 
+transaction id: 19
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: process-transaction 1 amount 1000 fee 10 note "fund account" payer master receiver city_1:car_5
+LEDGER: 
+transaction id: 20
+:LEDGER-CLOSE
+ 
 LEDGER-OPEN: get-account-balance janes_account
 LEDGER: 
 confirmed:1000
@@ -106,14 +177,14 @@ unconfirmed:1000
  
 LEDGER-OPEN: get-account-balances
 LEDGER: 
-{resident_8_account=1000, cambridge-account=0, joes_account=1000, resident_3_account=1000, resident_9_account=1000, resident_7_account=1000, resident_4_account=1000, resident_6_account=1000, janes_account=1000, resident_5_account=1000, master=2147473647, resident_A_account=1000}
+{resident_3_account=1000, resident_4_account=1000, resident_6_account=1000, resident_5_account=1000, master=2147463647, resident_A_account=1000, resident_8_account=1000, city_1:car_2=2000, cambridge-account=0, city_1:car_3=2000, joes_account=1000, resident_9_account=1000, city_1:car_1=2000, resident_7_account=1000, city_1:car_4=2000, city_1:car_5=2000, janes_account=1000}
 :LEDGER-CLOSE
  
 LEDGER-OPEN: get-block 1
 LEDGER: 
 ------------
 BLOCK NUMBER: 1
-BLOCK HASH: 42EE772020912EC5402FB4609ED72EC04C537F274B13838F972EC1EA43F59809
+BLOCK HASH: 856DF79B4C6DEBEDE25F74D27D51F6B19F42E766426A07680331F5CF83A52F16
 PREVIOUS HASH: null
 TRANSACTIONS: 
 transaction id: 1 amount: 1000 fee: 10 note: "fund account" payer: master receiver: janes_account 
@@ -127,18 +198,61 @@ transaction id: 8 amount: 1000 fee: 10 note: "fund account" payer: master receiv
 transaction id: 9 amount: 1000 fee: 10 note: "fund account" payer: master receiver: resident_9_account 
 transaction id: 10 amount: 1000 fee: 10 note: "fund account" payer: master receiver: resident_A_account
 ACCOUNT BALANCES: 
-resident_8_account: 1000 
-cambridge-account: 0 
-joes_account: 1000 
 resident_3_account: 1000 
-resident_9_account: 1000 
-resident_7_account: 1000 
 resident_4_account: 1000 
 resident_6_account: 1000 
-janes_account: 1000 
 resident_5_account: 1000 
 master: 2147473647 
-resident_A_account: 1000
+resident_A_account: 1000 
+resident_8_account: 1000 
+city_1:car_2: 0 
+cambridge-account: 0 
+city_1:car_3: 0 
+joes_account: 1000 
+resident_9_account: 1000 
+city_1:car_1: 0 
+resident_7_account: 1000 
+city_1:car_4: 0 
+city_1:car_5: 0 
+janes_account: 1000
+------------
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: get-block 2
+LEDGER: 
+------------
+BLOCK NUMBER: 2
+BLOCK HASH: A4F6384225E70A018998F44ADD09D491C6AB2639AF36AA9AE508B7311F5655B3
+PREVIOUS HASH: 856DF79B4C6DEBEDE25F74D27D51F6B19F42E766426A07680331F5CF83A52F16
+TRANSACTIONS: 
+transaction id: 11 amount: 1000 fee: 10 note: "fund account" payer: master receiver: city_1:car_1 
+transaction id: 12 amount: 1000 fee: 10 note: "fund account" payer: master receiver: city_1:car_2 
+transaction id: 13 amount: 1000 fee: 10 note: "fund account" payer: master receiver: city_1:car_3 
+transaction id: 14 amount: 1000 fee: 10 note: "fund account" payer: master receiver: city_1:car_4 
+transaction id: 15 amount: 1000 fee: 10 note: "fund account" payer: master receiver: city_1:car_5 
+transaction id: 16 amount: 1000 fee: 10 note: "fund account" payer: master receiver: city_1:car_1 
+transaction id: 17 amount: 1000 fee: 10 note: "fund account" payer: master receiver: city_1:car_2 
+transaction id: 18 amount: 1000 fee: 10 note: "fund account" payer: master receiver: city_1:car_3 
+transaction id: 19 amount: 1000 fee: 10 note: "fund account" payer: master receiver: city_1:car_4 
+transaction id: 20 amount: 1000 fee: 10 note: "fund account" payer: master receiver: city_1:car_5
+ACCOUNT BALANCES: 
+resident_3_account: 1000 
+resident_4_account: 1000 
+resident_6_account: 1000 
+resident_5_account: 1000 
+master: 2147463647 
+resident_A_account: 1000 
+resident_8_account: 1000 
+city_1:car_2: 2000 
+cambridge-account: 0 
+city_1:car_3: 2000 
+joes_account: 1000 
+resident_9_account: 1000 
+city_1:car_1: 2000 
+resident_7_account: 1000 
+city_1:car_4: 2000 
+city_1:car_5: 2000 
+janes_account: 1000
 ------------
 :LEDGER-CLOSE
  
@@ -162,12 +276,10 @@ City{cityId='city_1', name='Cambridge-MA', blockchainAddress='cambridge-account'
 # LINE 14 #define street-sign <city_id>:<device_id> lat <float> long <float> enabled (true|false) text <text>
 COMMAND: define street-sign city_1:ss_1 lat 42.3732 long -71.1202 enabled  true  text "Welcome to Harvard Square"
 RESPONSE: 
-COMMAND ERROR: line 16, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define street-sign city_1:ss_2 lat 42.3736 long -71.1214 enabled  true  text "Brattle Theatre"
 RESPONSE: 
-COMMAND ERROR: line 17, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 19 # update a street sign
@@ -184,12 +296,10 @@ RESPONSE:
 # LINE 26 #define info-kiosk <city_id>:<device_id> lat <float> long <float> enabled (true|false) image <uri>
 COMMAND: define info-kiosk city_1:kiosk_1 lat 42.3723 long -71.1230 enabled  true  image https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg
 RESPONSE: 
-COMMAND ERROR: line 28, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define info-kiosk city_1:kiosk_2 lat 42.3766 long -71.1160 enabled  true  image https://www.lwa-architects.com/wp-content/uploads/2014/12/Harvard-SciCtr_Ext-bikes-992x1250.jpg
 RESPONSE: 
-COMMAND ERROR: line 29, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 31 # Update an information kiosk
@@ -206,12 +316,10 @@ RESPONSE:
 # LINE 38 #define street-light <city_id>:<device_id> lat <float> long <float> enabled (true|false) brightness <int>
 COMMAND: define street-light city_1:sl_1 lat 42.3770 long  -71.1167 enabled  true  brightness 8
 RESPONSE: 
-COMMAND ERROR: line 40, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define street-light city_1:sl_2 lat 42.3749 long  -71.1218 enabled  true  brightness 5
 RESPONSE: 
-COMMAND ERROR: line 41, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 43 # Update a street light
@@ -228,12 +336,10 @@ RESPONSE:
 # LINE 50 #define parking-space <city_id>:<device_id> lat <float> long <float> enabled (true|false) rate <int>
 COMMAND: define parking-space city_1:ps_1 lat 42.3743 long -71.1202 enabled true  rate 25
 RESPONSE: 
-COMMAND ERROR: line 52, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define parking-space city_1:ps_2 lat 42.3744 long -71.1203 enabled true  rate 25
 RESPONSE: 
-COMMAND ERROR: line 53, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 55 # Update a parking space
@@ -250,32 +356,26 @@ RESPONSE:
 # LINE 61 #define robot <city_id>:<device_id> lat <float> long <float> enabled (true|false) activity <string>
 COMMAND: define robot city_1:bot_1 lat 42.37 long -71.12 enabled  true activity "cleaning"
 RESPONSE: 
-COMMAND ERROR: line 63, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define robot city_1:bot_2 lat 42.38 long -71.13 enabled true activity "assisting student2"
 RESPONSE: 
-COMMAND ERROR: line 64, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define robot city_1:bot_3 lat 42.39 long -71.14 enabled true activity "assisting student3"
 RESPONSE: 
-COMMAND ERROR: line 65, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define robot city_1:bot_4 lat 42.40 long -71.15 enabled true activity "assisting student4"
 RESPONSE: 
-COMMAND ERROR: line 66, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define robot city_1:bot_5 lat 42.41 long -71.16 enabled true activity "assisting student5"
 RESPONSE: 
-COMMAND ERROR: line 67, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: define robot city_1:bot_6 lat 42.42 long -71.17 enabled true activity "assisting student6"
 RESPONSE: 
-COMMAND ERROR: line 68, REASON: java.lang.NumberFormatException: null
 :END
  
 # LINE 70 # Update a robot
@@ -292,16 +392,38 @@ RESPONSE:
 # LINE 77 #define vehicle <city_id>:<device_id> lat <float> long <float> enabled (true|false) type (bus|car) activity <string> capacity <int> fee <int>
 COMMAND: define vehicle city_1:car_1 lat 42.3725 long -71.1161 enabled true type car activity "parked" capacity 4 fee 10
 RESPONSE: 
-COMMAND ERROR: line 79, REASON: java.lang.NumberFormatException: null
+:END
+ 
+COMMAND: define vehicle city_1:car_2 lat 42.38 long -71.12 enabled true type car activity "parked" capacity 4 fee 10
+RESPONSE: 
+:END
+ 
+COMMAND: define vehicle city_1:car_3 lat 42.39 long -71.13 enabled true type car activity "parked" capacity 4 fee 10
+RESPONSE: 
+:END
+ 
+COMMAND: define vehicle city_1:car_4 lat 42.40 long -71.14 enabled true type car activity "parked" capacity 4 fee 10
+RESPONSE: 
+:END
+ 
+COMMAND: define vehicle city_1:car_5 lat 42.41 long -71.15 enabled true type car activity "parked" capacity 4 fee 10
+RESPONSE: 
+:END
+ 
+COMMAND: define vehicle city_1:car_6 lat 42.42 long -71.16 enabled true type car activity "parked" capacity 4 fee 10
+RESPONSE: 
+:END
+ 
+COMMAND: define vehicle city_1:car_7 lat 42.43 long -71.17 enabled true type car activity "parked" capacity 4 fee 10
+RESPONSE: 
 :END
  
 COMMAND: define vehicle city_1:bus_1 lat 42.3736 long -71.1214 enabled  true  type  bus  activity "on route" capacity 30 fee 1
 RESPONSE: 
-COMMAND ERROR: line 80, REASON: java.lang.NumberFormatException: null
 :END
  
-# LINE 82 # Update a vehicle
-# LINE 83 #update vehicle <city_id>:<device_id> [lat <float> long <float>] [enabled (true|false)] [activity <string>] [fee <int>]
+# LINE 89 # Update a vehicle
+# LINE 90 #update vehicle <city_id>:<device_id> [lat <float> long <float>] [enabled (true|false)] [activity <string>] [fee <int>]
 COMMAND: update vehicle city_1:car_1 lat 42.3830 long -71.1125   activity "driving"
 RESPONSE: 
 :END
@@ -310,64 +432,73 @@ COMMAND: update vehicle city_1:bus_1 lat 42.3635 long -71.0985 enabled true acti
 RESPONSE: 
 :END
  
-# LINE 88 # Show the details of a device; if device id is omitted, show details for all devices within the city
-# LINE 89 #show device <city_id>[:<device_id>]
+# LINE 95 # Show the details of a device; if device id is omitted, show details for all devices within the city
+# LINE 96 #show device <city_id>[:<device_id>]
 COMMAND: show device city_1:bus_1
 RESPONSE: 
-Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+Vehicle{type=bus, capacity=30, fee=1, deviceId='city_1:bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
 :END
  
 COMMAND: show device city_1
 RESPONSE: 
-bot_1=Robot{deviceId='bot_1', location=[42.3732, -71.1195], enabled=false, event='cleaning', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:bus_1=Vehicle{type=bus, capacity=30, fee=1, deviceId='city_1:bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-ps_1=ParkingSpace{rate=50, deviceId='ps_1', location=[42.3743, -71.1202], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:ss_2=StreetSign{text='Now playing, Casablanca', deviceId='city_1:ss_2', location=[42.3736, -71.1214], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-kiosk_1=InfoKiosk{imageUri='https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg', deviceId='kiosk_1', location=[42.3723, -71.123], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:ps_1=ParkingSpace{rate=50, deviceId='city_1:ps_1', location=[42.3743, -71.1202], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-ps_2=ParkingSpace{rate=50, deviceId='ps_2', location=[42.3744, -71.1203], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:ps_2=ParkingSpace{rate=50, deviceId='city_1:ps_2', location=[42.3744, -71.1203], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-bot_3=Robot{deviceId='bot_3', location=[42.39, -71.14], enabled=true, event='assisting student3', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:kiosk_1=InfoKiosk{imageUri='https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg', deviceId='city_1:kiosk_1', location=[42.3723, -71.123], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-bot_2=Robot{deviceId='bot_2', location=[42.38, -71.13], enabled=false, event='walking dog', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:bot_4=Robot{deviceId='city_1:bot_4', location=[42.4, -71.15], enabled=true, event='assisting student4', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-ss_1=StreetSign{text='The time is now 9:00 pm', deviceId='ss_1', location=[42.3732, -71.1202], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:kiosk_2=InfoKiosk{imageUri='https://www.google.com/maps/place/Cambridge,+MA/@42.3737266,-71.1236297,16.23z/data=!4m5!3m4!1s0x89e370a5cb30cc5f:0xc53a8e6489686c87!8m2!3d42.3736158!4d-71.1097335', deviceId='city_1:kiosk_2', location=[42.3766, -71.116], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-bot_5=Robot{deviceId='bot_5', location=[42.41, -71.16], enabled=true, event='assisting student5', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:bot_3=Robot{deviceId='city_1:bot_3', location=[42.39, -71.14], enabled=true, event='assisting student3', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-ss_2=StreetSign{text='Now playing, Casablanca', deviceId='ss_2', location=[42.3736, -71.1214], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:bot_2=Robot{deviceId='city_1:bot_2', location=[42.38, -71.13], enabled=false, event='walking dog', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-kiosk_2=InfoKiosk{imageUri='https://www.google.com/maps/place/Cambridge,+MA/@42.3737266,-71.1236297,16.23z/data=!4m5!3m4!1s0x89e370a5cb30cc5f:0xc53a8e6489686c87!8m2!3d42.3736158!4d-71.1097335', deviceId='kiosk_2', location=[42.3766, -71.116], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:bot_1=Robot{deviceId='city_1:bot_1', location=[42.3732, -71.1195], enabled=false, event='cleaning', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-bot_4=Robot{deviceId='bot_4', location=[42.4, -71.15], enabled=true, event='assisting student4', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:car_2=Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_2', location=[42.38, -71.12], enabled=true, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-car_1=Vehicle{type=car, capacity=4, fee=10, deviceId='car_1', location=[42.383, -71.1125], enabled=false, event='driving', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:car_3=Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_3', location=[42.39, -71.13], enabled=true, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-bot_6=Robot{deviceId='bot_6', location=[42.42, -71.17], enabled=true, event='assisting student6', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:bot_6=Robot{deviceId='city_1:bot_6', location=[42.42, -71.17], enabled=true, event='assisting student6', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-bus_1=Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:bot_5=Robot{deviceId='city_1:bot_5', location=[42.41, -71.16], enabled=true, event='assisting student5', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-sl_2=StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:car_1=Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_1', location=[42.383, -71.1125], enabled=false, event='driving', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
-sl_1=StreetLight{brightness=5, deviceId='sl_1', location=[42.377, -71.1167], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+city_1:car_6=Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_6', location=[42.42, -71.16], enabled=true, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+city_1:car_7=Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_7', location=[42.43, -71.17], enabled=true, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+city_1:car_4=Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_4', location=[42.4, -71.14], enabled=true, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+city_1:car_5=Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_5', location=[42.41, -71.15], enabled=true, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+city_1:ss_1=StreetSign{text='The time is now 9:00 pm', deviceId='city_1:ss_1', location=[42.3732, -71.1202], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+city_1:sl_2=StreetLight{brightness=5, deviceId='city_1:sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
+ 
+city_1:sl_1=StreetLight{brightness=5, deviceId='city_1:sl_1', location=[42.377, -71.1167], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='null', personId='null'}}
  
 :END
  
-# LINE 94 # Simulate a device sensor event
-# LINE 95 #create sensor-event <city_id>[:<device_id>] type (microphone|camera|thermometer|co2meter) value <string> [subject <person_id>]
+# LINE 101 # Simulate a device sensor event
+# LINE 102 #create sensor-event <city_id>[:<device_id>] type (microphone|camera|thermometer|co2meter) value <string> [subject <person_id>]
 COMMAND: create sensor-event city_1:bus_1 type microphone value "does this bus go to Central Square?" subject resident_1
 RESPONSE: 
-COMMAND ERROR: line 97, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: create sensor-event city_1:bus_1 type camera value "person boarding bus" subject resident_1
 RESPONSE: 
-COMMAND ERROR: line 98, REASON: not found (null pointer)!
 :END
  
 COMMAND: create sensor-event city_1:sl_1 type thermometer value 80
 RESPONSE: 
-COMMAND ERROR: line 99, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: create sensor-event city_1:sl_1 type co2meter value 500
@@ -376,28 +507,21 @@ RESPONSE:
  
 COMMAND: create sensor-event city_1:bot_1 type thermometer  value 98.6 subject resident_2
 RESPONSE: 
-COMMAND ERROR: line 101, REASON: java.lang.NumberFormatException: null
 :END
  
-# LINE 103 # Send a device output
-# LINE 104 #create sensor-output <city_id>[:<device_id>] type (speaker) value <string>
+# LINE 110 # Send a device output
+# LINE 111 #create sensor-output <city_id>[:<device_id>] type (speaker) value <string>
 COMMAND: create sensor-output city_1:bot_1 type speaker value "your temperature is normal"
 RESPONSE: 
-COMMAND ERROR: line 106, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: create sensor-output city_1 speaker value "severe weather alert, please take shelter"
 RESPONSE: 
-COMMAND ERROR: line 107, REASON: java.lang.NumberFormatException: null
 :END
  
-COMMAND: Person Commands
-RESPONSE: 
-COMMAND ERROR: line 108, ACTION: command, REASON: command not recognized
-:END
- 
-# LINE 109 # Define a new Resident
-# LINE 110 #define resident <person_id> name <name> bio-metric <string> phone <phone_number> role (adult|child|administrator) lat <lat> long <long> account <account_address>
+# LINE 116 # Person Commands
+# LINE 117 # Define a new Resident
+# LINE 118 #define resident <person_id> name <name> bio-metric <string> phone <phone_number> role (adult|child|administrator) lat <lat> long <long> account <account_address>
 COMMAND: define resident resident_1 name jane bio-metric "voice-print='voiceprint-jane',face-print='faceprint-jane'" phone 781-222-3344 role adult lat 42.3735 long -71.1205 account janes_account
 RESPONSE: 
 :END
@@ -406,26 +530,26 @@ COMMAND: define resident resident_2 name joe bio-metric "voice-print='voiceprint
 RESPONSE: 
 :END
  
-# LINE 115 # Update a Resident
-# LINE 116 #update resident <person_id> [name <name>] [bio-metric <string>] [phone <phone_number>] [role (adult|child|administrator)] [lat <lat> long <long>] [account <account_address>]
+# LINE 123 # Update a Resident
+# LINE 124 #update resident <person_id> [name <name>] [bio-metric <string>] [phone <phone_number>] [role (adult|child|administrator)] [lat <lat> long <long>] [account <account_address>]
 COMMAND: update resident resident_1 name jane lat 42.3830 long -71.1125
 RESPONSE: 
 :END
  
-# LINE 120 # Define a new Visitor
-# LINE 121 #define visitor <person_id> bio-metric <string> lat <lat> long <long>
+# LINE 128 # Define a new Visitor
+# LINE 129 #define visitor <person_id> bio-metric <string> lat <lat> long <long>
 COMMAND: define visitor visitor_1 bio-metric "iris-print='irisprint-visitor_1'" lat 42.3744 long -71.1203
 RESPONSE: 
 :END
  
-# LINE 125 # Update a Visitor
-# LINE 126 #update visitor <person_id> [bio-metric <string>] [lat <lat> long <long>]
+# LINE 133 # Update a Visitor
+# LINE 134 #update visitor <person_id> [bio-metric <string>] [lat <lat> long <long>]
 COMMAND: update visitor visitor_1  lat 42.3830 long -71.1125
 RESPONSE: 
 :END
  
-# LINE 130 # Show the details of the person
-# LINE 131 #show person <person_id>
+# LINE 138 # Show the details of the person
+# LINE 139 #show person <person_id>
 COMMAND: show person resident_1
 RESPONSE: 
 Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.383, -71.1125], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
@@ -436,110 +560,105 @@ RESPONSE:
 Person{personId='visitor_1', biometricId='iris-print='irisprint-visitor_1'', location=[42.383, -71.1125], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
 :END
  
-# LINE 136 # Simulate events to trigger Controller Service rules
-# LINE 138 # Simulate a device sensor event
-# LINE 139 #create sensor-event <city_id>[:<device_id>] type (microphone|camera|thermometer|co2meter) value <string> [subject <person_id>]
-# LINE 141 # Trigger Rule Emergency 1
+# LINE 144 # Simulate events to trigger Controller Service rules
+# LINE 146 # Simulate a device sensor event
+# LINE 147 #create sensor-event <city_id>[:<device_id>] type (microphone|camera|thermometer|co2meter) value <string> [subject <person_id>]
+# LINE 149 # Trigger Rule Emergency 1
 COMMAND: create sensor-event city_1:sl_1 type camera value "fire"
 RESPONSE: 
-StreetLight{brightness=5, deviceId='sl_1', location=[42.377, -71.1167], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='fire', personId='null'}, thermometer=Sensor{type=thermometer, value='80', personId='null'}, co2meter=Sensor{type=co2meter, value='500', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+StreetLight{brightness=5, deviceId='city_1:sl_1', location=[42.377, -71.1167], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='fire', personId='null'}, thermometer=Sensor{type=thermometer, value='80', personId='null'}, co2meter=Sensor{type=co2meter, value='500', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
  
-Robot{deviceId='bot_1', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+Robot{deviceId='city_1:bot_1', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
  
-Robot{deviceId='bot_2', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+Robot{deviceId='city_1:bot_2', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
  
-Robot{deviceId='bot_3', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+Robot{deviceId='city_1:bot_3', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
  
-Robot{deviceId='bot_4', location=[42.4, -71.15], enabled=true, event='help people find shelter', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+Robot{deviceId='city_1:bot_4', location=[42.4, -71.15], enabled=true, event='help people find shelter', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
  
-Robot{deviceId='bot_5', location=[42.41, -71.16], enabled=true, event='help people find shelter', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+Robot{deviceId='city_1:bot_5', location=[42.41, -71.16], enabled=true, event='help people find shelter', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
  
-Robot{deviceId='bot_6', location=[42.42, -71.17], enabled=true, event='help people find shelter', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+Robot{deviceId='city_1:bot_6', location=[42.42, -71.17], enabled=true, event='help people find shelter', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
  
-StreetLight{brightness=5, deviceId='sl_1', location=[42.377, -71.1167], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='the fire emergency is over', personId='null'}, thermometer=Sensor{type=thermometer, value='80', personId='null'}, co2meter=Sensor{type=co2meter, value='500', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+StreetLight{brightness=5, deviceId='city_1:sl_1', location=[42.377, -71.1167], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='the fire emergency is over', personId='null'}, thermometer=Sensor{type=thermometer, value='80', personId='null'}, co2meter=Sensor{type=co2meter, value='500', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
  
 :END
  
-# LINE 144 # Trigger Rule Emergency 2
+# LINE 152 # Trigger Rule Emergency 2
 COMMAND: create sensor-event city_1:sl_2 type camera value "traffic_accident"
 RESPONSE: 
-StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='traffic_accident', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
+StreetLight{brightness=5, deviceId='city_1:sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='traffic_accident', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
  
-Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
+Robot{deviceId='city_1:bot_3', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
  
-Robot{deviceId='bot_3', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
+Robot{deviceId='city_1:bot_2', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
  
-StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='traffic accident cleared', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
+StreetLight{brightness=5, deviceId='city_1:sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='accident cleared', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
  
-COMMAND ERROR: line 145, REASON: java.lang.NumberFormatException: null
 :END
  
-# LINE 147 # Trigger Rule CO2 Event 1
+# LINE 155 # Trigger Rule CO2 Event 1
 COMMAND: create sensor-event city_1:sl_1 type co2meter value "1200"
 RESPONSE: 
-StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='traffic accident cleared', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
- 
-Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
- 
-Robot{deviceId='bot_3', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
- 
-StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='traffic accident cleared', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
- 
 :END
  
 COMMAND: create sensor-event city_1:sl_2 type co2meter value "1300"
 RESPONSE: 
-StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='traffic accident cleared', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='1300', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
- 
-Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
- 
-Robot{deviceId='bot_3', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
- 
-StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='traffic accident cleared', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='1300', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
- 
 :END
  
 COMMAND: create sensor-event city_1:ps_1 type co2meter value "1400"
 RESPONSE: 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_2', location=[42.38, -71.12], enabled=false, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_3', location=[42.39, -71.13], enabled=false, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_1', location=[42.383, -71.1125], enabled=false, event='driving', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_6', location=[42.42, -71.16], enabled=false, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_7', location=[42.43, -71.17], enabled=false, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_4', location=[42.4, -71.14], enabled=false, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_5', location=[42.41, -71.15], enabled=false, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
 :END
  
-# LINE 152 # Trigger Rule CO2 Event 2
+# LINE 160 # Trigger Rule CO2 Event 2
 COMMAND: create sensor-event city_1:sl_1 type co2meter value "900"
 RESPONSE: 
-StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='traffic accident cleared', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='1300', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
- 
-Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
- 
-Robot{deviceId='bot_3', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
- 
-StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='traffic accident cleared', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='1300', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
- 
 :END
  
 COMMAND: create sensor-event city_1:sl_2 type co2meter value "800"
 RESPONSE: 
-StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='traffic accident cleared', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='800', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
- 
-Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
- 
-Robot{deviceId='bot_3', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
- 
-StreetLight{brightness=5, deviceId='sl_2', location=[42.3749, -71.1218], enabled=true, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='traffic accident cleared', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='800', personId='null'}, speaker=Sensor{type=speaker, value='Stay calm, help is on its way!', personId='null'}}
- 
 :END
  
 COMMAND: create sensor-event city_1:bot_1 type co2meter value "700"
 RESPONSE: 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_2', location=[42.38, -71.12], enabled=true, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_3', location=[42.39, -71.13], enabled=true, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_1', location=[42.383, -71.1125], enabled=true, event='driving', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_6', location=[42.42, -71.16], enabled=true, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_7', location=[42.43, -71.17], enabled=true, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_4', location=[42.4, -71.14], enabled=true, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Vehicle{type=car, capacity=4, fee=10, deviceId='city_1:car_5', location=[42.41, -71.15], enabled=true, event='parked', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
 :END
  
-# LINE 157 # Trigger Rule Litter Event
+# LINE 165 # Trigger Rule Litter Event
 COMMAND: create sensor-event city_1:bot_1 type camera value "littering" subject resident_1
 RESPONSE: 
-Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='littering', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
+Robot{deviceId='city_1:bot_1', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='littering', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
  
-Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='litter cleaned up', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
+Robot{deviceId='city_1:bot_1', location=[42.377, -71.1167], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='litter cleaned up', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
  
-Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='litter cleaned up', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
+Robot{deviceId='city_1:bot_1', location=[42.377, -71.1167], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='litter cleaned up', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
  
 LEDGER-OPEN: get-account-balance janes_account
 LEDGER: 
@@ -549,7 +668,7 @@ unconfirmed:1000
  
 LEDGER-OPEN: process-transaction 1 amount 50 fee 10 note "littering" payer janes_account receiver cambridge-account
 LEDGER: 
-transaction id: 11
+transaction id: 21
 :LEDGER-CLOSE
  
 LEDGER-OPEN: get-account-balance janes_account
@@ -560,62 +679,82 @@ unconfirmed:940
  
 :END
  
-# LINE 160 # Trigger Rule Broken Glass
+# LINE 168 # Trigger Rule Broken Glass
 COMMAND: create sensor-event city_1:kiosk_1 type microphone value "broken_glass_sound"
 RESPONSE: 
-COMMAND ERROR: line 161, REASON: java.lang.NumberFormatException: null
+InfoKiosk{imageUri='https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg', deviceId='city_1:kiosk_1', location=[42.3723, -71.123], enabled=false, event='null', microphone=Sensor{type=microphone, value='broken_glass_sound', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+Robot{deviceId='city_1:bot_3', location=[42.3723, -71.123], enabled=true, event='cleaning broken glass', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
+ 
+InfoKiosk{imageUri='https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg', deviceId='city_1:kiosk_1', location=[42.3723, -71.123], enabled=false, event='null', microphone=Sensor{type=microphone, value='sound of robot cleaning up broken glass', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
 :END
  
-# LINE 163 # Trigger Rule Person Seen
+# LINE 171 # Trigger Rule Person Seen
 COMMAND: create sensor-event city_1:bot_2 type camera value "person_seen" subject resident_1
 RESPONSE: 
-Robot{deviceId='bot_2', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='person_seen', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+Robot{deviceId='city_1:bot_2', location=[42.3749, -71.1218], enabled=true, event='address traffic accident', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='person_seen', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
  
 Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.383, -71.1125], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
  
-Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.3749, -71.1218], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
  
-COMMAND ERROR: line 164, REASON: java.lang.NumberFormatException: null
 :END
  
-# LINE 166 # Trigger Rule Missing Child
+# LINE 174 # Trigger Rule Missing Child
 COMMAND: create sensor-event city_1:bot_1 type microphone value "can you help me find my child resident_2" subject resident_1
 RESPONSE: 
-Robot{deviceId='bot_2', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='person_seen', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+Robot{deviceId='city_1:bot_1', location=[42.377, -71.1167], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='can you help me find my child resident_2', personId='resident_1'}, camera=Sensor{type=camera, value='litter cleaned up', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
  
 Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
  
-Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+Robot{deviceId='city_1:bot_1', location=[42.377, -71.1167], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='can you help me find my child resident_2', personId='resident_1'}, camera=Sensor{type=camera, value='litter cleaned up', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='person resident_2 is at lat 42.3735 long -71.1205, a robot is retrieving now, stay where you are.', personId='resident_1'}}
+ 
+Robot{deviceId='city_1:bot_2', location=[42.3735, -71.1205], enabled=true, event='found child', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='person_seen', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
+ 
+Robot{deviceId='city_1:bot_2', location=[42.377, -71.1167], enabled=true, event='retrieved child', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='person_seen', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Help is here, stay calm', personId='null'}}
  
 :END
  
-# LINE 169 # Trigger Rule Parking Event
+# LINE 177 # Trigger Rule Parking Event
 COMMAND: create sensor-event city_1:ps_1 type camera value "Vehicle city_1:car_1 parked for 1 hour."
 RESPONSE: 
-Robot{deviceId='bot_2', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='person_seen', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ParkingSpace{rate=50, deviceId='city_1:ps_1', location=[42.3743, -71.1202], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='Vehicle city_1:car_1 parked for 1 hour.', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='1400', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
  
-Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+LEDGER-OPEN: get-account-balance city_1:car_1
+LEDGER: 
+confirmed:2000
+unconfirmed:2000
+:LEDGER-CLOSE
  
-Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+LEDGER-OPEN: process-transaction 1 amount 50 fee 10 note "parking" payer city_1:car_1 receiver cambridge-account
+LEDGER: 
+transaction id: 22
+:LEDGER-CLOSE
+ 
+LEDGER-OPEN: get-account-balance city_1:car_1
+LEDGER: 
+confirmed:2000
+unconfirmed:1940
+:LEDGER-CLOSE
+ 
+ParkingSpace{rate=50, deviceId='city_1:ps_1', location=[42.3743, -71.1202], enabled=false, event='null', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='vehicle just left', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='1400', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
  
 :END
  
-# LINE 172 # Trigger Rule Bus Route
+# LINE 180 # Trigger Rule Bus Route
 COMMAND: create sensor-event city_1:bus_1 type microphone value "Does this bus go to central square?" subject resident_1
 RESPONSE: 
-Robot{deviceId='bot_2', location=[42.377, -71.1167], enabled=true, event='address fire', microphone=Sensor{type=microphone, value='null', personId='null'}, camera=Sensor{type=camera, value='person_seen', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+Vehicle{type=bus, capacity=30, fee=1, deviceId='city_1:bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='person boarding bus', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
  
-Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
+Vehicle{type=bus, capacity=30, fee=1, deviceId='city_1:bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='silence', personId='null'}, camera=Sensor{type=camera, value='person boarding bus', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='yes this bus goes to central square', personId='resident_1'}}
  
-Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
- 
-COMMAND ERROR: line 173, REASON: java.lang.NumberFormatException: null
 :END
  
-# LINE 175 # Trigger Rule Board Bus
+# LINE 183 # Trigger Rule Board Bus
 COMMAND: create sensor-event city_1:bus_1 type camera value "Person boards bus" subject resident_1
 RESPONSE: 
-Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='Person boards bus', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+Vehicle{type=bus, capacity=30, fee=1, deviceId='city_1:bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='silence', personId='null'}, camera=Sensor{type=camera, value='Person boards bus', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='yes this bus goes to central square', personId='resident_1'}}
  
 Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
  
@@ -627,7 +766,7 @@ unconfirmed:940
  
 LEDGER-OPEN: process-transaction 1 amount 1 fee 10 note "board bus" payer janes_account receiver cambridge-account
 LEDGER: 
-transaction id: 12
+transaction id: 23
 :LEDGER-CLOSE
  
 LEDGER-OPEN: get-account-balance janes_account
@@ -636,14 +775,13 @@ confirmed:1000
 unconfirmed:929
 :LEDGER-CLOSE
  
-Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='bus boarded', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you jane', personId='resident_1'}}
+Vehicle{type=bus, capacity=30, fee=1, deviceId='city_1:bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='silence', personId='null'}, camera=Sensor{type=camera, value='bus boarded', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you jane', personId='resident_1'}}
  
-COMMAND ERROR: line 176, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: create sensor-event city_1:bus_1 type camera value "Person boards bus" subject resident_2
 RESPONSE: 
-Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='Person boards bus', personId='resident_2'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you jane', personId='resident_1'}}
+Vehicle{type=bus, capacity=30, fee=1, deviceId='city_1:bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='silence', personId='null'}, camera=Sensor{type=camera, value='Person boards bus', personId='resident_2'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you jane', personId='resident_1'}}
  
 Person{personId='resident_2', biometricId='voice-print='voiceprint-joe',face-print='faceprint-joe'', location=[42.3735, -71.1205], type=resident, name='joe', phoneNumber='781-222-3345', role=child, blockchainAddress='joes_account'}
  
@@ -655,7 +793,7 @@ unconfirmed:1000
  
 LEDGER-OPEN: process-transaction 1 amount 1 fee 10 note "board bus" payer joes_account receiver cambridge-account
 LEDGER: 
-transaction id: 13
+transaction id: 24
 :LEDGER-CLOSE
  
 LEDGER-OPEN: get-account-balance joes_account
@@ -664,43 +802,35 @@ confirmed:1000
 unconfirmed:989
 :LEDGER-CLOSE
  
-Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='bus boarded', personId='resident_2'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you joe', personId='resident_2'}}
+Vehicle{type=bus, capacity=30, fee=1, deviceId='city_1:bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='silence', personId='null'}, camera=Sensor{type=camera, value='bus boarded', personId='resident_2'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you joe', personId='resident_2'}}
  
-COMMAND ERROR: line 177, REASON: java.lang.NumberFormatException: null
 :END
  
 COMMAND: create sensor-event city_1:bus_1 type camera value "Person boards bus" subject visitor_1
 RESPONSE: 
-Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='Person boards bus', personId='visitor_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you joe', personId='resident_2'}}
+Vehicle{type=bus, capacity=30, fee=1, deviceId='city_1:bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='silence', personId='null'}, camera=Sensor{type=camera, value='Person boards bus', personId='visitor_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you joe', personId='resident_2'}}
  
 Person{personId='visitor_1', biometricId='iris-print='irisprint-visitor_1'', location=[42.383, -71.1125], type=visitor, name='null', phoneNumber='null', role=null, blockchainAddress='null'}
  
-Vehicle{type=bus, capacity=30, fee=1, deviceId='bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='Does this bus go to central square?', personId='resident_1'}, camera=Sensor{type=camera, value='bus boarded', personId='visitor_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you null', personId='visitor_1'}}
+Vehicle{type=bus, capacity=30, fee=1, deviceId='city_1:bus_1', location=[42.3635, -71.0985], enabled=true, event='on route', microphone=Sensor{type=microphone, value='silence', personId='null'}, camera=Sensor{type=camera, value='bus boarded', personId='visitor_1'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='hello, good to see you null', personId='visitor_1'}}
  
-COMMAND ERROR: line 178, REASON: java.lang.NumberFormatException: null
 :END
  
-# LINE 180 # Trigger Rule Movie Info
+# LINE 188 # Trigger Rule Movie Info
 COMMAND: create sensor-event city_1:kiosk_2 type microphone value "what movies are showing tonight?" subject resident_1
 RESPONSE: 
-COMMAND ERROR: line 181, REASON: java.lang.NumberFormatException: null
+InfoKiosk{imageUri='https://www.google.com/maps/place/Cambridge,+MA/@42.3737266,-71.1236297,16.23z/data=!4m5!3m4!1s0x89e370a5cb30cc5f:0xc53a8e6489686c87!8m2!3d42.3736158!4d-71.1097335', deviceId='city_1:kiosk_2', location=[42.3766, -71.116], enabled=false, event='null', microphone=Sensor{type=microphone, value='what movies are showing tonight?', personId='resident_1'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Alert! fire! please find shelter immediately!', personId='null'}}
+ 
+InfoKiosk{imageUri='https://en.wikipedia.org/wiki/Casablanca_(film)#/media/File:CasablancaPoster-Gold.jpg', deviceId='city_1:kiosk_2', location=[42.3766, -71.116], enabled=true, event='null', microphone=Sensor{type=microphone, value='Casablanca is showing at 9pm', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Casablanca is showing at 9pm', personId='resident_1'}}
+ 
 :END
  
-# LINE 183 # Trigger Rule Movie Reservation
+# LINE 191 # Trigger Rule Movie Reservation
 COMMAND: create sensor-event city_1:kiosk_2 type microphone value "reserve 3 seats for the 9 pm showing of Casablanca." subject resident_1
 RESPONSE: 
-COMMAND ERROR: line 184, REASON: java.lang.NumberFormatException: null
-:END
+InfoKiosk{imageUri='https://en.wikipedia.org/wiki/Casablanca_(film)#/media/File:CasablancaPoster-Gold.jpg', deviceId='city_1:kiosk_2', location=[42.3766, -71.116], enabled=true, event='null', microphone=Sensor{type=microphone, value='reserve 3 seats for the 9 pm showing of Casablanca.', personId='resident_1'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='Casablanca is showing at 9pm', personId='resident_1'}}
  
-# LINE 186 ###Duplicate Events
-# LINE 188 # Trigger Rule Litter Event
-COMMAND: create sensor-event city_1:bot_1 type camera value "littering" subject resident_1
-RESPONSE: 
-Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='can you help me find my child resident_2', personId='resident_1'}, camera=Sensor{type=camera, value='littering', personId='resident_1'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
- 
-Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='can you help me find my child resident_2', personId='resident_1'}, camera=Sensor{type=camera, value='litter cleaned up', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
- 
-Robot{deviceId='bot_1', location=[42.3749, -71.1218], enabled=true, event='cleaning garbage', microphone=Sensor{type=microphone, value='can you help me find my child resident_2', personId='resident_1'}, camera=Sensor{type=camera, value='litter cleaned up', personId='null'}, thermometer=Sensor{type=thermometer, value='98.6', personId='resident_2'}, co2meter=Sensor{type=co2meter, value='700', personId='null'}, speaker=Sensor{type=speaker, value='Please do not litter!', personId='resident_1'}}
+Person{personId='resident_1', biometricId='voice-print='voiceprint-jane',face-print='faceprint-jane'', location=[42.377, -71.1167], type=resident, name='jane', phoneNumber='781-222-3344', role=adult, blockchainAddress='janes_account'}
  
 LEDGER-OPEN: get-account-balance janes_account
 LEDGER: 
@@ -708,16 +838,18 @@ confirmed:1000
 unconfirmed:929
 :LEDGER-CLOSE
  
-LEDGER-OPEN: process-transaction 1 amount 50 fee 10 note "littering" payer janes_account receiver cambridge-account
+LEDGER-OPEN: process-transaction 1 amount 15 fee 10 note "movie reservation" payer janes_account receiver cambridge-account
 LEDGER: 
-transaction id: 14
+transaction id: 25
 :LEDGER-CLOSE
  
 LEDGER-OPEN: get-account-balance janes_account
 LEDGER: 
 confirmed:1000
-unconfirmed:869
+unconfirmed:904
 :LEDGER-CLOSE
+ 
+InfoKiosk{imageUri='https://en.wikipedia.org/wiki/Casablanca_(film)#/media/File:CasablancaPoster-Gold.jpg', deviceId='city_1:kiosk_2', location=[42.3766, -71.116], enabled=true, event='null', microphone=Sensor{type=microphone, value='your seats are reserved; please arrive a few minutes early!', personId='null'}, camera=Sensor{type=camera, value='null', personId='null'}, thermometer=Sensor{type=thermometer, value='null', personId='null'}, co2meter=Sensor{type=co2meter, value='null', personId='null'}, speaker=Sensor{type=speaker, value='your seats are reserved; please arrive a few minutes early!', personId='resident_1'}}
  
 :END
  

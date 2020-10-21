@@ -1,11 +1,8 @@
-package cscie97.smartcity;
+package cscie97.smartcity.helper;
 
 import cscie97.smartcity.model.IoTDevice;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Tool
@@ -50,11 +47,30 @@ public class Tool {
     /**
      * Helper: get attribute from command
      *
-     * @param a    command
+     * @param a    command passed in as a list of words
      * @param attr attribute name
      * @return attribute value
      */
     public static String findAttr(List<String> a, String attr) {
+        int Idx = a.indexOf(attr);
+        if (Idx == -1) {
+            return null;
+        } else if (a.size() > Idx + 1) {
+            return clean(a.get(Idx + 1));
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Helper: get attribute from command
+     *
+     * @param command command passed in as a string
+     * @param attr    attribute name
+     * @return attribute value
+     */
+    public static String findAttr(String command, String attr) {
+        List<String> a = Arrays.asList(command.split("\\s+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"));
         int Idx = a.indexOf(attr);
         if (Idx == -1) {
             return null;
@@ -99,5 +115,34 @@ public class Tool {
         }
         Collections.sort(botList);
         return botList;
+    }
+
+    /**
+     * Helper, get list of bots, sorted by nearest to LOCATION of interest
+     *
+     * @param targetLocation the LOCATION of interest
+     * @param deviceMap      all the city devices
+     * @return list of bots sorted by distance
+     */
+    public static List<BotDist> getBotsByDist(Float[] targetLocation, Map<String, IoTDevice> deviceMap) {
+        List<BotDist> botList = new ArrayList<>();
+        for (String botId : deviceMap.keySet()) {
+            IoTDevice b = deviceMap.get(botId);
+            if (b.getClass().getName().equals("cscie97.smartcity.model.Robot")) {
+                botList.add(new BotDist(botId, Tool.distance(targetLocation, b.getLocation())));
+            }
+        }
+        Collections.sort(botList);
+        return botList;
+    }
+
+    /**
+     * Helper, report out the device details
+     *
+     * @param d the device or person
+     */
+    public static void report(Object d) {
+        System.out.println(d);
+        System.out.println(" "); // line break
     }
 }

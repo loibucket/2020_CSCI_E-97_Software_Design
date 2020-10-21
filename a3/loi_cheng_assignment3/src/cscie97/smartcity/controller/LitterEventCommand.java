@@ -2,12 +2,10 @@ package cscie97.smartcity.controller;
 
 import cscie97.ledger.CommandProcessor;
 import cscie97.ledger.CommandProcessorException;
-import cscie97.smartcity.BotDist;
-import cscie97.smartcity.Tool;
+import cscie97.smartcity.helper.BotDist;
+import cscie97.smartcity.helper.Tool;
 import cscie97.smartcity.model.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -43,8 +41,7 @@ public class LitterEventCommand implements Command {
         String subject = this.device.readSensor(SensorType.camera)[1];
         //Speaker: please do not litter
         this.device.sensorEvent(SensorType.speaker, "Please do not litter!", subject);
-        System.out.println(this.device);
-        System.out.println(" "); // line break
+        Tool.report(this.device);
 
         //get robots
         List<BotDist> botList = Tool.getBotsByDist(this.device, this.deviceMap);
@@ -52,13 +49,11 @@ public class LitterEventCommand implements Command {
         Robot bot = (Robot) deviceMap.get(botList.get(0).getBot());
         bot.updateRobot(this.device.getLocation(), true, "cleaning garbage");
         bot.sensorEvent(SensorType.camera, "litter cleaned up", null);
-        System.out.println(bot);
-        System.out.println(" "); // line break
+        Tool.report(bot);
 
         //cleaned litter
         this.device.sensorEvent(SensorType.camera, "litter cleaned up", null);
-        System.out.println(this.device);
-        System.out.println(" "); // line break
+        Tool.report(this.device);
 
         //if resident, find blockchain address of person
         Person person = CommandAPI.getRegistry().showPerson(subject);
