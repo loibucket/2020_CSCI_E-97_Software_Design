@@ -1,10 +1,6 @@
 package cscie97.smartcity.controller;
 
-import cscie97.smartcity.helper.Tool;
 import cscie97.smartcity.model.*;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * The parking meter controller observes parked cars

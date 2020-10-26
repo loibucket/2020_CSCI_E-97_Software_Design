@@ -107,6 +107,8 @@ public class CommandProcessor {
         } catch (LedgerException e) {
             // print error message, and continue processing next line
             System.out.println((new CommandProcessorException(e.action, e.reason, lineNumber)).toString());
+        } catch (Exception e) {
+            System.out.println((new CommandProcessorException(action, "processing error!", lineNumber)).toString());
         }
         System.out.println(":LEDGER-CLOSE");
         System.out.println(" "); //line break
