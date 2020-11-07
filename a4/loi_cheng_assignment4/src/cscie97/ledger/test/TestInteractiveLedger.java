@@ -16,7 +16,7 @@ public class TestInteractiveLedger {
             while (true) {
                 System.out.print("COMMAND:");
                 String str = sc.nextLine();
-                CommandProcessor.processCommand(null,str, 1);
+                LedgerApi.processCommand(null,str, 1);
             }
         } catch (Exception e) {
             System.out.print("FINISHED");

@@ -1,7 +1,7 @@
 package cscie97.smartcity.controller;
 
-import cscie97.ledger.CommandProcessor;
-import cscie97.ledger.CommandProcessorException;
+import cscie97.ledger.LedgerApi;
+import cscie97.ledger.LedgerApiException;
 import cscie97.smartcity.shared.BotDist;
 import cscie97.smartcity.shared.Tool;
 import cscie97.smartcity.model.*;
@@ -56,17 +56,12 @@ public class LitterEventCommand implements Command {
         Tool.report(this.device);
 
         //if resident, find blockchain address of person
-        Person person = ModelAPI.getRegistry().showPerson(subject);
+        Person person = ModelApi.getRegistry().showPerson(subject);
         if (person.getType() == PersonType.resident) {
             String address = person.getBlockchainAddress();
-            try {
-                CommandProcessor.processCommand(null, "get-account-balance " + address, -1);
-                CommandProcessor.processCommand(null, "process-transaction 1 amount 50 fee 10 note \"littering\" payer " + address + " receiver " + this.cityBlockchain, -1);
-                CommandProcessor.processCommand(null, "get-account-balance " + address, -1);
-            } catch (CommandProcessorException e) {
-                //print ledger processing errors
-                System.out.println(e.toString());
-            }
+            LedgerApi.processCommand(null, "get-account-balance " + address, -1);
+            LedgerApi.processCommand(null, "process-transaction 1 amount 50 fee 10 note \"littering\" payer " + address + " receiver " + this.cityBlockchain, -1);
+            LedgerApi.processCommand(null, "get-account-balance " + address, -1);
         }
     }
 }

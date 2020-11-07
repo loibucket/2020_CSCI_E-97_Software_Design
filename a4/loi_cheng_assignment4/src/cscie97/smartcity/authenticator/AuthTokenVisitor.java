@@ -13,7 +13,7 @@ public class AuthTokenVisitor implements Visitor {
     }
 
     @Override
-    public void getState(AuthElemType elem, String id, String name, String desc, Map<String, AuthElement> subAuths) throws AccessException {
+    public void getState(AuthElemType elem, String id, String name, String desc, Map<String, AuthElement> subAuths) throws AuthException {
         if (elem == AuthElemType.Root) {
             try {
                 AuthElement a = subAuths.get(tokenSearch.getId());
@@ -22,7 +22,7 @@ public class AuthTokenVisitor implements Visitor {
                     tokenFound = true;
                 }
             } catch (Exception e) {
-                throw new AccessException("auth token visitor", "auth token not found!");
+                throw new AuthException("auth token visitor", "auth token not found!");
             }
         }
     }

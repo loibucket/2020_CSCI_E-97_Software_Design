@@ -17,7 +17,7 @@ import cscie97.smartcity.shared.Tool;
  * @version 1.1
  * @since 2020-10-19
  */
-public class ModelAPI {
+public class ModelApi {
 
     private static final Map<String, City> cityMap = new HashMap<>();
     private static final Registry registry = new Registry("peoples_01001");
@@ -43,7 +43,7 @@ public class ModelAPI {
     /**
      * Constructor
      */
-    public ModelAPI() {
+    public ModelApi() {
 
     }
 
@@ -61,7 +61,7 @@ public class ModelAPI {
 //            return;
 //        }
 
-        System.out.println("COMMAND: " + command);
+        System.out.println("MODEL: " + command);
         System.out.println("RESPONSE: ");
 
         // replace special quotes to normal
@@ -81,7 +81,7 @@ public class ModelAPI {
                 case "define" -> define(a);
                 case "show" -> show(a);
                 case "update" -> update(a);
-                default -> throw new ServiceException("command api", "command not recognized");
+                default -> throw new ServiceException("model api", "command not recognized");
             }
         } catch (ServiceException e) {
             System.out.println(new ModelException(command, e.action, e.reason, lineNumber).toString());

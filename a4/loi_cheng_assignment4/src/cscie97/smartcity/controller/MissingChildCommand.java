@@ -45,7 +45,7 @@ public class MissingChildCommand implements Command {
         Tool.report(this.device);
 
         //update adult location to device
-        this.adult = ModelAPI.getRegistry().showPerson(this.device.readSensor(SensorType.microphone)[1]);
+        this.adult = ModelApi.getRegistry().showPerson(this.device.readSensor(SensorType.microphone)[1]);
         this.adult.updateLocation(this.device.getLocation());
         Tool.report(this.adult);
 
@@ -55,7 +55,7 @@ public class MissingChildCommand implements Command {
 
         //get child location
         this.childId = words[words.length - 1];
-        this.child = ModelAPI.getRegistry().showPerson(this.childId);
+        this.child = ModelApi.getRegistry().showPerson(this.childId);
         Float[] childLocation = this.child.getLocation();
 
         //update speaker to inform adult

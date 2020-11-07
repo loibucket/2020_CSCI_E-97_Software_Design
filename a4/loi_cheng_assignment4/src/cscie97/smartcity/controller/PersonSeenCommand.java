@@ -24,7 +24,7 @@ public class PersonSeenCommand implements Command {
     public PersonSeenCommand(IoTDevice targetDevice, City c) throws ServiceException {
         this.device = targetDevice;
         try {
-            this.person = ModelAPI.getRegistry().showPerson(targetDevice.readSensor(SensorType.camera)[1]);
+            this.person = ModelApi.getRegistry().showPerson(targetDevice.readSensor(SensorType.camera)[1]);
         } catch (Exception e) {
             throw new ServiceException("person seen", "person id not found in registry!");
         }

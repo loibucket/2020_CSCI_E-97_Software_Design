@@ -1,6 +1,6 @@
 package cscie97.smartcity.controller;
 
-import cscie97.ledger.CommandProcessor;
+import cscie97.ledger.LedgerApi;
 import cscie97.smartcity.model.*;
 
 /**
@@ -42,7 +42,7 @@ public class BoardBusCommand implements Command {
 
         Person person;
         try {
-            person = ModelAPI.getRegistry().showPerson(personId);
+            person = ModelApi.getRegistry().showPerson(personId);
             System.out.println(person);
             System.out.println(" "); // line break
         } catch (Exception e) {
@@ -53,9 +53,9 @@ public class BoardBusCommand implements Command {
         try {
             Vehicle bus = (Vehicle) this.device;
             if (person.getType() == PersonType.resident) {
-                CommandProcessor.processCommand(null, "get-account-balance " + person.getBlockchainAddress(), -1);
-                CommandProcessor.processCommand(null, "process-transaction 1 amount " + bus.getFee() + " fee 10 note \"board bus\" payer " + person.getBlockchainAddress() + " receiver " + cityBlockchain, -1);
-                CommandProcessor.processCommand(null, "get-account-balance " + person.getBlockchainAddress(), -1);
+                LedgerApi.processCommand(null, "get-account-balance " + person.getBlockchainAddress(), -1);
+                LedgerApi.processCommand(null, "process-transaction 1 amount " + bus.getFee() + " fee 10 note \"board bus\" payer " + person.getBlockchainAddress() + " receiver " + cityBlockchain, -1);
+                LedgerApi.processCommand(null, "get-account-balance " + person.getBlockchainAddress(), -1);
             }
         } catch (Exception e) {
             throw new ServiceException("board bus", "ledger transaction error!");

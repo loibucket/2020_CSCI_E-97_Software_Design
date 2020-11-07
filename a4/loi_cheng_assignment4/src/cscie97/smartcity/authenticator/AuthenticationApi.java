@@ -1,14 +1,12 @@
 package cscie97.smartcity.authenticator;
 
-import cscie97.smartcity.shared.FileProcessor;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AuthenticationAPI {
+public class AuthenticationApi {
 
     /**
      * process a line of command
@@ -18,7 +16,7 @@ public class AuthenticationAPI {
      */
     public static void processCommand(AuthToken authToken, String command, int lineNumber) {
 
-        System.out.println("COMMAND: " + command);
+        System.out.println("AUTH: " + command);
         System.out.println("RESPONSE: ");
 
         // replace special quotes to normal
@@ -36,13 +34,14 @@ public class AuthenticationAPI {
             switch (action) {
                 case "define_permission" -> Authenticator.definePermission(a.get(1), a.get(2), a.get(3));
                 case "define_role" -> Authenticator.defineRole(a.get(1), a.get(2), a.get(3));
-                case "add_permission_to_role", "add_role_to_user" -> Authenticator.addSubAuth(a.get(1), a.get(2));
-                case "create_user" -> Authenticator.createResource(a.get(1), a.get(2), null);
+                case "add_permission_to_role", "add_role_to_user" -> Authenticator.addSub(a.get(1), a.get(2));
+                case "create_user" -> Authenticator.createUser(a.get(1), a.get(2));
                 case "add_user_credential" -> Authenticator.addUserCredential(a.get(1), a.get(2), a.get(3));
                 case "create_resource_role" -> Authenticator.createResourceRole(a.get(1), a.get(2), a.get(3));
-                default -> throw new AccessException("process command", "command not recognized");
+                case "create_resource" -> Authenticator.createResource(a.get(1), a.get(2), a.get(3));
+                default -> throw new AuthException("process command", "command not recognized");
             }
-        } catch (Exception | AccessException e) {
+        } catch (Exception | AuthException e) {
             System.out.println(e.toString());
         }
 

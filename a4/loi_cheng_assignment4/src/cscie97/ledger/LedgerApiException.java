@@ -15,7 +15,7 @@ import java.io.IOException;
  * @version 1.0
  * @since 2020-09-05
  */
-public class CommandProcessorException extends IOException {
+public class LedgerApiException extends IOException {
     // Command that was performed (e.g., “submit transaction”)
     private String command;
 
@@ -29,28 +29,28 @@ public class CommandProcessorException extends IOException {
     private int lineNumber;
 
     // Create an exception without any parameters provided
-    public CommandProcessorException() {
+    public LedgerApiException() {
         this.command = "unspecified";
         this.reason = "unspecified";
         this.lineNumber = -1;
     }
 
     // Create an exception with only the command provided
-    public CommandProcessorException(String command) {
+    public LedgerApiException(String command) {
         this.command = command;
         this.reason = "unspecified";
         this.lineNumber = -1;
     }
 
     // Create an exception with commmand and reason
-    public CommandProcessorException(String command, String reason) {
+    public LedgerApiException(String command, String reason) {
         this.command = command;
         this.reason = reason;
         this.lineNumber = -1;
     }
 
     // Create an execption with comand, reason and line number
-    public CommandProcessorException(String command, String reason, int lineNumber) {
+    public LedgerApiException(String command, String reason, int lineNumber) {
         this.command = command;
         this.reason = reason;
         this.lineNumber = lineNumber;

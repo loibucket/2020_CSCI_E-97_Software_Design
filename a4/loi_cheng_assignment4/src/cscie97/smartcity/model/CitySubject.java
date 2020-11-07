@@ -1,6 +1,6 @@
 package cscie97.smartcity.model;
 
-import cscie97.ledger.CommandProcessorException;
+import cscie97.ledger.LedgerApiException;
 
 /**
  * The city subject interface has methods specific to attach and detach observers, and to notify observers
@@ -31,6 +31,6 @@ public interface CitySubject {
      * @param d the list of devices that has been updated
      * @throws ServiceException if notification errors
      */
-    void notifyObs(IoTDevice d) throws ServiceException, CommandProcessorException;
+    void notifyObs(IoTDevice d) throws ServiceException, LedgerApiException;
 
 }

@@ -1,7 +1,6 @@
 package cscie97.smartcity.controller;
 
-import cscie97.ledger.CommandProcessor;
-import cscie97.ledger.CommandProcessorException;
+import cscie97.ledger.LedgerApi;
 import cscie97.smartcity.shared.*;
 import cscie97.smartcity.model.*;
 
@@ -63,10 +62,10 @@ public class ParkingEventCommand implements Command {
 
         //open ledger and charge vehicle
         try {
-            CommandProcessor.processCommand(null, "get-account-balance " + vehicleId, -1);
-            CommandProcessor.processCommand(null, "process-transaction 1 amount " + charge + " fee 10 note \"parking\" payer " +
+            LedgerApi.processCommand(null, "get-account-balance " + vehicleId, -1);
+            LedgerApi.processCommand(null, "process-transaction 1 amount " + charge + " fee 10 note \"parking\" payer " +
                     vehicleId + " receiver " + this.cityBlockchain, -1);
-            CommandProcessor.processCommand(null, "get-account-balance " + vehicleId, -1);
+            LedgerApi.processCommand(null, "get-account-balance " + vehicleId, -1);
         } catch (Exception e) {
             //print ledger processing errors
             System.out.println(e.toString());

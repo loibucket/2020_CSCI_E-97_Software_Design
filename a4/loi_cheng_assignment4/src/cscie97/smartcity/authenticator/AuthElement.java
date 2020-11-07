@@ -1,5 +1,6 @@
 package cscie97.smartcity.authenticator;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AuthElement {
@@ -15,6 +16,7 @@ public abstract class AuthElement {
         this.name = name;
         this.description = description;
         this.elem = null;
+        this.subAuths = new HashMap<>();
     }
 
     public AuthElement(String id, String name, String description, AuthElemType elem) {
@@ -22,9 +24,10 @@ public abstract class AuthElement {
         this.name = name;
         this.description = description;
         this.elem = elem;
+        this.subAuths = new HashMap<>();
     }
 
-    public void acceptVisitor(Visitor v) throws AccessException {
+    public void acceptVisitor(Visitor v) throws AuthException {
         v.getState(elem, id, name, description, subAuths);
     }
 

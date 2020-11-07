@@ -57,7 +57,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @version 1.1
  * @since 2020-10-19
  */
-public class CommandProcessor extends FileProcessor {
+public class LedgerApi extends FileProcessor {
 
     // the ledger, this is static so there can only be 1 ledger
     private static Ledger ledger = null;
@@ -71,9 +71,9 @@ public class CommandProcessor extends FileProcessor {
      *
      * @param command    the command
      * @param lineNumber the line number
-     * @throws CommandProcessorException if process errors
+     * @throws LedgerApiException if process errors
      */
-    public static void processCommand(AuthToken authToken, String command, int lineNumber) throws CommandProcessorException {
+    public static void processCommand(AuthToken authToken, String command, int lineNumber) {
 
         System.out.println("LEDGER-OPEN: " + command);
         System.out.println("LEDGER: ");
@@ -105,13 +105,13 @@ public class CommandProcessor extends FileProcessor {
                     ledger.validate();
                     System.out.println("ledger is valid");
                 }
-                default -> System.out.println((new CommandProcessorException(action, "no such command", lineNumber).toString()));
+                default -> System.out.println((new LedgerApiException(action, "no such command", lineNumber).toString()));
             }
         } catch (LedgerException e) {
             // print error message, and continue processing next line
-            System.out.println((new CommandProcessorException(e.action, e.reason, lineNumber)).toString());
+            System.out.println((new LedgerApiException(e.action, e.reason, lineNumber)).toString());
         } catch (Exception e) {
-            System.out.println((new CommandProcessorException(action, "processing error!", lineNumber)).toString());
+            System.out.println((new LedgerApiException(action, "processing error!", lineNumber)).toString());
         }
         System.out.println(":LEDGER-CLOSE");
         System.out.println(" "); //line break
@@ -157,47 +157,47 @@ public class CommandProcessor extends FileProcessor {
         id = a.get(1);
         // amount tag
         if (!a.get(2).equals("amount")) {
-            System.out.println((new CommandProcessorException(action, "amount missing", lineNumber)).toString());
+            System.out.println((new LedgerApiException(action, "amount missing", lineNumber)).toString());
         }
         // amount value
         int amount = Integer.parseInt(a.get(3));
         // fee tag
         if (!a.get(4).equals("fee")) {
-            System.out.println((new CommandProcessorException(action, "fee missing", lineNumber)).toString());
+            System.out.println((new LedgerApiException(action, "fee missing", lineNumber)).toString());
         }
         int fee = Integer.parseInt(a.get(5));
         // note tag
         if (!a.get(6).equals("note")) {
-            System.out.println((new CommandProcessorException(action, "note missing", lineNumber)).toString());
+            System.out.println((new LedgerApiException(action, "note missing", lineNumber)).toString());
         }
         // note text
         String note = a.get(7);
         if (note.length() > 1024) {
             System.out.println(
-                    (new CommandProcessorException(action, "note must be less than 1024 characters", lineNumber)).toString());
+                    (new LedgerApiException(action, "note must be less than 1024 characters", lineNumber)).toString());
         }
         // payer tag
         if (!a.get(8).equals("payer")) {
             System.out.println(a.get(8));
-            System.out.println((new CommandProcessorException(action, "payer missing", lineNumber)).toString());
+            System.out.println((new LedgerApiException(action, "payer missing", lineNumber)).toString());
         }
         // payer account
         Account payer = null;
         try {
             payer = ledger.getBalancePool().get(a.get(9));
         } catch (Exception e) {
-            System.out.println((new CommandProcessorException(action, "payer not found", lineNumber)).toString());
+            System.out.println((new LedgerApiException(action, "payer not found", lineNumber)).toString());
         }
         // receiver tag
         if (!a.get(10).equals("receiver")) {
-            System.out.println((new CommandProcessorException(action, "receiver missing", lineNumber)).toString());
+            System.out.println((new LedgerApiException(action, "receiver missing", lineNumber)).toString());
         }
         // receiver account
         Account receiver = null;
         try {
             receiver = ledger.getBalancePool().get(a.get(11));
         } catch (Exception e) {
-            System.out.println((new CommandProcessorException(action, "receiver not found", lineNumber)).toString());
+            System.out.println((new LedgerApiException(action, "receiver not found", lineNumber)).toString());
         }
         // command should be ok, process transaction
         String transId = "-1";
@@ -206,7 +206,7 @@ public class CommandProcessor extends FileProcessor {
             transactionId++;
             transId = ledger.processTransaction(new Transaction(Integer.toString(transactionId), amount, fee, note, payer, receiver));
         } catch (LedgerException e) {
-            System.out.println((new CommandProcessorException(e.action, e.reason, lineNumber)).toString());
+            System.out.println((new LedgerApiException(e.action, e.reason, lineNumber)).toString());
         }
 
         return transId;

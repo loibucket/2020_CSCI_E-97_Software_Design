@@ -49,9 +49,4 @@ public class User extends AuthElement {
     public void acceptVisitor(Visitor v) {
 
     }
-
-    @Override
-    public List<AuthElement> getAuths() {
-        return null;
-    }
 }

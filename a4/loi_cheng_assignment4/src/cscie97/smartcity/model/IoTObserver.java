@@ -1,12 +1,5 @@
 package cscie97.smartcity.model;
 
-import cscie97.ledger.CommandProcessorException;
-import cscie97.smartcity.model.IoTDevice;
-import cscie97.smartcity.model.ServiceException;
-
-import java.util.List;
-import java.util.Map;
-
 /**
  * The IoT observer interface looks for specific events in the device list and acts on it through the devices in the device map
  *

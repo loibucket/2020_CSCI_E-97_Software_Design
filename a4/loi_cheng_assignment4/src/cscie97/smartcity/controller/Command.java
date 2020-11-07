@@ -1,8 +1,5 @@
 package cscie97.smartcity.controller;
 
-import cscie97.ledger.CommandProcessorException;
-import cscie97.smartcity.model.City;
-import cscie97.smartcity.model.IoTDevice;
 import cscie97.smartcity.model.ServiceException;
 
 /**

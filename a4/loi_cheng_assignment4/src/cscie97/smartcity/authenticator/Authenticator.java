@@ -29,14 +29,29 @@ public class Authenticator {
         authMap.put(roleId, r);
     }
 
-    public static void addSubAuth(String parentAuth, String childAuth) {
+    public static void addSub(String parentAuth, String childAuth) throws AuthException {
+
         AuthElement p = authMap.get(parentAuth);
+        if (p == null) {
+            throw new AuthException("authenticator", parentAuth + " not found!");
+        }
+
         AuthElement c = authMap.get(childAuth);
+        if (c == null) {
+            throw new AuthException("authenticator", childAuth + " not found!");
+        }
+
         p.addSubAuth(c.getId(), c);
     }
 
-    public static void addUserCredential(String userId, String credentialType, String value) throws NoSuchAlgorithmException, AccessException {
+    public static void addUserCredential(String userId, String credentialType, String value) throws NoSuchAlgorithmException, AuthException {
         User user = (User) authMap.get(userId);
+        if (user == null) {
+            throw new AuthException("authenticator", userId + " not found!");
+        }
+        if (!user.getClass().toString().equals("class cscie97.smartcity.authenticator.User")) {
+            throw new AuthException("authenticator", userId + " not a user!");
+        }
         if (credentialType.equals("password")) {
             Login login = new Login(userId, value);
             user.setLogin(login);
@@ -47,18 +62,17 @@ public class Authenticator {
             } else if (a.get(0).equals("faceprint")) {
                 FacePrint f = new FacePrint(userId, value);
             } else {
-                throw new AccessException("authenticator", "set biometric error");
+                throw new AuthException("authenticator", "set biometric error");
             }
         } else {
-            throw new AccessException("authenticator", "set credential error");
+            throw new AuthException("authenticator", "set credential error");
         }
     }
 
     public static void createUser(String userId, String userName) {
         User user = new User(userId, userName, null);
         root.addSubAuth(userId, user);
-        //userMap.put(userId, user);
-        //authMap.put(userId, user);
+        authMap.put(userId, user);
         AuthToken token = new AuthToken(userId);
         user.setAuthToken(token);
     }
@@ -68,14 +82,26 @@ public class Authenticator {
         authMap.put(resourceId, r);
     }
 
-    public static void createResourceRole(String resourceRoleName, String role, String resource) {
+    public static void createResourceRole(String resourceRoleName, String role, String resource) throws AuthException {
+
         ResourceRole rr = new ResourceRole(resourceRoleName, null, null);
-        authMap.get(role).addSubAuth(resourceRoleName, rr);
+
+        AuthElement ro = authMap.get(role);
+        if (ro == null) {
+            throw new AuthException("authenticator", role + " not found!");
+        }
+
+        AuthElement re = authMap.get(resource);
+        if (re == null) {
+            throw new AuthException("authenticator", resource + " not found!");
+        }
+
+        ro.addSubAuth(resourceRoleName, rr);
         rr.addSubAuth(resource, authMap.get(resource));
         authMap.put(resourceRoleName, rr);
     }
 
-    public static Boolean checkAccess(AuthToken token) throws AccessException {
+    public static Boolean checkAccess(AuthToken token) throws AuthException {
         AuthTokenVisitor v = new AuthTokenVisitor(token);
         root.acceptVisitor(v);
         return v.getTokenFound();

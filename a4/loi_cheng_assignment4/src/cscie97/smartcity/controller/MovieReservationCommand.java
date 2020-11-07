@@ -1,7 +1,7 @@
 package cscie97.smartcity.controller;
 
-import cscie97.ledger.CommandProcessor;
-import cscie97.ledger.CommandProcessorException;
+import cscie97.ledger.LedgerApi;
+import cscie97.ledger.LedgerApiException;
 import cscie97.smartcity.shared.*;
 import cscie97.smartcity.model.*;
 
@@ -47,7 +47,7 @@ public class MovieReservationCommand implements Command {
         String personId;
         try {
             personId = this.kiosk.readSensor(SensorType.microphone)[1];
-            person = ModelAPI.getRegistry().showPerson(personId);
+            person = ModelApi.getRegistry().showPerson(personId);
             Tool.report(person);
         } catch (Exception e) {
             throw new ServiceException("movie reservation command", "person id not found!");
@@ -68,15 +68,11 @@ public class MovieReservationCommand implements Command {
             }
 
             //open ledger and charge person
-            try {
-                CommandProcessor.processCommand(null, "get-account-balance " + person.getBlockchainAddress(), -1);
-                CommandProcessor.processCommand(null, "process-transaction 1 amount " + charge + " fee 10 note \"movie reservation\" payer " +
-                        person.getBlockchainAddress() + " receiver " + this.cityBlockchain, -1);
-                CommandProcessor.processCommand(null, "get-account-balance " + person.getBlockchainAddress(), -1);
-            } catch (CommandProcessorException e) {
-                //print ledger processing errors
-                System.out.println(e.toString());
-            }
+            LedgerApi.processCommand(null, "get-account-balance " + person.getBlockchainAddress(), -1);
+            LedgerApi.processCommand(null, "process-transaction 1 amount " + charge + " fee 10 note \"movie reservation\" payer " +
+                    person.getBlockchainAddress() + " receiver " + this.cityBlockchain, -1);
+            LedgerApi.processCommand(null, "get-account-balance " + person.getBlockchainAddress(), -1);
+
         }
 
         //update kiosk
