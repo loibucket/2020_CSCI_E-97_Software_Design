@@ -2,6 +2,7 @@ package cscie97.smartcity.controller;
 
 import cscie97.ledger.LedgerApi;
 import cscie97.ledger.LedgerApiException;
+import cscie97.smartcity.authenticator.AuthException;
 import cscie97.smartcity.shared.*;
 import cscie97.smartcity.model.*;
 
@@ -37,7 +38,7 @@ public class MovieReservationCommand implements Command {
      * @throws ServiceException if any errors
      */
     @Override
-    public void execute() throws ServiceException {
+    public void execute() throws ServiceException, AuthException {
 
         //the kiosk
         Tool.report(this.kiosk);
@@ -68,10 +69,10 @@ public class MovieReservationCommand implements Command {
             }
 
             //open ledger and charge person
-            LedgerApi.processCommand(null, "get-account-balance " + person.getBlockchainAddress(), -1);
-            LedgerApi.processCommand(null, "process-transaction 1 amount " + charge + " fee 10 note \"movie reservation\" payer " +
+            LedgerApi.processCommand("get-account-balance " + person.getBlockchainAddress(), -1);
+            LedgerApi.processCommand("process-transaction 1 amount " + charge + " fee 10 note \"movie reservation\" payer " +
                     person.getBlockchainAddress() + " receiver " + this.cityBlockchain, -1);
-            LedgerApi.processCommand(null, "get-account-balance " + person.getBlockchainAddress(), -1);
+            LedgerApi.processCommand("get-account-balance " + person.getBlockchainAddress(), -1);
 
         }
 

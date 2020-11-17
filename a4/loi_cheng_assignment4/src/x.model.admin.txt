@@ -1,0 +1,215 @@
+### login as admin
+login resident_9000 secret
+
+# city commands
+# define a city
+#define city <city_id> name <name> account <address> lat <float> long <float> radius <float>
+
+define city city_boston name boston-ma account boston-account lat 42.3766 long -71.1160 radius 100
+
+# show the details of a city. print out the details of the city including the id, name, account, location, people, and iot devices.
+#show city <city_id>
+show city city_boston
+
+### apply authentication to city_boston
+# roles
+define_role admin "admin" "Has permissions to everything"
+define_role adult "adult" "Has permissions to most things"
+define_role child "child" "Has permissions to fewer things"
+
+# permissions
+define_permission city "city" "Create cities"
+define_permission defineStreetSign "defineStreetSign" "Define Street Sign"
+define_permission defineInfoKiosk "defineInfoKiosk" "Define Info Kiosk"
+define_permission defineStreetLight "defineStreetLight" "Define Street Light"
+define_permission defineParkingSpace "defineParkingSpace" "Define Parking Space"
+define_permission defineRobot "defineRobot" "Define Robot"
+define_permission defineVehicle "defineVehicle" "Define Vehicle"
+define_permission showDevice "showDevice" "Show Device"
+define_permission showAllDevices "showAllDevices" "Show All Devices"
+define_permission definePerson "definePerson" "Define Person"
+
+# add permission to roles
+add_permission_to_role admin city
+add_permission_to_role admin defineStreetSign
+add_permission_to_role admin defineInfoKiosk
+add_permission_to_role admin defineStreetLight
+add_permission_to_role admin defineParkingSpace
+add_permission_to_role admin defineRobot
+add_permission_to_role admin defineVehicle
+add_permission_to_role admin showDevice
+add_permission_to_role admin showAllDevices
+add_permission_to_role admin definePerson
+
+# permissions
+define_permission updateStreetSign "updateStreetSign" "Update Street Sign"
+define_permission updateInfoKiosk "updateInfoKiosk" "Update Info Kiosk"
+define_permission updateStreetLight "updateStreetLight" "Update Street Light"
+define_permission updateParkingSpace "updateParkingSpace" "Update Parking Space"
+define_permission updateRobot "updateRobot" "Update Robot"
+define_permission updateVehicle "updateVehicle" "Update Vehicle"
+define_permission updateResident "updateResident" "Update Resident"
+define_permission updateVisitor "updateVisitor" "Update Visitor"
+define_permission updateLocation "updateLocation" "Update Location"
+
+# add permission to roles
+add_permission_to_role adult updateStreetSign
+add_permission_to_role adult updateInfoKiosk
+add_permission_to_role adult updateStreetLight
+add_permission_to_role adult updateParkingSpace
+add_permission_to_role adult updateRobot
+add_permission_to_role adult updateVehicle
+add_permission_to_role adult updateResident
+add_permission_to_role adult updateVisitor
+add_permission_to_role adult updateLocation
+
+# sensor events
+define_permission sensorEvent "sensorEvent" "Sensor Event"
+add_permission_to_role child sensorEvent
+
+# permissions
+define_permission createCityAccess "createCityAccess" "description"
+define_permission setCityAccess "setCityAccess" "description"
+define_permission definePermission "definePermission" "description"
+define_permission defineRole "defineRole" "description"
+define_permission addSub "addSub" "description"
+define_permission addUserCredential "addUserCredential" "description"
+define_permission createCityAccess "createCityAccess" "description"
+define_permission createUser "createUser" "description"
+define_permission createResource "createResource" "description"
+define_permission createResourceRole  "createResourceRole" "description"
+
+# add permission to roles
+add_permission_to_role admin createCityAccess
+add_permission_to_role admin setCityAccess
+add_permission_to_role admin definePermission
+add_permission_to_role admin defineRole
+add_permission_to_role admin addSub
+add_permission_to_role admin addUserCredential
+add_permission_to_role admin createCityAccess
+add_permission_to_role admin createUser
+add_permission_to_role admin createResource
+add_permission_to_role admin createResourceRole
+
+# add sub roles to roles
+add_role_to_role admin adult
+add_role_to_role adult child
+
+### refresh login
+login resident_9000 secret
+### create devices
+
+# device commands
+# define a street sign
+#define street-sign <city_id>:<device_id> lat <float> long <float> enabled (true|false) text <text>
+
+define street-sign city_boston:ss_1 lat 42.3732 long -71.1202 enabled  true  text "welcome to harvard square"
+define street-sign city_boston:ss_2 lat 42.3736 long -71.1214 enabled  true  text "brattle theatre"
+
+# update a street sign
+#update street-sign <city_id>:<device_id> [enabled (true|false)] [text <text>]
+
+update street-sign city_boston:ss_1  text "the time is now 9:00 pm"
+update street-sign city_boston:ss_2  text "now playing, casablanca"
+
+# define an information kiosk
+#define info-kiosk <city_id>:<device_id> lat <float> long <float> enabled (true|false) image <uri>
+
+define info-kiosk city_boston:kiosk_1 lat 42.3723 long -71.1230 enabled  true  image https://media-cdn.tripadvisor.com/media/photo-s/05/94/cc/10/charles-hotel.jpg
+define info-kiosk city_boston:kiosk_2 lat 42.3766 long -71.1160 enabled  true  image https://www.lwa-architects.com/wp-content/uploads/2014/12/harvard-scictr_ext-bikes-992x1250.jpg
+
+# update an information kiosk
+#update info-kiosk <city_id>:<device_id> [enabled (true|false)] [image <uri>]
+
+update info-kiosk city_boston:kiosk_1 enabled false
+update info-kiosk city_boston:kiosk_2 image https://www.google.com/maps/place/cambridge,+ma/@42.3737266,-71.1236297,16.23z/data=!4m5!3m4!1s0x89e370a5cb30cc5f:0xc53a8e6489686c87!8m2!3d42.3736158!4d-71.1097335
+
+# define a street light
+#define street-light <city_id>:<device_id> lat <float> long <float> enabled (true|false) brightness <int>
+
+define street-light city_boston:sl_1 lat 42.3770 long  -71.1167 enabled  true  brightness 8
+define street-light city_boston:sl_2 lat 42.3749 long  -71.1218 enabled  true  brightness 5
+
+# update a street light
+#update street-light <city_id>:<device_id> [enabled (true|false)] [brightness <int>]
+
+update street-light city_boston:sl_1  brightness 4
+update street-light city_boston:sl_1  enabled false brightness 5
+
+# define a parking space
+#define parking-space <city_id>:<device_id> lat <float> long <float> enabled (true|false) rate <int>
+
+define parking-space city_boston:ps_1 lat 42.3743 long -71.1202 enabled true  rate 25
+define parking-space city_boston:ps_2 lat 42.3744 long -71.1203 enabled true  rate 25
+
+# update a parking space
+#update parking-space <city_id>:<device_id> [enabled (true|false)] [rate <int>]
+update parking-space city_boston:ps_1  rate 50
+update parking-space city_boston:ps_2  rate 50
+
+# define a robot
+#define robot <city_id>:<device_id> lat <float> long <float> enabled (true|false) activity <string>
+
+define robot city_boston:bot_1 lat 42.37 long -71.12 enabled  true activity "cleaning"
+define robot city_boston:bot_2 lat 42.38 long -71.13 enabled true activity "assisting student2"
+define robot city_boston:bot_3 lat 42.39 long -71.14 enabled true activity "assisting student3"
+define robot city_boston:bot_4 lat 42.40 long -71.15 enabled true activity "assisting student4"
+define robot city_boston:bot_5 lat 42.41 long -71.16 enabled true activity "assisting student5"
+define robot city_boston:bot_6 lat 42.42 long -71.17 enabled true activity "assisting student6"
+
+# update a robot
+#update robot <city_id>:<device_id> [lat <float> long <float>] [enabled (true|false)] [activity <string>]
+
+update robot city_boston:bot_1 lat 42.3732 long -71.1195
+update robot city_boston:bot_2 activity "walking dog"
+
+# define a vehicle
+#define vehicle <city_id>:<device_id> lat <float> long <float> enabled (true|false) type (bus|car) activity <string> capacity <int> fee <int>
+
+define vehicle city_boston:car_1 lat 42.3725 long -71.1161 enabled true type car activity "parked" capacity 4 fee 10
+define vehicle city_boston:car_2 lat 42.38 long -71.12 enabled true type car activity "parked" capacity 4 fee 10
+define vehicle city_boston:car_3 lat 42.39 long -71.13 enabled true type car activity "parked" capacity 4 fee 10
+define vehicle city_boston:car_4 lat 42.40 long -71.14 enabled true type car activity "parked" capacity 4 fee 10
+define vehicle city_boston:car_5 lat 42.41 long -71.15 enabled true type car activity "parked" capacity 4 fee 10
+define vehicle city_boston:car_6 lat 42.42 long -71.16 enabled true type car activity "parked" capacity 4 fee 10
+define vehicle city_boston:car_7 lat 42.43 long -71.17 enabled true type car activity "parked" capacity 4 fee 10
+
+define vehicle city_boston:bus_1 lat 42.3736 long -71.1214 enabled  true  type  bus  activity "on route" capacity 30 fee 1
+
+# update a vehicle
+#update vehicle <city_id>:<device_id> [lat <float> long <float>] [enabled (true|false)] [activity <string>] [fee <int>]
+
+update vehicle city_boston:car_1 lat 42.3830 long -71.1125   activity "driving"
+update vehicle city_boston:bus_1 lat 42.3635 long -71.0985 enabled true activity "on route"
+
+# show the details of a device; if device id is omitted, show details for all devices within the city
+#show device <city_id>[:<device_id>]
+
+show device city_boston:bus_1
+show device city_boston
+
+### refresh login
+login resident_9000 secret
+### create people
+
+# define a new resident
+#define resident <person_id> name <name> bio-metric <string> phone <phone_number> role (adult|child|administrator) lat <lat> long <long> account <account_address>
+
+define resident citizen_a name adele bio-metric "voice-print='voiceprint-adele',face-print='faceprint-adele'" phone 781-222-3344 role adult lat 42.3735 long -71.1205 account adeles_account
+define resident citizen_b name bart bio-metric "voice-print='voiceprint-bart',face-print='faceprint-bart'" phone 781-222-3345 role child lat 42.3735 long -71.1205 account adeles_account
+
+# update a resident
+#update resident <person_id> [name <name>] [bio-metric <string>] [phone <phone_number>] [role (adult|child|administrator)] [lat <lat> long <long>] [account <account_address>]
+update resident citizen_a name adele bio-metric "voice-print='voiceprint-adele',face-print='faceprint-adele'" phone 781-222-3344 role adult lat 42.3735 long -71.1205 account adeles_account
+
+### resource roles
+create_resource_role citizen_b_updateLocation "updateLocation" "resident 22 update location"
+create_resource citizen_b_resource "citizen_b" "resident 22 resource"
+
+add_resource_to_role citizen_b_updateLocation citizen_b_resource
+add_role_to_user citizen_b citizen_b_updateLocation
+
+show_entitlements citizen_b
+
+### logout admin
+logout

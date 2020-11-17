@@ -1,5 +1,8 @@
 package cscie97.smartcity.model;
 
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.Authenticator;
+
 import java.util.Arrays;
 
 /**
@@ -59,7 +62,10 @@ public class Vehicle extends IoTDevice {
      * @param activity what it's doing
      * @param fee      cost per passenger
      */
-    public void updateVehicle(Float[] location, Boolean enabled, String activity, Integer fee) {
+    public void updateVehicle(Float[] location, Boolean enabled, String activity, Integer fee) throws AuthException {
+
+        Authenticator.authenticate("updateVehicle", this.deviceId);
+
         super.location = location == null ? super.location : location;
         super.enabled = enabled == null ? super.enabled : enabled;
         super.event = activity == null ? super.event : activity;

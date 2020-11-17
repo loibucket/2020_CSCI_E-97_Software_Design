@@ -1,5 +1,12 @@
 package cscie97.smartcity.authenticator;
 
+/**
+ * All exceptions related to authentication
+ *
+ * @author Loi Cheng
+ * @version 1.0
+ * @since 2020-11-15
+ */
 public class AuthException extends Throwable {
 
     public String action;

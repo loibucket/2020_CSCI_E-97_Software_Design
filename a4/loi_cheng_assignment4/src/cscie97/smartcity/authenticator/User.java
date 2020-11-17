@@ -1,52 +1,36 @@
 package cscie97.smartcity.authenticator;
 
-import java.util.List;
+import java.security.NoSuchAlgorithmException;
 
-public class User extends AuthElement {
+/**
+ * The user at the root of the tree holds multiple entitlement items
+ *
+ * @author Loi Cheng
+ * @version 1.0
+ * @since 2020-11-15
+ */
+public class User extends Entitlement {
 
-    private Login login;
-    private FacePrint facePrint;
-    private VoicePrint voicePrint;
-    private AuthToken authToken;
+    private final Credential creds;
 
-    public Login getLogin() {
-        return login;
+    /**
+     * User entitlement
+     *
+     * @param userId id
+     * @param name   name
+     * @throws NoSuchAlgorithmException
+     */
+    public User(String cityId, String userId, String name) throws NoSuchAlgorithmException {
+        super(cityId, userId, name, "Smart City User", EntType.User);
+        this.creds = new Credential(userId);
     }
 
-    public FacePrint getFacePrint() {
-        return facePrint;
+    public Credential getCreds() {
+        return creds;
     }
 
-    public AuthToken getAuthToken() {
-        return authToken;
+    public AuthToken getToken() {
+        return creds.getUserToken();
     }
 
-    public VoicePrint getVoicePrint() {
-        return voicePrint;
-    }
-
-    public void setAuthToken(AuthToken authToken) {
-        this.authToken = authToken;
-    }
-
-    public void setFacePrint(FacePrint facePrint) {
-        this.facePrint = facePrint;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
-    }
-
-    public void setVoicePrint(VoicePrint voicePrint) {
-        this.voicePrint = voicePrint;
-    }
-
-    public User(String id, String name, String description) {
-        super(id, name, description, AuthElemType.User);
-    }
-
-    @Override
-    public void acceptVisitor(Visitor v) {
-
-    }
 }

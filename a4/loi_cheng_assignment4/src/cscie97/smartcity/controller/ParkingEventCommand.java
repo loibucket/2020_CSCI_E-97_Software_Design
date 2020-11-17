@@ -1,6 +1,7 @@
 package cscie97.smartcity.controller;
 
 import cscie97.ledger.LedgerApi;
+import cscie97.smartcity.authenticator.AuthException;
 import cscie97.smartcity.shared.*;
 import cscie97.smartcity.model.*;
 
@@ -33,7 +34,7 @@ public class ParkingEventCommand implements Command {
      * charge the vehicle for parking
      */
     @Override
-    public void execute() throws ServiceException {
+    public void execute() throws ServiceException, AuthException {
 
         //the parking space
         Tool.report(this.space);
@@ -62,10 +63,10 @@ public class ParkingEventCommand implements Command {
 
         //open ledger and charge vehicle
         try {
-            LedgerApi.processCommand(null, "get-account-balance " + vehicleId, -1);
-            LedgerApi.processCommand(null, "process-transaction 1 amount " + charge + " fee 10 note \"parking\" payer " +
+            LedgerApi.processCommand("get-account-balance " + vehicleId, -1);
+            LedgerApi.processCommand("process-transaction 1 amount " + charge + " fee 10 note \"parking\" payer " +
                     vehicleId + " receiver " + this.cityBlockchain, -1);
-            LedgerApi.processCommand(null, "get-account-balance " + vehicleId, -1);
+            LedgerApi.processCommand("get-account-balance " + vehicleId, -1);
         } catch (Exception e) {
             //print ledger processing errors
             System.out.println(e.toString());

@@ -1,0 +1,54 @@
+### try other users
+### adele
+login citizen_a voiceprint:adele-voiceprint
+
+# adele cannot define a vehicle
+define vehicle city_boston:car_8 lat 42.43 long -71.17 enabled true type car activity "parked" capacity 4 fee 10
+
+# adele can update a vehicle
+update vehicle city_boston:car_1 lat 42.3830 long -71.1125   activity "driving"
+
+logout
+
+### bart
+login citizen_b voiceprint:bart-voiceprint
+
+# bart cannot update a vehicle
+update vehicle city_boston:car_1 lat 42.3830 long -71.1125   activity "driving"
+
+# bart can update his own location
+update location citizen_b lat 42.3830 long -71.1125
+show person citizen_b
+
+# bart cannot update adele's location
+update location citizen_a lat 42.3830 long -71.1125
+
+logout
+
+### go back to city_boston
+set_city_access city_boston
+
+### try other users
+### adele
+login citizen_a voiceprint:adele-voiceprint
+
+# adele cannot define a vehicle
+define vehicle city_boston:car_8 lat 42.43 long -71.17 enabled true type car activity "parked" capacity 4 fee 10
+
+# adele can update a vehicle
+update vehicle city_boston:car_1 lat 42.3830 long -71.1125   activity "driving"
+
+logout
+
+### bart
+login citizen_b voiceprint:bart-voiceprint
+
+# bart cannot update a vehicle
+update vehicle city_boston:car_1 lat 42.3830 long -71.1125   activity "driving"
+
+# bart can update his own location
+update location citizen_b lat 42.3830 long -71.1125
+show person citizen_b
+
+# bart cannot update adele's location
+update location citizen_a lat 42.3830 long -71.1125

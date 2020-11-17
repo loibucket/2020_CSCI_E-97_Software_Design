@@ -1,5 +1,8 @@
 package cscie97.smartcity.model;
 
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.Authenticator;
+
 import java.util.Arrays;
 
 /**
@@ -38,7 +41,10 @@ public class ParkingSpace extends IoTDevice {
      * @param enabled boolean
      * @param rate    per hour charged for parking
      */
-    public void updateParkingSpace(Boolean enabled, Integer rate) {
+    public void updateParkingSpace(Boolean enabled, Integer rate) throws AuthException {
+
+        Authenticator.authenticate("updateParkingSpace", this.deviceId);
+
         super.enabled = enabled == null ? super.enabled : enabled;
         this.rate = rate == null ? this.rate : rate;
     }

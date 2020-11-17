@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.*;
 import cscie97.smartcity.shared.BotDist;
 import cscie97.smartcity.shared.Tool;
 import cscie97.smartcity.model.*;
@@ -27,7 +28,8 @@ public class EmergencyOneCommand implements Command {
      * @param targetDevice the reporting device
      * @param c            the city
      */
-    public EmergencyOneCommand(IoTDevice targetDevice, City c) {
+    public EmergencyOneCommand(IoTDevice targetDevice, City c) throws AuthException {
+
         this.device = targetDevice;
         this.deviceMap = c.showAllDevices();
     }
@@ -38,7 +40,7 @@ public class EmergencyOneCommand implements Command {
      * @throws ServiceException if error in building the command
      */
     @Override
-    public void execute() throws ServiceException {
+    public void execute() throws ServiceException, AuthException {
 
         String event = device.readSensor(SensorType.camera)[0];
 

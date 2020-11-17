@@ -1,14 +1,23 @@
 package cscie97.smartcity.authenticator;
 
-public class Resource extends AuthElement {
+/**
+ * The resource specifies the single item that user has access to
+ *
+ * @author Loi Cheng
+ * @version 1.0
+ * @since 2020-11-15
+ */
+public class Resource extends Entitlement {
 
-    public Resource(String id, String name, String description) {
-        super(id, name, description);
-    }
-
-    @Override
-    public void acceptVisitor(Visitor v) {
-
+    /**
+     * Specific entitlement to a resource in the model
+     *
+     * @param id          id
+     * @param name        name
+     * @param description optional description
+     */
+    public Resource(String cityId, String id, String name, String description) {
+        super(cityId, id, name, description, EntType.Resource);
     }
 
 }

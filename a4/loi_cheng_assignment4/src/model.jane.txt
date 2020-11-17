@@ -1,0 +1,26 @@
+### try other users
+### jane
+login resident_1 voiceprint:jane-voiceprint
+
+# jane cannot define a vehicle
+define vehicle city_1:car_8 lat 42.43 long -71.17 enabled true type car activity "parked" capacity 4 fee 10
+
+# jane can update a vehicle
+update vehicle city_1:car_1 lat 42.3830 long -71.1125   activity "driving"
+
+logout
+
+### joe
+login resident_2 voiceprint:joe-voiceprint
+
+# joe cannot update a vehicle
+update vehicle city_1:car_1 lat 42.3830 long -71.1125   activity "driving"
+
+# joe can update his own location
+update location resident_2 lat 42.3830 long -71.1125
+show person resident_2
+
+# joe cannot update jane's location
+update location resident_1 lat 42.3830 long -71.1125
+
+logout

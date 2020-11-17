@@ -1,0 +1,35 @@
+# simulate events to trigger controller service rules
+
+### login
+login citizen_a voiceprint:adele-voiceprint
+
+# simulate a device sensor event
+#create sensor-event <city_id>[:<device_id>] type (microphone|camera|thermometer|co2meter) value <string> [subject <person_id>]
+
+# trigger rule emergency 1
+create sensor-event city_boston:sl_1 type camera value "fire"
+
+# trigger rule emergency 2
+create sensor-event city_boston:sl_2 type camera value "traffic_accident"
+
+# trigger rule co2 event 1
+create sensor-event city_boston:sl_1 type co2meter value "1200"
+create sensor-event city_boston:sl_2 type co2meter value "1300"
+create sensor-event city_boston:ps_1 type co2meter value "1400"
+
+# trigger rule co2 event 2
+create sensor-event city_boston:sl_1 type co2meter value "900"
+create sensor-event city_boston:sl_2 type co2meter value "800"
+create sensor-event city_boston:bot_1 type co2meter value "700"
+
+# trigger rule litter event
+create sensor-event city_boston:bot_1 type camera value "littering" subject resident_1
+
+# trigger rule broken glass
+create sensor-event city_boston:kiosk_1 type microphone value "broken_glass_sound"
+
+# trigger rule person seen
+create sensor-event city_boston:bot_2 type camera value "person_seen" subject resident_1
+
+### show all entitlements
+show_all_entitlements

@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.AuthException;
 import cscie97.smartcity.model.*;
 import cscie97.smartcity.model.IoTObserver;
 
@@ -41,7 +42,7 @@ public class ParkingMeterController implements IoTObserver, CommandFactory {
      * @throws ServiceException if observation error
      */
     @Override
-    public void observe(IoTDevice space) throws ServiceException {
+    public void observe(IoTDevice space) throws ServiceException, AuthException {
         this.targetSpace = space;
 
         //only respond to parking space devices
@@ -55,6 +56,7 @@ public class ParkingMeterController implements IoTObserver, CommandFactory {
             }
 
             if (footage.contains("Vehicle") && footage.contains("parked for") && footage.contains("hour")) {
+                System.out.println("-PARKING METER CONTROLLER ACTIVATED-");
                 createCommand().execute();
 
             }

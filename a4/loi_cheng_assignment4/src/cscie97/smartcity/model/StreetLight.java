@@ -1,5 +1,8 @@
 package cscie97.smartcity.model;
 
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.Authenticator;
+
 import java.util.Arrays;
 
 /**
@@ -38,7 +41,10 @@ public class StreetLight extends IoTDevice {
      * @param enabled    true false
      * @param brightness 0-10
      */
-    public void updateStreetLight(Boolean enabled, Integer brightness) throws ServiceException {
+    public void updateStreetLight(Boolean enabled, Integer brightness) throws ServiceException, AuthException {
+
+        Authenticator.authenticate("updateStreetLight", this.deviceId);
+
         if (brightness < 0 || brightness > 100) {
             throw new ServiceException("set street light brightness", "value outside 0-100 range!");
         }

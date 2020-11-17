@@ -8,6 +8,6 @@ import cscie97.ledger.*;
  */
 public class TestDriverLedger {
     public static void main(String[] args) {
-        LedgerApi.processCommandFile(null, args[0]);
+        LedgerApi.processCommandFile(args[0]);
     }
 }

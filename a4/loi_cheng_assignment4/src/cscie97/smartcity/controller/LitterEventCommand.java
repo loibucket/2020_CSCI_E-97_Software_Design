@@ -2,6 +2,7 @@ package cscie97.smartcity.controller;
 
 import cscie97.ledger.LedgerApi;
 import cscie97.ledger.LedgerApiException;
+import cscie97.smartcity.authenticator.*;
 import cscie97.smartcity.shared.BotDist;
 import cscie97.smartcity.shared.Tool;
 import cscie97.smartcity.model.*;
@@ -36,7 +37,7 @@ public class LitterEventCommand implements Command {
     }
 
     @Override
-    public void execute() throws ServiceException {
+    public void execute() throws ServiceException, AuthException {
 
         String subject = this.device.readSensor(SensorType.camera)[1];
         //Speaker: please do not litter
@@ -59,9 +60,9 @@ public class LitterEventCommand implements Command {
         Person person = ModelApi.getRegistry().showPerson(subject);
         if (person.getType() == PersonType.resident) {
             String address = person.getBlockchainAddress();
-            LedgerApi.processCommand(null, "get-account-balance " + address, -1);
-            LedgerApi.processCommand(null, "process-transaction 1 amount 50 fee 10 note \"littering\" payer " + address + " receiver " + this.cityBlockchain, -1);
-            LedgerApi.processCommand(null, "get-account-balance " + address, -1);
+            LedgerApi.processCommand("get-account-balance " + address, -1);
+            LedgerApi.processCommand("process-transaction 1 amount 50 fee 10 note \"littering\" payer " + address + " receiver " + this.cityBlockchain, -1);
+            LedgerApi.processCommand("get-account-balance " + address, -1);
         }
     }
 }

@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.*;
 import cscie97.smartcity.shared.Tool;
 import cscie97.smartcity.model.City;
 import cscie97.smartcity.model.IoTDevice;
@@ -31,7 +32,7 @@ public class COCommand implements Command {
      * enables or disables all cars
      */
     @Override
-    public void execute() {
+    public void execute() throws AuthException {
         // find all the cars and update them
         for (IoTDevice d : this.city.showAllDevices().values()) {
             if (d.getClass().getName().equals("cscie97.smartcity.model.Vehicle") && ((Vehicle) d).getType() == VehicleType.car) {

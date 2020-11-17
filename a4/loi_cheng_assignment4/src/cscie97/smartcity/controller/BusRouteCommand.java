@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.*;
 import cscie97.smartcity.shared.Tool;
 import cscie97.smartcity.model.*;
 
@@ -30,7 +31,7 @@ public class BusRouteCommand implements Command {
      * @throws ServiceException if error in command creation
      */
     @Override
-    public void execute() throws ServiceException {
+    public void execute() throws ServiceException, AuthException {
 
         //the device
         Tool.report(this.device);

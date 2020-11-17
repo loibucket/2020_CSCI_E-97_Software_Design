@@ -1,5 +1,7 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.AuthToken;
 import cscie97.smartcity.controller.Command;
 import cscie97.smartcity.model.ServiceException;
 
@@ -18,6 +20,6 @@ public interface CommandFactory {
      * @return a command object
      * @throws ServiceException if error in creating object
      */
-    Command createCommand() throws ServiceException;
+    Command createCommand() throws ServiceException, AuthException;
 
 }

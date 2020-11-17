@@ -1,0 +1,8 @@
+#read in scripts
+ledger.script.txt
+model.admin.txt
+model.jane.txt
+controller.script.txt
+x.model.admin.txt
+x.model.jane.txt
+x.controller.script.txt

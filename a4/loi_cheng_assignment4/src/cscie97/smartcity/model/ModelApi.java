@@ -2,20 +2,24 @@ package cscie97.smartcity.model;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import cscie97.smartcity.authenticator.AuthToken;
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.AuthenticationApi;
+import cscie97.smartcity.authenticator.Authenticator;
 import cscie97.smartcity.shared.Tool;
 
 /**
  * The ModelAPI processes input commands from user and processes them through various methods
  * v1.0 initial
- * v1.1 converted all methods to static, all device id's now also contain the city_id, eg. city_1:bus_1
+ * v1.1 2020-10-19 converted all methods to static, all device id's now also contain the city_id, eg. city_1:bus_1
+ * v1.2 2020-11-09 added the login and logout routine
  *
  * @author Loi Cheng
- * @version 1.1
- * @since 2020-10-19
+ * @version 1.2
+ * @since 2020-11-09
  */
 public class ModelApi {
 
@@ -50,19 +54,17 @@ public class ModelApi {
     /**
      * process a line of command
      *
-     * @param authToken  authorization token
      * @param command    command
      * @param lineNumber line number if given
      */
-    public static void processCommand(AuthToken authToken, String command, int lineNumber) {
+    public static void processCommand(String command, int lineNumber) {
 
-//        if (authToken == null) {
-//            System.out.println("authorization token not provided!");
-//            return;
-//        }
 
-        System.out.println("MODEL: " + command);
-        System.out.println("RESPONSE: ");
+        if (Authenticator.getToken() == null || Authenticator.getAccessToCity() == null) {
+            System.out.println("MODELAPI: " + command);
+        } else {
+            System.out.println("MODELAPI/" + Authenticator.getToken().getUserId() + "/" + Authenticator.getAccessToCity().getId() + ": " + command);
+        }
 
         // replace special quotes to normal
         command = command.replace('“', '"');
@@ -71,6 +73,10 @@ public class ModelApi {
         // split string by whitespace, except when between quotes
         // stackoverflow.com/questions/18893390/splitting-on-comma-outside-quotes
         List<String> a = Arrays.asList(command.split("\\s+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"));
+
+        for (int i = 0; i < a.size(); i++) {
+            a.set(i, Tool.clean(a.get(i)));
+        }
 
         // do different action with commands
         String action = a.get(0);
@@ -81,9 +87,14 @@ public class ModelApi {
                 case "define" -> define(a);
                 case "show" -> show(a);
                 case "update" -> update(a);
-                default -> throw new ServiceException("model api", "command not recognized");
+                case "login" -> Authenticator.login(a);
+                case "logout" -> Authenticator.logout();
+                case "set_city" -> Authenticator.setCityAccess(a.get(1));
+                default -> AuthenticationApi.processCommand(command, lineNumber); //try auth commands
             }
         } catch (ServiceException e) {
+            System.out.println(new ModelException(command, e.action, e.reason, lineNumber).toString());
+        } catch (AuthException e) {
             System.out.println(new ModelException(command, e.action, e.reason, lineNumber).toString());
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
             System.out.println(new ModelException(command, "other", "too few arguments!", lineNumber).toString());
@@ -95,7 +106,7 @@ public class ModelApi {
             System.out.println(new ModelException(command, "other", e.toString(), lineNumber).toString());
             e.printStackTrace();
         }
-        System.out.println(":END"); //end command
+        System.out.println("  :COMPLETED"); //end command
         System.out.println(" "); //line break
     }
 
@@ -103,10 +114,9 @@ public class ModelApi {
     /**
      * process a set of commands from file
      *
-     * @param authToken   authorization token
      * @param commandFile command file name
      */
-    public static void processCommandFile(AuthToken authToken, String commandFile) {
+    public static void processCommandFile(String commandFile) {
 
 //        if (!authToken.equals("placeholder")) {
 //            System.out.println("authentication error");
@@ -119,7 +129,7 @@ public class ModelApi {
             while ((line = reader.readLine()) != null) {
                 if (!line.isEmpty()) {
                     if (line.charAt(0) != "#".charAt(0)) {
-                        processCommand(authToken, line, lineNumber.get());
+                        processCommand(line, lineNumber.get());
                     } else {
                         System.out.println("# LINE " + lineNumber.get() + " " + line);
                     }
@@ -132,6 +142,7 @@ public class ModelApi {
         }
     }
 
+
     /**
      * Helper: handle create commands
      * Slight variations in commands are accepted
@@ -139,7 +150,7 @@ public class ModelApi {
      * @param a the command
      * @throws ServiceException if cannot process command
      */
-    private static void create(List<String> a) throws ServiceException {
+    private static void create(List<String> a) throws ServiceException, AuthException {
         switch (a.get(1)) {
             case "sensor-event", "sensor-output" -> {
 
@@ -198,7 +209,7 @@ public class ModelApi {
      * @param a command
      * @throws ServiceException if command cannot be processed
      */
-    private static void define(List<String> a) throws ServiceException {
+    private static void define(List<String> a) throws ServiceException, AuthException, NoSuchAlgorithmException {
         switch (a.get(1)) {
             // Expected Commands, all fields are required
             //   0            2             4               6             8           10             12
@@ -241,7 +252,7 @@ public class ModelApi {
                     throw new ServiceException("define info-kiosk", "command format error!");
                 }
                 cityMap.get(a.get(2).split(":")[0]).
-                        defineInfoKiosk(a.get(2),
+                        defineInfoKiosk(Authenticator.getToken(), a.get(2),
                                 new Float[]{Float.parseFloat(a.get(4)), Float.parseFloat(a.get(6))},
                                 a.get(8).equals("true"), a.get(10));
             }
@@ -339,7 +350,7 @@ public class ModelApi {
      * @param a command
      * @throws ServiceException if show error
      */
-    private static void show(List<String> a) throws ServiceException {
+    private static void show(List<String> a) throws ServiceException, AuthException {
         switch (a.get(1)) {
             // Expected Commands, device_id is optional
             // show city <city_id>
@@ -403,7 +414,7 @@ public class ModelApi {
      *
      * @param a command
      */
-    private static void update(List<String> a) throws ServiceException {
+    private static void update(List<String> a) throws ServiceException, AuthException {
 
         String primaryId;
         String secondaryId;
@@ -484,6 +495,8 @@ public class ModelApi {
             }
             // update visitor <person_id> [bio-metric <string>] [lat <lat> long <Float>]
             case "visitor" -> registry.showPerson(primaryId).updateVisitor(biometric, location);
+            // update location <person_id> [lat <lat> long <Float>]
+            case "location" -> registry.showPerson(primaryId).updateLocation(location);
             default -> throw new ServiceException("update", "subject not recognized!");
         }
     }

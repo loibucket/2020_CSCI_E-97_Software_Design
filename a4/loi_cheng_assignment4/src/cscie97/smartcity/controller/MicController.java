@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.AuthException;
 import cscie97.smartcity.model.*;
 import cscie97.smartcity.model.IoTObserver;
 
@@ -34,7 +35,7 @@ public class MicController implements IoTObserver, CommandFactory {
     @Override
     public Command createCommand() throws ServiceException {
 
-        Command c = null;
+        Command c;
         switch (this.command) {
             case "missing_child" -> {
                 c = new MissingChildCommand(this.device, this.city);
@@ -57,7 +58,7 @@ public class MicController implements IoTObserver, CommandFactory {
      * @throws ServiceException if observation error
      */
     @Override
-    public void observe(IoTDevice device) throws ServiceException {
+    public void observe(IoTDevice device) throws ServiceException, AuthException {
 
         this.device = device;
         String sound = this.device.readSensor(SensorType.microphone)[0];
@@ -68,12 +69,15 @@ public class MicController implements IoTObserver, CommandFactory {
 
         if (sound.startsWith("can you help me find my child")) {
             this.command = "missing_child";
+            System.out.println("-MIC CONTROLLER ACTIVATED-");
             createCommand().execute();
         } else if (sound.equals("broken_glass_sound")) {
             this.command = "broken_glass";
+            System.out.println("-MIC CONTROLLER ACTIVATED-");
             createCommand().execute();
         } else if (sound.startsWith("Does this bus go to ")) {
             this.command = "bus_route";
+            System.out.println("-MIC CONTROLLER ACTIVATED-");
             createCommand().execute();
         }
 

@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.*;
 import cscie97.smartcity.shared.*;
 import cscie97.smartcity.model.*;
 
@@ -40,7 +41,7 @@ public class MissingChildCommand implements Command {
      * @throws ServiceException if any error
      */
     @Override
-    public void execute() throws ServiceException {
+    public void execute() throws ServiceException, AuthException {
         //the device that heard the event
         Tool.report(this.device);
 

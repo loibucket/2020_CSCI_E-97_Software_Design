@@ -1,5 +1,8 @@
 package cscie97.smartcity.model;
 
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.Authenticator;
+
 import java.util.Arrays;
 
 /**
@@ -35,7 +38,10 @@ public class StreetSign extends IoTDevice {
      * @param enabled boolean
      * @param text    what the sign says
      */
-    public void updateStreetSign(Boolean enabled, String text) {
+    public void updateStreetSign(Boolean enabled, String text) throws AuthException {
+
+        Authenticator.authenticate("updateStreetSign", this.deviceId);
+
         super.enabled = enabled == null ? super.enabled : enabled;
         this.text = text == null ? this.text : text;
     }

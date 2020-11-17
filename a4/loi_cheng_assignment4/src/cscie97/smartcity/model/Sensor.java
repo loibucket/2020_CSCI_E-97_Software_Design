@@ -32,6 +32,7 @@ public class Sensor {
      * @param personId optional person it's doing on
      */
     public void updateEvent(String value, String personId) {
+
         this.value = value;
         this.personId = personId;
     }
@@ -40,7 +41,7 @@ public class Sensor {
      * read sensor, fields can be null
      */
     public String[] readEvent() {
-        return(new String[]{this.value,this.personId});
+        return (new String[]{this.value, this.personId});
     }
 
     /**

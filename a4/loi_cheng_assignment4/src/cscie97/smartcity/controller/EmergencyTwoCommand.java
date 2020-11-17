@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.*;
 import cscie97.smartcity.shared.BotDist;
 import cscie97.smartcity.shared.Tool;
 import cscie97.smartcity.model.*;
@@ -25,7 +26,7 @@ public class EmergencyTwoCommand implements Command {
      *
      * @param c the city
      */
-    public EmergencyTwoCommand(IoTDevice d, City c) {
+    public EmergencyTwoCommand(IoTDevice d, City c) throws AuthException {
         this.device = d;
         this.deviceMap = c.showAllDevices();
     }
@@ -36,7 +37,7 @@ public class EmergencyTwoCommand implements Command {
      * @throws ServiceException if error in building the command
      */
     @Override
-    public void execute() throws ServiceException {
+    public void execute() throws ServiceException, AuthException {
 
         //stay calm
         this.device.sensorEvent(SensorType.speaker, "Stay calm, help is on its way!", null);

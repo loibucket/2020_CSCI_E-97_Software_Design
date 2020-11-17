@@ -1,5 +1,8 @@
 package cscie97.smartcity.model;
 
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.Authenticator;
+
 import java.util.Arrays;
 
 /**
@@ -35,7 +38,10 @@ public class InfoKiosk extends IoTDevice {
      * @param enabled  true false
      * @param imageUri image
      */
-    public void updateInfoKiosk(Boolean enabled, String imageUri) {
+    public void updateInfoKiosk(Boolean enabled, String imageUri) throws AuthException {
+
+        Authenticator.authenticate("updateInfoKiosk", this.deviceId);
+
         super.enabled = enabled == null ? super.enabled : enabled;
         this.imageUri = imageUri == null ? this.imageUri : imageUri;
     }

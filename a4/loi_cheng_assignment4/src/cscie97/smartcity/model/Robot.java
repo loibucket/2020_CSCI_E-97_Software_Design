@@ -1,5 +1,8 @@
 package cscie97.smartcity.model;
 
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.Authenticator;
+
 import java.util.Arrays;
 
 /**
@@ -34,7 +37,10 @@ public class Robot extends IoTDevice {
      * @param enabled  true false
      * @param activity last thing it is doing
      */
-    public void updateRobot(Float[] location, Boolean enabled, String activity) {
+    public void updateRobot(Float[] location, Boolean enabled, String activity) throws AuthException {
+
+        Authenticator.authenticate("updateRobot", this.deviceId);
+
         super.location = location == null ? super.location : location;
         super.enabled = enabled == null ? super.enabled : enabled;
         super.event = activity == null ? super.event : activity;

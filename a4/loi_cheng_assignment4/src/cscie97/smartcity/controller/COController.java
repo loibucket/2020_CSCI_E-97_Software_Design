@@ -1,5 +1,7 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.AuthToken;
 import cscie97.smartcity.model.*;
 import cscie97.smartcity.model.IoTObserver;
 
@@ -41,7 +43,7 @@ public class COController implements IoTObserver, CommandFactory {
      * @throws ServiceException if error
      */
     @Override
-    public void observe(IoTDevice d) throws ServiceException {
+    public void observe(IoTDevice d) throws ServiceException, AuthException {
 
         //read co2 level
         String coReading = d.readSensor(SensorType.co2meter)[0];
@@ -68,11 +70,13 @@ public class COController implements IoTObserver, CommandFactory {
         if (this.coCount >= 3) {
             if (this.carsEnabled) {
                 this.carsEnabled = false;
+                System.out.println("-CO CONTROLLER ACTIVATED-");
                 createCommand().execute();
             }
         } else if (coCount == 0) {
             if (!this.carsEnabled) {
                 this.carsEnabled = true;
+                System.out.println("-CO CONTROLLER ACTIVATED-");
                 createCommand().execute();
             }
         }

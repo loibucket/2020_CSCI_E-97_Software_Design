@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.*;
 import cscie97.smartcity.shared.*;
 import cscie97.smartcity.model.*;
 
@@ -19,7 +20,7 @@ public class MovieInfoCommand implements Command {
      *
      * @param kiosk the kiosk handling the request
      */
-    public MovieInfoCommand(IoTDevice kiosk, City city) {
+    public MovieInfoCommand(IoTDevice kiosk, City city) throws AuthException {
         this.kiosk = (InfoKiosk) kiosk;
     }
 
@@ -29,7 +30,7 @@ public class MovieInfoCommand implements Command {
      * @throws ServiceException if any errors
      */
     @Override
-    public void execute() throws ServiceException {
+    public void execute() throws ServiceException, AuthException {
 
         //the kiosk
         Tool.report(kiosk);

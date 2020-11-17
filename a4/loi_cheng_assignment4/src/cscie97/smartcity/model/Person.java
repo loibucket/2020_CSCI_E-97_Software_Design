@@ -1,5 +1,8 @@
 package cscie97.smartcity.model;
 
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.Authenticator;
+
 import java.util.Arrays;
 
 /**
@@ -94,7 +97,9 @@ public class Person {
      * @param account     blockchain address
      * @throws ServiceException if update failed
      */
-    public void updateResident(String name, String biometricId, String phoneNumber, Role role, Float[] location, String account) throws ServiceException {
+    public void updateResident(String name, String biometricId, String phoneNumber, Role role, Float[] location, String account) throws ServiceException, AuthException {
+        Authenticator.authenticate("updateResident", this.personId);
+
         // update resident <person_id> [name <name>] [bio-metric <string>] [phone<phone_number>] [role (adult|child|administrator)] [lat <lat> Float <Float>] [account <account_address>]
         if (this.type != PersonType.resident) {
             throw new ServiceException("update resident", "not a resident!");
@@ -115,7 +120,9 @@ public class Person {
      * @param location    lat long
      * @throws ServiceException if update failed
      */
-    public void updateVisitor(String biometricId, Float[] location) throws ServiceException {
+    public void updateVisitor(String biometricId, Float[] location) throws ServiceException, AuthException {
+        Authenticator.authenticate("updateVisitor", this.personId);
+
         // update visitor <person_id> [bio-metric <string>] [lat <lat> Float <Float>]
         if (this.type != PersonType.visitor) {
             throw new ServiceException("update visitor", "not a visitor!");
@@ -129,7 +136,8 @@ public class Person {
      *
      * @param location the location
      */
-    public void updateLocation(Float[] location) {
+    public void updateLocation(Float[] location) throws AuthException {
+        Authenticator.authenticate("updateLocation", this.personId);
         this.location = location == null ? this.location : location;
     }
 

@@ -1,5 +1,8 @@
 package cscie97.smartcity.model;
 
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.Authenticator;
+
 /**
  * IoTDevice is the base of all the other devices like robot, parking space, etc.
  * <p>
@@ -29,7 +32,10 @@ public class IoTDevice {
      * @param action   activity / event
      * @param personId person (optional, null)
      */
-    public void sensorEvent(SensorType type, String action, String personId) {
+    public void sensorEvent(SensorType type, String action, String personId) throws AuthException {
+
+        Authenticator.authenticate("sensorEvent", deviceId);
+
         switch (type) {
             case microphone -> this.microphone.updateEvent(action, personId);
             case camera -> this.camera.updateEvent(action, personId);

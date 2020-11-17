@@ -1,6 +1,7 @@
 package cscie97.ledger;
 
 import cscie97.smartcity.authenticator.AuthToken;
+import cscie97.smartcity.model.ServiceException;
 import cscie97.smartcity.shared.FileProcessor;
 
 import java.io.*;
@@ -73,10 +74,9 @@ public class LedgerApi extends FileProcessor {
      * @param lineNumber the line number
      * @throws LedgerApiException if process errors
      */
-    public static void processCommand(AuthToken authToken, String command, int lineNumber) {
+    public static void processCommand(String command, int lineNumber) {
 
         System.out.println("LEDGER-OPEN: " + command);
-        System.out.println("LEDGER: ");
 
         // replace special quotes to normal
         command = command.replace('“', '"');
@@ -105,7 +105,7 @@ public class LedgerApi extends FileProcessor {
                     ledger.validate();
                     System.out.println("ledger is valid");
                 }
-                default -> System.out.println((new LedgerApiException(action, "no such command", lineNumber).toString()));
+                default -> System.out.println("command not recognized!");
             }
         } catch (LedgerException e) {
             // print error message, and continue processing next line
@@ -113,8 +113,7 @@ public class LedgerApi extends FileProcessor {
         } catch (Exception e) {
             System.out.println((new LedgerApiException(action, "processing error!", lineNumber)).toString());
         }
-        System.out.println(":LEDGER-CLOSE");
-        System.out.println(" "); //line break
+        System.out.println("  :LEDGER-CLOSE");
     }
 
     /**
@@ -124,7 +123,7 @@ public class LedgerApi extends FileProcessor {
      *
      * @param commandFile the filename
      */
-    public static void processCommandFile(AuthToken authToken, String commandFile) {
+    public static void processCommandFile(String commandFile) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(commandFile));
             String line;
@@ -132,7 +131,7 @@ public class LedgerApi extends FileProcessor {
             while ((line = reader.readLine()) != null) {
                 if (!line.isEmpty()) {
                     if (line.charAt(0) != "#".charAt(0)) {
-                        processCommand(authToken, line, lineNumber.get());
+                        processCommand(line, lineNumber.get());
                     } else {
                         System.out.println("# LINE " + lineNumber.get() + " " + line);
                     }

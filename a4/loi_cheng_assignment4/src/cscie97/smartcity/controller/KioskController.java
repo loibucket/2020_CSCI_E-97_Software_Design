@@ -1,5 +1,7 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.AuthToken;
 import cscie97.smartcity.model.*;
 import cscie97.smartcity.model.IoTObserver;
 
@@ -31,7 +33,7 @@ public class KioskController implements IoTObserver, CommandFactory {
      * @return command to execute
      */
     @Override
-    public Command createCommand() throws ServiceException {
+    public Command createCommand() throws ServiceException, AuthException {
 
         switch (this.command) {
             case "movie_info" -> {
@@ -50,7 +52,7 @@ public class KioskController implements IoTObserver, CommandFactory {
      * @param d the device the city spammed you
      */
     @Override
-    public void observe(IoTDevice d) throws ServiceException {
+    public void observe(IoTDevice d) throws ServiceException, AuthException {
         this.kiosk = d;
         //check if device given is a kiosk
         if (this.kiosk.getClass().getName().equals("cscie97.smartcity.model.InfoKiosk")) {
@@ -64,9 +66,11 @@ public class KioskController implements IoTObserver, CommandFactory {
 
             if (request.contains("what movies are showing tonight?")) {
                 this.command = "movie_info";
+                System.out.println("-KIOSK CONTROLLER ACTIVATED-");
                 createCommand().execute();
             } else if (request.contains("reserve") && request.contains("seats for the") && request.contains("showing of")) {
                 this.command = "movie_reservation";
+                System.out.println("-KIOSK CONTROLLER ACTIVATED-");
                 createCommand().execute();
             }
         }

@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.AuthException;
 import cscie97.smartcity.model.ServiceException;
 
 /**
@@ -11,12 +12,12 @@ import cscie97.smartcity.model.ServiceException;
  * @since 2020-10-19
  */
 public interface Command {
-    
+
     /**
      * Execute, performs all the actions from the command
      *
      * @throws ServiceException if command cannot execute
      */
-    void execute() throws ServiceException;
+    void execute() throws ServiceException, AuthException;
 
 }

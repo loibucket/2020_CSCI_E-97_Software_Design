@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.AuthException;
 import cscie97.smartcity.shared.*;
 import cscie97.smartcity.model.*;
 
@@ -42,7 +43,7 @@ public class PersonSeenCommand implements Command {
         try {
             person.updateResident(null, null, null, null, this.device.getLocation(), null);
             Tool.report(this.person);
-        } catch (Exception e) {
+        } catch (Exception | AuthException e) {
             throw new ServiceException("person seen", "location update error!");
         }
     }

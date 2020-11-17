@@ -1,5 +1,7 @@
 package cscie97.smartcity.model;
 
+import cscie97.smartcity.authenticator.AuthException;
+
 /**
  * The IoT observer interface looks for specific events in the device list and acts on it through the devices in the device map
  *
@@ -15,7 +17,7 @@ public interface IoTObserver {
      * @param device the device check events from
      * @throws ServiceException if obeserving errors
      */
-    default void observe(IoTDevice device) throws ServiceException {
+    default void observe(IoTDevice device) throws ServiceException, AuthException {
 
     }
 

@@ -1,6 +1,7 @@
 package cscie97.smartcity.controller;
 
 import cscie97.ledger.LedgerApi;
+import cscie97.smartcity.authenticator.*;
 import cscie97.smartcity.model.*;
 
 /**
@@ -32,7 +33,7 @@ public class BoardBusCommand implements Command {
      * @throws ServiceException if error in greeting or charging
      */
     @Override
-    public void execute() throws ServiceException {
+    public void execute() throws ServiceException, AuthException {
 
         // bus
         System.out.println(this.device);
@@ -53,9 +54,9 @@ public class BoardBusCommand implements Command {
         try {
             Vehicle bus = (Vehicle) this.device;
             if (person.getType() == PersonType.resident) {
-                LedgerApi.processCommand(null, "get-account-balance " + person.getBlockchainAddress(), -1);
-                LedgerApi.processCommand(null, "process-transaction 1 amount " + bus.getFee() + " fee 10 note \"board bus\" payer " + person.getBlockchainAddress() + " receiver " + cityBlockchain, -1);
-                LedgerApi.processCommand(null, "get-account-balance " + person.getBlockchainAddress(), -1);
+                LedgerApi.processCommand("get-account-balance " + person.getBlockchainAddress(), -1);
+                LedgerApi.processCommand("process-transaction 1 amount " + bus.getFee() + " fee 10 note \"board bus\" payer " + person.getBlockchainAddress() + " receiver " + cityBlockchain, -1);
+                LedgerApi.processCommand("get-account-balance " + person.getBlockchainAddress(), -1);
             }
         } catch (Exception e) {
             throw new ServiceException("board bus", "ledger transaction error!");

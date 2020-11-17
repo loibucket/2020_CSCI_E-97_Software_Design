@@ -1,5 +1,6 @@
 package cscie97.smartcity.model;
 
+import cscie97.smartcity.authenticator.*;
 import cscie97.smartcity.controller.*;
 
 import java.util.*;
@@ -53,7 +54,7 @@ public class City implements CitySubject {
      * @throws ServiceException if error occurs during the observation
      */
     @Override
-    public void notifyObs(IoTDevice d) throws ServiceException {
+    public void notifyObs(IoTDevice d) throws ServiceException, AuthException {
         for (IoTObserver observer : observerList) {
             observer.observe(d);
         }
@@ -68,7 +69,10 @@ public class City implements CitySubject {
      * @param location location of city
      * @param radius   radius of city, in km
      */
-    public City(String cityId, String name, String account, Float[] location, Float radius) {
+    public City(String cityId, String name, String account, Float[] location, Float radius) throws AuthException {
+
+        Authenticator.authenticate("city", cityId);
+
         this.cityId = cityId;
         this.name = name;
         this.blockchainAddress = account;
@@ -83,6 +87,9 @@ public class City implements CitySubject {
         attachObs(new KioskController(this));
         attachObs(new MicController(this));
         attachObs(new ParkingMeterController(this));
+
+        Authenticator.createAccessToCity(cityId, name);
+        Authenticator.setCityAccess(cityId);
     }
 
     //getters
@@ -129,8 +136,10 @@ public class City implements CitySubject {
      * @param text     text to display
      * @throws ServiceException on error defining device
      */
-    public void defineStreetSign(String deviceId, Float[] location, Boolean enabled, String text) throws ServiceException {
-        deviceExists(deviceId);
+    public void defineStreetSign(String deviceId, Float[] location, Boolean enabled, String text) throws ServiceException, AuthException {
+        Authenticator.authenticate("defineStreetSign", deviceId);
+
+        deviceAlreadyExists(deviceId);
         StreetSign sign = new StreetSign(deviceId, location, enabled, text);
         this.deviceMap.put(deviceId, sign);
         //notify observers
@@ -146,8 +155,10 @@ public class City implements CitySubject {
      * @param imageUri link to image
      * @throws ServiceException on error defining device
      */
-    public void defineInfoKiosk(String deviceId, Float[] location, Boolean enabled, String imageUri) throws ServiceException {
-        deviceExists(deviceId);
+    public void defineInfoKiosk(AuthToken token, String deviceId, Float[] location, Boolean enabled, String imageUri) throws ServiceException, AuthException {
+        Authenticator.authenticate("defineInfoKiosk", deviceId);
+
+        deviceAlreadyExists(deviceId);
         InfoKiosk kiosk = new InfoKiosk(deviceId, location, enabled, imageUri);
         this.deviceMap.put(deviceId, kiosk);
         //notify observers
@@ -163,8 +174,10 @@ public class City implements CitySubject {
      * @param brightness from 0-100
      * @throws ServiceException on error defining device
      */
-    public void defineStreetLight(String deviceId, Float[] location, Boolean enabled, int brightness) throws ServiceException {
-        deviceExists(deviceId);
+    public void defineStreetLight(String deviceId, Float[] location, Boolean enabled, int brightness) throws ServiceException, AuthException {
+        Authenticator.authenticate("defineStreetLight", deviceId);
+
+        deviceAlreadyExists(deviceId);
         StreetLight light = new StreetLight(deviceId, location, enabled, brightness);
         this.deviceMap.put(deviceId, light);
         //notify observers
@@ -180,8 +193,10 @@ public class City implements CitySubject {
      * @param rate     fee charged per hour
      * @throws ServiceException on error defining device
      */
-    public void defineParkingSpace(String deviceId, Float[] location, Boolean enabled, int rate) throws ServiceException {
-        deviceExists(deviceId);
+    public void defineParkingSpace(String deviceId, Float[] location, Boolean enabled, int rate) throws ServiceException, AuthException {
+        Authenticator.authenticate("defineParkingSpace", deviceId);
+
+        deviceAlreadyExists(deviceId);
         ParkingSpace space = new ParkingSpace(deviceId, location, enabled, rate);
         this.deviceMap.put(deviceId, space);
         //notify observers
@@ -197,8 +212,10 @@ public class City implements CitySubject {
      * @param activity what it is doing
      * @throws ServiceException on error defining device
      */
-    public void defineRobot(String deviceId, Float[] location, Boolean enabled, String activity) throws ServiceException {
-        deviceExists(deviceId);
+    public void defineRobot(String deviceId, Float[] location, Boolean enabled, String activity) throws ServiceException, AuthException {
+        Authenticator.authenticate("defineRobot", deviceId);
+
+        deviceAlreadyExists(deviceId);
         Robot bot = new Robot(deviceId, location, enabled, activity);
         this.deviceMap.put(deviceId, bot);
         //notify observers
@@ -217,8 +234,10 @@ public class City implements CitySubject {
      * @param fee      charged to rider per trip
      * @throws ServiceException on error defining device
      */
-    public void defineVehicle(String deviceId, Float[] location, Boolean enabled, String type, String activity, int capacity, int fee) throws ServiceException {
-        deviceExists(deviceId);
+    public void defineVehicle(String deviceId, Float[] location, Boolean enabled, String type, String activity, int capacity, int fee) throws ServiceException, AuthException {
+        Authenticator.authenticate("defineVehicle", deviceId);
+
+        deviceAlreadyExists(deviceId);
         VehicleType vehType;
         switch (type) {
             case "bus" -> vehType = VehicleType.bus;
@@ -238,7 +257,7 @@ public class City implements CitySubject {
      * @return IoTDevice
      * @throws ServiceException if device not found
      */
-    public IoTDevice showDevice(String deviceId) throws ServiceException {
+    public IoTDevice showDevice(String deviceId) throws ServiceException, AuthException {
         if (!deviceMap.containsKey(deviceId)) {
             throw new ServiceException("show device", "deviceId not found!");
         }
@@ -263,7 +282,7 @@ public class City implements CitySubject {
      * @param personId (optional) the person the sensor is getting info from, or sending info to
      * @throws ServiceException if device is not found
      */
-    public void createSensorEvent(String deviceId, String type, String event, String personId) throws ServiceException {
+    public void createSensorEvent(String deviceId, String type, String event, String personId) throws ServiceException, AuthException {
 
         SensorType sensor;
         switch (type) {
@@ -297,7 +316,7 @@ public class City implements CitySubject {
      * @param deviceId the device Id
      * @throws ServiceException if already exists
      */
-    private void deviceExists(String deviceId) throws ServiceException {
+    private void deviceAlreadyExists(String deviceId) throws ServiceException {
         if (this.deviceMap.containsKey(deviceId)) {
             throw new ServiceException("define device", "deviceId already exists!");
         }

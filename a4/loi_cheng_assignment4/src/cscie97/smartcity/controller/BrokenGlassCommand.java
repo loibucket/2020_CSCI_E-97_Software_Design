@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.*;
 import cscie97.smartcity.shared.BotDist;
 import cscie97.smartcity.shared.Tool;
 import cscie97.smartcity.model.City;
@@ -36,7 +37,7 @@ public class BrokenGlassCommand implements Command {
      * Send the closest robot to clean the mess
      */
     @Override
-    public void execute() {
+    public void execute() throws AuthException {
         //the device
         Tool.report(this.device);
 

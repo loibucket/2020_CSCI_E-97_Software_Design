@@ -1,0 +1,534 @@
+# LINE 1 # BOOTSTRAP
+MODELAPI: create_city_access city_9000 master_city
+AUTHAPI: create_city_access city_9000 master_city
+  AUTHENTICATING: createCityAccess city_9000
+
+Entitlement{cityId='city_9000', id='city_9000', name='master_city', description='null', elem=AccessCity, subAuths={}}
+  :COMPLETED
+ 
+# LINE 4 # roles
+MODELAPI: define_role admin "admin" "Has permissions to everything"
+AUTHAPI/city_9000: define_role admin "admin" "Has permissions to everything"
+  AUTHENTICATING: defineRole admin
+
+Entitlement{cityId='city_9000', id='admin', name='admin', description='Has permissions to everything', elem=Role, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_role adult "adult" "Has permissions to most things"
+AUTHAPI/city_9000: define_role adult "adult" "Has permissions to most things"
+  AUTHENTICATING: defineRole adult
+
+Entitlement{cityId='city_9000', id='adult', name='adult', description='Has permissions to most things', elem=Role, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_role child "child" "Has permissions to fewer things"
+AUTHAPI/city_9000: define_role child "child" "Has permissions to fewer things"
+  AUTHENTICATING: defineRole child
+
+Entitlement{cityId='city_9000', id='child', name='child', description='Has permissions to fewer things', elem=Role, subAuths={}}
+  :COMPLETED
+ 
+# LINE 9 # permissions
+MODELAPI: define_permission city "city" "Create cities"
+AUTHAPI/city_9000: define_permission city "city" "Create cities"
+  AUTHENTICATING: definePermission city
+
+Entitlement{cityId='city_9000', id='city', name='city', description='Create cities', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission defineStreetSign "defineStreetSign" "Define Street Sign"
+AUTHAPI/city_9000: define_permission defineStreetSign "defineStreetSign" "Define Street Sign"
+  AUTHENTICATING: definePermission defineStreetSign
+
+Entitlement{cityId='city_9000', id='defineStreetSign', name='defineStreetSign', description='Define Street Sign', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission defineInfoKiosk "defineInfoKiosk" "Define Info Kiosk"
+AUTHAPI/city_9000: define_permission defineInfoKiosk "defineInfoKiosk" "Define Info Kiosk"
+  AUTHENTICATING: definePermission defineInfoKiosk
+
+Entitlement{cityId='city_9000', id='defineInfoKiosk', name='defineInfoKiosk', description='Define Info Kiosk', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission defineStreetLight "defineStreetLight" "Define Street Light"
+AUTHAPI/city_9000: define_permission defineStreetLight "defineStreetLight" "Define Street Light"
+  AUTHENTICATING: definePermission defineStreetLight
+
+Entitlement{cityId='city_9000', id='defineStreetLight', name='defineStreetLight', description='Define Street Light', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission defineParkingSpace "defineParkingSpace" "Define Parking Space"
+AUTHAPI/city_9000: define_permission defineParkingSpace "defineParkingSpace" "Define Parking Space"
+  AUTHENTICATING: definePermission defineParkingSpace
+
+Entitlement{cityId='city_9000', id='defineParkingSpace', name='defineParkingSpace', description='Define Parking Space', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission defineRobot "defineRobot" "Define Robot"
+AUTHAPI/city_9000: define_permission defineRobot "defineRobot" "Define Robot"
+  AUTHENTICATING: definePermission defineRobot
+
+Entitlement{cityId='city_9000', id='defineRobot', name='defineRobot', description='Define Robot', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission defineVehicle "defineVehicle" "Define Vehicle"
+AUTHAPI/city_9000: define_permission defineVehicle "defineVehicle" "Define Vehicle"
+  AUTHENTICATING: definePermission defineVehicle
+
+Entitlement{cityId='city_9000', id='defineVehicle', name='defineVehicle', description='Define Vehicle', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission showDevice "showDevice" "Show Device"
+AUTHAPI/city_9000: define_permission showDevice "showDevice" "Show Device"
+  AUTHENTICATING: definePermission showDevice
+
+Entitlement{cityId='city_9000', id='showDevice', name='showDevice', description='Show Device', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission showAllDevices "showAllDevices" "Show All Devices"
+AUTHAPI/city_9000: define_permission showAllDevices "showAllDevices" "Show All Devices"
+  AUTHENTICATING: definePermission showAllDevices
+
+Entitlement{cityId='city_9000', id='showAllDevices', name='showAllDevices', description='Show All Devices', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission definePerson "definePerson" "Define Person"
+AUTHAPI/city_9000: define_permission definePerson "definePerson" "Define Person"
+  AUTHENTICATING: definePermission definePerson
+
+Entitlement{cityId='city_9000', id='definePerson', name='definePerson', description='Define Person', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+# LINE 21 # add permission to roles
+MODELAPI: add_permission_to_role admin city
+AUTHAPI/city_9000: add_permission_to_role admin city
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin defineStreetSign
+AUTHAPI/city_9000: add_permission_to_role admin defineStreetSign
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin defineInfoKiosk
+AUTHAPI/city_9000: add_permission_to_role admin defineInfoKiosk
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin defineStreetLight
+AUTHAPI/city_9000: add_permission_to_role admin defineStreetLight
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin defineParkingSpace
+AUTHAPI/city_9000: add_permission_to_role admin defineParkingSpace
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin defineRobot
+AUTHAPI/city_9000: add_permission_to_role admin defineRobot
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin defineVehicle
+AUTHAPI/city_9000: add_permission_to_role admin defineVehicle
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin showDevice
+AUTHAPI/city_9000: add_permission_to_role admin showDevice
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin showAllDevices
+AUTHAPI/city_9000: add_permission_to_role admin showAllDevices
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin definePerson
+AUTHAPI/city_9000: add_permission_to_role admin definePerson
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+# LINE 33 # permissions
+MODELAPI: define_permission updateStreetSign "updateStreetSign" "Update Street Sign"
+AUTHAPI/city_9000: define_permission updateStreetSign "updateStreetSign" "Update Street Sign"
+  AUTHENTICATING: definePermission updateStreetSign
+
+Entitlement{cityId='city_9000', id='updateStreetSign', name='updateStreetSign', description='Update Street Sign', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission updateInfoKiosk "updateInfoKiosk" "Update Info Kiosk"
+AUTHAPI/city_9000: define_permission updateInfoKiosk "updateInfoKiosk" "Update Info Kiosk"
+  AUTHENTICATING: definePermission updateInfoKiosk
+
+Entitlement{cityId='city_9000', id='updateInfoKiosk', name='updateInfoKiosk', description='Update Info Kiosk', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission updateStreetLight "updateStreetLight" "Update Street Light"
+AUTHAPI/city_9000: define_permission updateStreetLight "updateStreetLight" "Update Street Light"
+  AUTHENTICATING: definePermission updateStreetLight
+
+Entitlement{cityId='city_9000', id='updateStreetLight', name='updateStreetLight', description='Update Street Light', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission updateParkingSpace "updateParkingSpace" "Update Parking Space"
+AUTHAPI/city_9000: define_permission updateParkingSpace "updateParkingSpace" "Update Parking Space"
+  AUTHENTICATING: definePermission updateParkingSpace
+
+Entitlement{cityId='city_9000', id='updateParkingSpace', name='updateParkingSpace', description='Update Parking Space', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission updateRobot "updateRobot" "Update Robot"
+AUTHAPI/city_9000: define_permission updateRobot "updateRobot" "Update Robot"
+  AUTHENTICATING: definePermission updateRobot
+
+Entitlement{cityId='city_9000', id='updateRobot', name='updateRobot', description='Update Robot', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission updateVehicle "updateVehicle" "Update Vehicle"
+AUTHAPI/city_9000: define_permission updateVehicle "updateVehicle" "Update Vehicle"
+  AUTHENTICATING: definePermission updateVehicle
+
+Entitlement{cityId='city_9000', id='updateVehicle', name='updateVehicle', description='Update Vehicle', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission updateResident "updateResident" "Update Resident"
+AUTHAPI/city_9000: define_permission updateResident "updateResident" "Update Resident"
+  AUTHENTICATING: definePermission updateResident
+
+Entitlement{cityId='city_9000', id='updateResident', name='updateResident', description='Update Resident', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission updateVisitor "updateVisitor" "Update Visitor"
+AUTHAPI/city_9000: define_permission updateVisitor "updateVisitor" "Update Visitor"
+  AUTHENTICATING: definePermission updateVisitor
+
+Entitlement{cityId='city_9000', id='updateVisitor', name='updateVisitor', description='Update Visitor', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission updateLocation "updateLocation" "Update Location"
+AUTHAPI/city_9000: define_permission updateLocation "updateLocation" "Update Location"
+  AUTHENTICATING: definePermission updateLocation
+
+Entitlement{cityId='city_9000', id='updateLocation', name='updateLocation', description='Update Location', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+# LINE 44 # add permission to roles
+MODELAPI: add_permission_to_role adult updateStreetSign
+AUTHAPI/city_9000: add_permission_to_role adult updateStreetSign
+  AUTHENTICATING: addSub adult
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role adult updateInfoKiosk
+AUTHAPI/city_9000: add_permission_to_role adult updateInfoKiosk
+  AUTHENTICATING: addSub adult
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role adult updateStreetLight
+AUTHAPI/city_9000: add_permission_to_role adult updateStreetLight
+  AUTHENTICATING: addSub adult
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role adult updateParkingSpace
+AUTHAPI/city_9000: add_permission_to_role adult updateParkingSpace
+  AUTHENTICATING: addSub adult
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role adult updateRobot
+AUTHAPI/city_9000: add_permission_to_role adult updateRobot
+  AUTHENTICATING: addSub adult
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role adult updateVehicle
+AUTHAPI/city_9000: add_permission_to_role adult updateVehicle
+  AUTHENTICATING: addSub adult
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin updateResident
+AUTHAPI/city_9000: add_permission_to_role admin updateResident
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin updateVisitor
+AUTHAPI/city_9000: add_permission_to_role admin updateVisitor
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin updateLocation
+AUTHAPI/city_9000: add_permission_to_role admin updateLocation
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+# LINE 55 # sensor events
+MODELAPI: define_permission sensorEvent "sensorEvent" "Sensor Event"
+AUTHAPI/city_9000: define_permission sensorEvent "sensorEvent" "Sensor Event"
+  AUTHENTICATING: definePermission sensorEvent
+
+Entitlement{cityId='city_9000', id='sensorEvent', name='sensorEvent', description='Sensor Event', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role child sensorEvent
+AUTHAPI/city_9000: add_permission_to_role child sensorEvent
+  AUTHENTICATING: addSub child
+  :COMPLETED
+ 
+# LINE 59 # permissions
+MODELAPI: define_permission createCityAccess "createCityAccess" "description"
+AUTHAPI/city_9000: define_permission createCityAccess "createCityAccess" "description"
+  AUTHENTICATING: definePermission createCityAccess
+
+Entitlement{cityId='city_9000', id='createCityAccess', name='createCityAccess', description='description', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission setCityAccess "setCityAccess" "description"
+AUTHAPI/city_9000: define_permission setCityAccess "setCityAccess" "description"
+  AUTHENTICATING: definePermission setCityAccess
+
+Entitlement{cityId='city_9000', id='setCityAccess', name='setCityAccess', description='description', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission definePermission "definePermission" "description"
+AUTHAPI/city_9000: define_permission definePermission "definePermission" "description"
+  AUTHENTICATING: definePermission definePermission
+
+Entitlement{cityId='city_9000', id='definePermission', name='definePermission', description='description', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission defineRole "defineRole" "description"
+AUTHAPI/city_9000: define_permission defineRole "defineRole" "description"
+  AUTHENTICATING: definePermission defineRole
+
+Entitlement{cityId='city_9000', id='defineRole', name='defineRole', description='description', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission addSub "addSub" "description"
+AUTHAPI/city_9000: define_permission addSub "addSub" "description"
+  AUTHENTICATING: definePermission addSub
+
+Entitlement{cityId='city_9000', id='addSub', name='addSub', description='description', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission addUserCredential "addUserCredential" "description"
+AUTHAPI/city_9000: define_permission addUserCredential "addUserCredential" "description"
+  AUTHENTICATING: definePermission addUserCredential
+
+Entitlement{cityId='city_9000', id='addUserCredential', name='addUserCredential', description='description', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission createCityAccess "createCityAccess" "description"
+AUTHAPI/city_9000: define_permission createCityAccess "createCityAccess" "description"
+  AUTHENTICATING: definePermission createCityAccess
+
+Entitlement{cityId='city_9000', id='createCityAccess', name='createCityAccess', description='description', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission createUser "createUser" "description"
+AUTHAPI/city_9000: define_permission createUser "createUser" "description"
+  AUTHENTICATING: definePermission createUser
+
+Entitlement{cityId='city_9000', id='createUser', name='createUser', description='description', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission createResource "createResource" "description"
+AUTHAPI/city_9000: define_permission createResource "createResource" "description"
+  AUTHENTICATING: definePermission createResource
+
+Entitlement{cityId='city_9000', id='createResource', name='createResource', description='description', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+MODELAPI: define_permission createResourceRole  "createResourceRole" "description"
+AUTHAPI/city_9000: define_permission createResourceRole  "createResourceRole" "description"
+  AUTHENTICATING: definePermission createResourceRole
+
+Entitlement{cityId='city_9000', id='createResourceRole', name='createResourceRole', description='description', elem=Permission, subAuths={}}
+  :COMPLETED
+ 
+# LINE 71 # add permission to roles
+MODELAPI: add_permission_to_role admin createCityAccess
+AUTHAPI/city_9000: add_permission_to_role admin createCityAccess
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin setCityAccess
+AUTHAPI/city_9000: add_permission_to_role admin setCityAccess
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin definePermission
+AUTHAPI/city_9000: add_permission_to_role admin definePermission
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin defineRole
+AUTHAPI/city_9000: add_permission_to_role admin defineRole
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin addSub
+AUTHAPI/city_9000: add_permission_to_role admin addSub
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin addUserCredential
+AUTHAPI/city_9000: add_permission_to_role admin addUserCredential
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin createCityAccess
+AUTHAPI/city_9000: add_permission_to_role admin createCityAccess
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin createUser
+AUTHAPI/city_9000: add_permission_to_role admin createUser
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin createResource
+AUTHAPI/city_9000: add_permission_to_role admin createResource
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_permission_to_role admin createResourceRole
+AUTHAPI/city_9000: add_permission_to_role admin createResourceRole
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+# LINE 83 # add sub roles to roles
+MODELAPI: add_role_to_role admin adult
+AUTHAPI/city_9000: add_role_to_role admin adult
+  AUTHENTICATING: addSub admin
+  :COMPLETED
+ 
+MODELAPI: add_role_to_role adult child
+AUTHAPI/city_9000: add_role_to_role adult child
+  AUTHENTICATING: addSub adult
+  :COMPLETED
+ 
+# LINE 87 # admin
+MODELAPI: create_user resident_9000 "Loi"
+AUTHAPI/city_9000: create_user resident_9000 "Loi"
+  AUTHENTICATING: createUser resident_9000
+
+Entitlement{cityId='city_9000', id='resident_9000', name='Loi', description='Smart City User', elem=User, subAuths={}}
+  :COMPLETED
+ 
+# LINE 90 # credentials
+MODELAPI: add_user_credential resident_9000 password secret
+AUTHAPI/city_9000: add_user_credential resident_9000 password secret
+  AUTHENTICATING: addSub resident_9000
+  :COMPLETED
+ 
+MODELAPI: add_user_credential resident_9000 biometric voiceprint:loi-voiceprint
+AUTHAPI/city_9000: add_user_credential resident_9000 biometric voiceprint:loi-voiceprint
+  AUTHENTICATING: addSub resident_9000
+  :COMPLETED
+ 
+MODELAPI: add_user_credential resident_9000 biometric faceprint:loi-voiceprint
+AUTHAPI/city_9000: add_user_credential resident_9000 biometric faceprint:loi-voiceprint
+  AUTHENTICATING: addSub resident_9000
+  :COMPLETED
+ 
+# LINE 95 # show superuser
+MODELAPI: add_role_to_user resident_9000 admin
+AUTHAPI/city_9000: add_role_to_user resident_9000 admin
+  AUTHENTICATING: addSub resident_9000
+  :COMPLETED
+ 
+MODELAPI: show_entitlements resident_9000
+AUTHAPI/city_9000: show_entitlements resident_9000
+  ENTITLEMENT AT: city: city_9000 elem: User id: resident_9000 name: Loi desc: Smart City User subauths: 1
+  ENTITLEMENT AT: city: city_9000 elem: Role id: admin name: admin desc: Has permissions to everything subauths: 23
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: defineParkingSpace name: defineParkingSpace desc: Define Parking Space subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: defineInfoKiosk name: defineInfoKiosk desc: Define Info Kiosk subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: defineRobot name: defineRobot desc: Define Robot subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: definePerson name: definePerson desc: Define Person subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: updateVisitor name: updateVisitor desc: Update Visitor subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: createResource name: createResource desc: description subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: definePermission name: definePermission desc: description subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: city name: city desc: Create cities subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: createCityAccess name: createCityAccess desc: description subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: addSub name: addSub desc: description subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: defineStreetLight name: defineStreetLight desc: Define Street Light subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: defineVehicle name: defineVehicle desc: Define Vehicle subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: defineRole name: defineRole desc: description subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: showDevice name: showDevice desc: Show Device subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: createResourceRole name: createResourceRole desc: description subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: updateLocation name: updateLocation desc: Update Location subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: addUserCredential name: addUserCredential desc: description subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: updateResident name: updateResident desc: Update Resident subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: setCityAccess name: setCityAccess desc: description subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: createUser name: createUser desc: description subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: defineStreetSign name: defineStreetSign desc: Define Street Sign subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Role id: adult name: adult desc: Has permissions to most things subauths: 7
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: updateStreetSign name: updateStreetSign desc: Update Street Sign subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: updateStreetLight name: updateStreetLight desc: Update Street Light subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: updateInfoKiosk name: updateInfoKiosk desc: Update Info Kiosk subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: updateRobot name: updateRobot desc: Update Robot subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: updateVehicle name: updateVehicle desc: Update Vehicle subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: updateParkingSpace name: updateParkingSpace desc: Update Parking Space subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Role id: child name: child desc: Has permissions to fewer things subauths: 1
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: sensorEvent name: sensorEvent desc: Sensor Event subauths: 0
+  ENTITLEMENT AT: city: city_9000 elem: Permission id: showAllDevices name: showAllDevices desc: Show All Devices subauths: 0
+  :COMPLETED
+ 
+# LINE 98 # END BOOTSTRAP
+SMART CITY
+LINE: #read in scripts
+LINE: ledger.script.txt
+MODELAPI: ledger.script.txt
+AUTHAPI/city_9000: ledger.script.txt
+LEDGER-OPEN: ledger.script.txt
+command not recognized!
+  :LEDGER-CLOSE
+  :COMPLETED
+ 
+LINE: model.admin.txt
+MODELAPI: model.admin.txt
+AUTHAPI/city_9000: model.admin.txt
+LEDGER-OPEN: model.admin.txt
+command not recognized!
+  :LEDGER-CLOSE
+  :COMPLETED
+ 
+LINE: model.jane.txt
+MODELAPI: model.jane.txt
+AUTHAPI/city_9000: model.jane.txt
+LEDGER-OPEN: model.jane.txt
+command not recognized!
+  :LEDGER-CLOSE
+  :COMPLETED
+ 
+LINE: controller.script.txt
+MODELAPI: controller.script.txt
+AUTHAPI/city_9000: controller.script.txt
+LEDGER-OPEN: controller.script.txt
+command not recognized!
+  :LEDGER-CLOSE
+  :COMPLETED
+ 
+LINE: x.model.admin.txt
+MODELAPI: x.model.admin.txt
+AUTHAPI/city_9000: x.model.admin.txt
+LEDGER-OPEN: x.model.admin.txt
+command not recognized!
+  :LEDGER-CLOSE
+  :COMPLETED
+ 
+LINE: x.model.jane.txt
+MODELAPI: x.model.jane.txt
+AUTHAPI/city_9000: x.model.jane.txt
+LEDGER-OPEN: x.model.jane.txt
+command not recognized!
+  :LEDGER-CLOSE
+  :COMPLETED
+ 
+LINE: x.controller.script.txt
+MODELAPI: x.controller.script.txt
+AUTHAPI/city_9000: x.controller.script.txt
+LEDGER-OPEN: x.controller.script.txt
+command not recognized!
+  :LEDGER-CLOSE
+  :COMPLETED
+ 

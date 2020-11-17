@@ -1,5 +1,7 @@
 package cscie97.smartcity.controller;
 
+import cscie97.smartcity.authenticator.AuthException;
+import cscie97.smartcity.authenticator.AuthToken;
 import cscie97.smartcity.model.*;
 import cscie97.smartcity.model.IoTObserver;
 
@@ -27,7 +29,7 @@ public class CameraController implements IoTObserver, CommandFactory {
      * @throws ServiceException if error in creating the command
      */
     @Override
-    public Command createCommand() throws ServiceException {
+    public Command createCommand() throws ServiceException, AuthException {
         Command c;
         switch (this.command) {
             case "emergency_one" -> c = new EmergencyOneCommand(this.targetDevice, this.city);
@@ -47,7 +49,7 @@ public class CameraController implements IoTObserver, CommandFactory {
      * @throws ServiceException if observation errors
      */
     @Override
-    public void observe(IoTDevice d) throws ServiceException {
+    public void observe(IoTDevice d) throws ServiceException, AuthException {
 
         if (d == null) {
             throw new ServiceException("camera controller", "no devices to observe!");
@@ -87,6 +89,7 @@ public class CameraController implements IoTObserver, CommandFactory {
                 }
             }
             //create and execute command
+            System.out.println("-CAMERA CONTROLLER ACTIVATED-");
             createCommand().execute();
 
         }
