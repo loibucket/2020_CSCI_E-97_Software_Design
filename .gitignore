@@ -26,3 +26,9 @@ a2/SmartCity.asta.lock
 a2/.DS_Store
 a2/.DS_Store
 .DS_Store
+
+# PDFS, docs, ???
+*.pdf
+*.docx
+*.jmt
+*.DS_Store
